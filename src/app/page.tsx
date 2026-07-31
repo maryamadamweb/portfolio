@@ -1,14 +1,16 @@
-import Link from "next/link";
+import { projects } from "@/lib/projects";
+import { ProjectCard } from "@/components/projects/ProjectCard";
 import styles from "./page.module.css";
 
-// Entry point. Click the illustration to go to /home.
+// Entry point. Each card is a project/genre — click into it to go to that project's page.
 export default function MainPage() {
   return (
     <main className={styles.page}>
-      <Link href="/home" aria-label="Enter site">
-        {/* TODO: replace with the real illustration */}
-        <div className={styles.illustrationPlaceholder}>Illustration</div>
-      </Link>
+      <div className={styles.grid}>
+        {projects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
+        ))}
+      </div>
     </main>
   );
 }

@@ -1,18 +1,12 @@
 .page {
-  display: flex;
   min-height: 100dvh;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
+  padding: 4rem 2rem;
 }
 
-.illustrationPlaceholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 320px;
-  height: 320px;
-  border: 1px dashed #888;
-  border-radius: 8px;
-  cursor: pointer;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }

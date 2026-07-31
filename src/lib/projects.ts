@@ -5,14 +5,14 @@ import type { ProjectMeta } from "@/types/project";
 export const projects: ProjectMeta[] = [
   {
     slug: "project-one",
-    title: "Project One",
+    title: "Illustrations",
     summary: "A short one-line description of this project.",
     cover: "/window.svg",
     tags: ["Design", "Web"],
   },
   {
     slug: "project-two",
-    title: "Project Two",
+    title: "Graphic Design",
     summary: "A short one-line description of this project.",
     cover: "/globe.svg",
     tags: ["Illustration"],

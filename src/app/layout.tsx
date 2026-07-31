@@ -1,15 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const headingFont = localFont({
+  src: "../fonts/flor-de-ruina/FlorDeRuina-Germen.woff2",
+  variable: "--font-heading",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const bodyFont = localFont({
+  src: [
+    {
+      path: "../fonts/times-dot/TimesDot-Roman.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/times-dot/TimesDot-Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/times-dot/TimesDot-Italic.otf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  variable: "--font-body",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +44,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${headingFont.variable} ${bodyFont.variable}`}
     >
       <body>{children}</body>
     </html>

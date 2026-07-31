@@ -62,8 +62,7 @@ ol {
   --color-border: #e5e5e5;
 
   /* Typography */
-  --font-heading: var(--font-heading-google); /* wired via next/font */
-  --font-body: var(--font-body-google);
+  /* --font-heading and --font-body are set by next/font on <html> in layout.tsx */
   --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
   --fs-base: 1rem;

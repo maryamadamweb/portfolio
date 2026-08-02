@@ -1,5 +1,4 @@
 import { getGenreMeta } from "@/lib/genres";
-import { GenreNav } from "@/components/genres/GenreNav";
 import Content from "./content.mdx";
 import styles from "./page.module.css";
 
@@ -10,7 +9,6 @@ export default function IllustrationsPage() {
 
   return (
     <main className={styles.page}>
-      <GenreNav currentSlug="illustrations" />
       <header className={styles.hero}>
         <h1>{meta?.title}</h1>
         <p>{meta?.summary}</p>

@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 import { genres } from "@/lib/genres";
 import styles from "./GenreNav.module.css";
 
-export function GenreNav({ currentSlug }: { currentSlug: string }) {
+export function GenreNav() {
+  const currentSlug = useSelectedLayoutSegment();
+
   return (
     <nav className={styles.nav} aria-label="Genres">
       <Link href="/" className={styles.homeLink}>

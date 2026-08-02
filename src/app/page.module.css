@@ -10,25 +10,15 @@
   z-index: -1;
 }
 
-/* Collage layout approximating the hand-drawn wireframe: a big centered title
-   block (col3-4, all rows) with genre cards wrapped around it in the outer
-   columns. Columns are symmetric (col1+col2 == col5) so the title block is
-   genuinely centered. Grid-area name per genre slug — see MainPage in page.tsx.
-   Cards are fixed-size squares (see GenreCard.module.css) so spanning a cell
-   over multiple rows just gives a card more room to center in, not a bigger
-   card — that's what keeps every genre visually the same size regardless of
-   its own source image's real proportions. */
+/* Genres ring around the centered title, 7 evenly-spaced points on an ellipse
+   (Graphic Design at 12 o'clock, then clockwise: Henna, Paintings, Animations,
+   Residencies, About, Illustrations). Each card's top/left is its CENTER point
+   as a % of .layout, translate(-50%,-50%) does the rest — see the per-slug
+   classes below. Using absolute positioning instead of a grid so cards spread
+   across the full height (not two clustered top/bottom stacks) and pull in
+   closer to the title instead of hugging the page edges. */
 .layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr 1.5fr 2fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas:
-    "illustrations graphic-design title title henna"
-    "about         .              title title paintings"
-    "about         residencies    title title animations";
-  align-items: center;
-  justify-items: center;
-  gap: 1.5rem;
+  position: relative;
   max-width: 1500px;
   width: 100%;
   height: calc(100dvh - 6rem);
@@ -39,38 +29,58 @@
 }
 
 .centerImage {
-  grid-area: title;
-  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38%;
   height: auto;
-  align-self: center;
 }
 
-.illustrations {
-  grid-area: illustrations;
+.illustrations,
+.graphic-design,
+.henna,
+.paintings,
+.animations,
+.residencies,
+.about {
+  position: absolute;
+  transform: translate(-50%, -50%);
 }
 
 .graphic-design {
-  grid-area: graphic-design;
+  top: 8%;
+  left: 50%;
 }
 
 .henna {
-  grid-area: henna;
+  top: 23.8%;
+  left: 81.3%;
 }
 
 .paintings {
-  grid-area: paintings;
+  top: 59.3%;
+  left: 89%;
 }
 
 .animations {
-  grid-area: animations;
+  top: 87.8%;
+  left: 67.4%;
 }
 
 .residencies {
-  grid-area: residencies;
+  top: 87.8%;
+  left: 32.6%;
 }
 
 .about {
-  grid-area: about;
+  top: 59.3%;
+  left: 11%;
+}
+
+.illustrations {
+  top: 23.8%;
+  left: 18.7%;
 }
 
 @media (max-width: 900px) {
@@ -80,6 +90,19 @@
     align-items: center;
     height: auto;
     gap: 2.5rem;
+  }
+
+  .centerImage,
+  .illustrations,
+  .graphic-design,
+  .henna,
+  .paintings,
+  .animations,
+  .residencies,
+  .about {
+    position: static;
+    transform: none;
+    width: auto;
   }
 
   .centerImage {

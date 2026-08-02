@@ -60,6 +60,7 @@ ol {
   --color-text-muted: #6b6b6b;
   --color-accent: #000000;
   --color-border: #e5e5e5;
+  --color-title: #242021;
 
   /* Typography */
   /* --font-heading and --font-body are set by next/font on <html> in layout.tsx */
@@ -117,7 +118,7 @@ h3 {
 }
 
 p {
-  color: var(--color-text-muted);
+  color: var(--color-text);
 }
 
 /* ---------- Layout Helpers ---------- */

@@ -12,6 +12,15 @@ export default function MainPage() {
 
   return (
     <main className={styles.page}>
+      <Image
+        src="/home-bg.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        preload
+        className={styles.background}
+        style={{ objectFit: "cover", objectPosition: "top" }}
+      />
       <div className={styles.layout}>
         <div className={styles.column}>
           {leftProjects.map((project) => (

@@ -1,8 +1,13 @@
 .page {
+  position: relative;
   min-height: 100dvh;
   padding: 4rem 2rem;
   display: flex;
   align-items: center;
+}
+
+.background {
+  z-index: -1;
 }
 
 .layout {

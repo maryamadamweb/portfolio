@@ -9,8 +9,9 @@ export function ProjectCard({ project }: { project: ProjectMeta }) {
       <Image
         src={project.cover}
         alt=""
-        width={48}
-        height={48}
+        width={1427}
+        height={1606}
+        sizes="(max-width: 900px) 320px, 480px"
         className={styles.cover}
       />
       <h2 className={styles.title}>{project.title}</h2>

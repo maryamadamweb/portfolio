@@ -7,7 +7,7 @@ export const projects: ProjectMeta[] = [
     slug: "project-one",
     title: "Illustrations",
     summary: "A short one-line description of this project.",
-    cover: "/window.svg",
+    cover: "/illustrations-sticker.png",
     tags: ["Design", "Web"],
   },
   {

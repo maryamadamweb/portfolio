@@ -23,8 +23,8 @@
 
 .title {
   flex: 0 0 auto;
-  font-size: 2rem;
-  /* font-weight: 600; */
+  font-size: 1.25rem;
+  font-weight: 600;
   margin: 0;
   text-align: center;
   text-transform: lowercase;

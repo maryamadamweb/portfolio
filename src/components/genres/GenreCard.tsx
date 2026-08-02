@@ -3,7 +3,16 @@ import Link from "next/link";
 import type { GenreMeta } from "@/types/genre";
 import styles from "./GenreCard.module.css";
 
-export function GenreCard({ genre }: { genre: GenreMeta }) {
+export function GenreCard({
+  genre,
+  eager = false,
+}: {
+  genre: GenreMeta;
+  // Several cards can be above the fold depending on viewport, so `preload`
+  // (single LCP guess) isn't right here — mark the likely ones eager instead.
+  // See: node_modules/next/dist/docs .../components/image.md#preload
+  eager?: boolean;
+}) {
   return (
     <Link href={`/${genre.slug}`} className={styles.card}>
       {genre.coverAnimation ? (
@@ -15,6 +24,7 @@ export function GenreCard({ genre }: { genre: GenreMeta }) {
           width={genre.coverWidth}
           height={genre.coverHeight}
           unoptimized
+          loading={eager ? "eager" : undefined}
           className={styles.cover}
         />
       ) : genre.coverVideo ? (
@@ -36,11 +46,11 @@ export function GenreCard({ genre }: { genre: GenreMeta }) {
           width={genre.coverWidth}
           height={genre.coverHeight}
           sizes="(max-width: 900px) 320px, 480px"
+          loading={eager ? "eager" : undefined}
           className={styles.cover}
         />
       )}
       <h2 className={styles.title}>{genre.title}</h2>
-      <p className={styles.summary}>{genre.summary}</p>
     </Link>
   );
 }

@@ -1,7 +1,7 @@
 .page {
   position: relative;
   min-height: 100dvh;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
   display: flex;
   align-items: center;
 }
@@ -10,35 +10,82 @@
   z-index: -1;
 }
 
+/* Collage layout approximating the hand-drawn wireframe: a big centered title
+   block (col3-4, all rows) with genre cards wrapped around it in the outer
+   columns. Columns are symmetric (col1+col2 == col5) so the title block is
+   genuinely centered. Grid-area name per genre slug — see MainPage in page.tsx.
+   Cards are fixed-size squares (see GenreCard.module.css) so spanning a cell
+   over multiple rows just gives a card more room to center in, not a bigger
+   card — that's what keeps every genre visually the same size regardless of
+   its own source image's real proportions. */
 .layout {
   display: grid;
-  grid-template-columns: 1fr minmax(240px, 480px) 1fr;
+  grid-template-columns: 1fr 1fr 1.5fr 1.5fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    "illustrations graphic-design title title henna"
+    "about         .              title title paintings"
+    "about         residencies    title title animations";
   align-items: center;
-  gap: 3rem;
-  max-width: 1400px;
+  justify-items: center;
+  gap: 1.5rem;
+  max-width: 1500px;
   width: 100%;
+  height: calc(100dvh - 6rem);
   margin: 0 auto;
-}
 
-.column {
-  display: grid;
-  gap: 2rem;
+  /* // #231f21 */
+  /* #242021 */
 }
 
 .centerImage {
+  grid-area: title;
   width: 100%;
   height: auto;
-  justify-self: center;
+  align-self: center;
+}
+
+.illustrations {
+  grid-area: illustrations;
+}
+
+.graphic-design {
+  grid-area: graphic-design;
+}
+
+.henna {
+  grid-area: henna;
+}
+
+.paintings {
+  grid-area: paintings;
+}
+
+.animations {
+  grid-area: animations;
+}
+
+.residencies {
+  grid-area: residencies;
+}
+
+.about {
+  grid-area: about;
 }
 
 @media (max-width: 900px) {
   .layout {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    gap: 2.5rem;
   }
 
   .centerImage {
-    order: -1;
     max-width: 320px;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
   }
 }

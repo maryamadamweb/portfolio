@@ -4,12 +4,11 @@ import { GenreCard } from "@/components/genres/GenreCard";
 import styles from "./page.module.css";
 
 // Entry point. Each card is a genre — click into it to go to that genre's page.
-// Cards are split evenly to flank the centered title image.
-export default function MainPage() {
-  const mid = Math.ceil(genres.length / 2);
-  const leftGenres = genres.slice(0, mid);
-  const rightGenres = genres.slice(mid);
+// Positions are hand-placed via CSS grid-area (one class per slug in page.module.css)
+// to match the intended collage layout, not a generic repeating grid.
+const EAGER_SLUGS = new Set(["illustrations", "graphic-design", "henna"]);
 
+export default function MainPage() {
   return (
     <main className={styles.page}>
       <Image
@@ -22,24 +21,19 @@ export default function MainPage() {
         style={{ objectFit: "cover", objectPosition: "top" }}
       />
       <div className={styles.layout}>
-        <div className={styles.column}>
-          {leftGenres.map((genre) => (
-            <GenreCard key={genre.slug} genre={genre} />
-          ))}
-        </div>
         <Image
           src="/maryam-adam-title.png"
           alt="Maryam Adam"
-          width={700}
-          height={496}
+          width={2323}
+          height={378}
           className={styles.centerImage}
-          priority
+          preload
         />
-        <div className={styles.column}>
-          {rightGenres.map((genre) => (
-            <GenreCard key={genre.slug} genre={genre} />
-          ))}
-        </div>
+        {genres.map((genre) => (
+          <div key={genre.slug} className={styles[genre.slug]}>
+            <GenreCard genre={genre} eager={EAGER_SLUGS.has(genre.slug)} />
+          </div>
+        ))}
       </div>
     </main>
   );

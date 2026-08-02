@@ -1,0 +1,35 @@
+.nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.homeLink {
+  font-weight: 700;
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--color-border);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.link {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.link:hover {
+  color: var(--color-text);
+}
+
+.active {
+  color: var(--color-text);
+  font-weight: 700;
+}

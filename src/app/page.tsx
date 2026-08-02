@@ -1,14 +1,14 @@
 import Image from "next/image";
-import { projects } from "@/lib/projects";
-import { ProjectCard } from "@/components/projects/ProjectCard";
+import { genres } from "@/lib/genres";
+import { GenreCard } from "@/components/genres/GenreCard";
 import styles from "./page.module.css";
 
-// Entry point. Each card is a project/genre — click into it to go to that project's page.
+// Entry point. Each card is a genre — click into it to go to that genre's page.
 // Cards are split evenly to flank the centered title image.
 export default function MainPage() {
-  const mid = Math.ceil(projects.length / 2);
-  const leftProjects = projects.slice(0, mid);
-  const rightProjects = projects.slice(mid);
+  const mid = Math.ceil(genres.length / 2);
+  const leftGenres = genres.slice(0, mid);
+  const rightGenres = genres.slice(mid);
 
   return (
     <main className={styles.page}>
@@ -23,8 +23,8 @@ export default function MainPage() {
       />
       <div className={styles.layout}>
         <div className={styles.column}>
-          {leftProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+          {leftGenres.map((genre) => (
+            <GenreCard key={genre.slug} genre={genre} />
           ))}
         </div>
         <Image
@@ -36,8 +36,8 @@ export default function MainPage() {
           priority
         />
         <div className={styles.column}>
-          {rightProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+          {rightGenres.map((genre) => (
+            <GenreCard key={genre.slug} genre={genre} />
           ))}
         </div>
       </div>

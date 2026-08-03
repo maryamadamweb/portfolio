@@ -2,9 +2,6 @@
   position: relative;
   min-height: 2400px;
   overflow-x: hidden;
-  overflow-y: visible;
-  /* padding: 4rem 0; */
-  /* margin-top: 2.5rem; */
 }
 
 .center {
@@ -15,21 +12,16 @@
   padding: 2rem;
 }
 
-.title {
-  text-align: center;
-  margin-bottom: 3rem;
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 }
 
-.videos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+.featuredGroup {
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
-  margin-top: 3rem;
-}
-
-.video {
-  width: 100%;
-  border-radius: 8px;
 }
 
 @media (max-width: 900px) {

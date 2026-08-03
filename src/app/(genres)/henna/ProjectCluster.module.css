@@ -1,0 +1,64 @@
+.cluster {
+  width: 100%;
+}
+
+.name {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  margin-bottom: 0.5rem;
+}
+
+.summary {
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+  max-width: 60ch;
+}
+
+.grid {
+  column-width: 220px;
+  column-gap: 1rem;
+}
+
+.grid[data-size="large"] {
+  column-width: 320px;
+  column-gap: 1.5rem;
+}
+
+.tile {
+  display: block;
+  width: 100%;
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.media {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.videoWrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.videoWrap .media {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+}
+
+.verticalCaption {
+  flex-shrink: 0;
+  writing-mode: vertical-rl;
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  white-space: nowrap;
+}

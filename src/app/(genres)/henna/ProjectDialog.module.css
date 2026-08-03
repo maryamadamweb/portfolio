@@ -1,0 +1,115 @@
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlayFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes contentFadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 40%);
+  z-index: 50;
+}
+
+.overlay[data-state="open"] {
+  animation: overlayFadeIn var(--duration-base) var(--ease-default);
+}
+
+.overlay[data-state="closed"] {
+  animation: overlayFadeOut var(--duration-base) var(--ease-default);
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  max-width: 95vw;
+  height: 85vh;
+  background: transparent;
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-sm);
+  z-index: 51;
+}
+
+.content[data-state="open"] {
+  animation: contentFadeIn var(--duration-base) var(--ease-default);
+}
+
+.content[data-state="closed"] {
+  animation: contentFadeOut var(--duration-base) var(--ease-default);
+}
+
+.mediaPane {
+  position: relative;
+  height: 100%;
+}
+
+.media {
+  object-fit: contain;
+  height: 100%;
+  width: auto;
+}
+
+.textPane {
+  flex: 0 0 300px;
+  background: var(--color-bg);
+  padding: var(--space-sm);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+}
+
+.closeButton {
+  align-self: flex-end;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.title {
+  font-family: var(--font-body);
+  font-size: var(--fs-xl);
+}
+
+.description {
+  color: var(--color-text-muted);
+}

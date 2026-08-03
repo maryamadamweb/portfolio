@@ -7,13 +7,20 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1.5rem;
-  padding: 1.5rem 2rem;
+  padding: 0.5rem 1rem;
   margin-bottom: 2rem;
   border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-heading);
 }
 
 .homeLink {
-  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.homeImage {
+  width: auto;
+  height: 1rem;
 }
 
 .list {
@@ -25,6 +32,8 @@
 .link {
   color: var(--color-text-muted);
   font-size: var(--fs-sm);
+  font-weight: 600;
+  text-transform: lowercase;
 }
 
 .link:hover {
@@ -33,5 +42,7 @@
 
 .active {
   color: var(--color-text);
-  font-weight: 700;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { genres } from "@/lib/genres";
@@ -11,7 +12,13 @@ export function GenreNav() {
   return (
     <nav className={styles.nav} aria-label="Genres">
       <Link href="/" className={styles.homeLink}>
-        Home
+        <Image
+          src="/maryam-adam-title.png"
+          alt="Home"
+          width={2323}
+          height={378}
+          className={styles.homeImage}
+        />
       </Link>
       <ul className={styles.list}>
         {genres.map((genre) => {
@@ -20,7 +27,9 @@ export function GenreNav() {
             <li key={genre.slug}>
               <Link
                 href={`/${genre.slug}`}
-                className={isActive ? `${styles.link} ${styles.active}` : styles.link}
+                className={
+                  isActive ? `${styles.link} ${styles.active}` : styles.link
+                }
                 aria-current={isActive ? "page" : undefined}
               >
                 {genre.title}

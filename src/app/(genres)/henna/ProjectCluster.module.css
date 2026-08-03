@@ -3,7 +3,6 @@
 }
 
 .name {
-  font-family: var(--font-body);
   font-size: var(--fs-lg);
   margin-bottom: 0.5rem;
 }

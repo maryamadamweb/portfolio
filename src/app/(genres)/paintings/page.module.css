@@ -1,33 +1,46 @@
 .page {
   min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
   padding: 4rem 2rem;
 }
 
-.grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "tall square about2"
-    "about1 item3 item4";
-  gap: 3rem;
-  max-width: 1400px;
-  width: 100%;
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  max-width: 1600px;
   margin: 0 auto;
+}
+
+.row {
+  display: flex;
   align-items: center;
+  gap: 4rem;
+}
+
+.row:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.imageWrap {
+  flex: 1 1 60%;
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 88vh;
+}
+
+.textPane {
+  flex: 1 1 40%;
+  max-width: 45ch;
 }
 
 .name {
-  font-family: var(--font-body);
-  font-size: var(--fs-lg);
-  margin-bottom: 1rem;
-}
-
-.aboutHeading {
-  font-family: var(--font-body);
   font-size: var(--fs-lg);
   margin-bottom: 1rem;
 }
@@ -38,82 +51,21 @@
   margin-bottom: 1rem;
 }
 
-.image {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 70vh;
-}
-
-.tallItem {
-  grid-area: tall;
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-
-.verticalName {
-  position: absolute;
-  top: 0;
-  left: -2rem;
-  writing-mode: vertical-rl;
-  font-size: var(--fs-sm);
+.about {
   color: var(--color-text-muted);
-}
-
-.about1 {
-  grid-area: about1;
-  color: var(--color-text-muted);
-  max-width: 40ch;
-}
-
-.squareItem {
-  grid-area: square;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.about2 {
-  grid-area: about2;
-  color: var(--color-text-muted);
-  max-width: 40ch;
-}
-
-.simpleItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.item3 {
-  grid-area: item3;
-}
-
-.item4 {
-  grid-area: item4;
-}
-
-.caption {
-  color: var(--color-text-muted);
-  max-width: 40ch;
 }
 
 @media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "tall"
-      "about1"
-      "square"
-      "about2"
-      "item3"
-      "item4";
-    gap: 2.5rem;
+  .row,
+  .row:nth-child(even) {
+    flex-direction: column;
   }
 
-  .verticalName {
-    left: -1.25rem;
+  .textPane {
+    max-width: none;
+  }
+
+  .image {
+    max-height: 70vh;
   }
 }

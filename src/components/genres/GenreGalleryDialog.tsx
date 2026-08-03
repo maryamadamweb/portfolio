@@ -21,12 +21,14 @@ export function GenreGalleryDialog({
         <Dialog.Content className={styles.content}>
           {image && (
             <>
-              <div className={styles.imagePane}>
+              <div
+                className={styles.imagePane}
+                style={{ aspectRatio: `${image.width} / ${image.height}` }}
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
-                  sizes="60vw"
                   className={styles.image}
                 />
               </div>

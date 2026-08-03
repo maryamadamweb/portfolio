@@ -1,21 +1,35 @@
+import Image from "next/image";
 import { getGenreMeta } from "@/lib/genres";
-import Content from "./content.mdx";
+// import Content from "./content.mdx";
 import styles from "./page.module.css";
 
-// Custom layout for this genre. Narrative sections come from content.mdx;
-// the surrounding hero/structure is hand-built and unique to this page.
 export default function IllustrationsPage() {
   const meta = getGenreMeta("illustrations");
 
   return (
     <main className={styles.page}>
-      <header className={styles.hero}>
-        <h1>{meta?.title}</h1>
-        <p>{meta?.summary}</p>
-      </header>
-      <article className={styles.content}>
+      <div className={styles.imageWrap}>
+        <Image
+          src="/genres/illustrations/islamic-relief.jpeg"
+          alt="Islamic Relief Artwork"
+          width={960}
+          height={1165}
+          sizes="(max-width: 800px) 100vw, 800px"
+          className={styles.cover}
+        />
+        {meta && (
+          <Image
+            src={meta.cover}
+            alt=""
+            width={meta.coverWidth}
+            height={meta.coverHeight}
+            className={styles.badge}
+          />
+        )}
+      </div>
+      {/* <article className={styles.content}>
         <Content />
-      </article>
+      </article> */}
     </main>
   );
 }

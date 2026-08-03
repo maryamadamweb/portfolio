@@ -4,8 +4,25 @@
   margin: 0;
 }
 
-.hero {
+.imageWrap {
+  position: relative;
+  width: 50%;
   margin-bottom: 3rem;
+}
+
+.cover {
+  width: 100%;
+  height: auto;
+  /* border-radius: 8px; */
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(40%, -40%) rotate(10deg);
+  width: 20%;
+  height: auto;
 }
 
 .content {

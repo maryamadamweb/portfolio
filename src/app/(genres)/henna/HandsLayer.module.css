@@ -1,0 +1,29 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.item {
+  position: absolute;
+  width: 220px;
+  transform: translate(-50%, -50%) rotate(var(--rotate));
+  transition: transform 0.25s var(--ease-default);
+  pointer-events: auto;
+}
+
+.item:hover {
+  transform: translate(-50%, -50%) rotate(var(--rotate)) scale(1.1);
+  z-index: 2;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .layer {
+    display: none;
+  }
+}

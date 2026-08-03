@@ -20,6 +20,18 @@
   margin-bottom: 3rem;
 }
 
+.videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.video {
+  width: 100%;
+  border-radius: 8px;
+}
+
 @media (max-width: 900px) {
   .page {
     min-height: 100dvh;

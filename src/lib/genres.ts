@@ -48,6 +48,36 @@ export const genres: GenreMeta[] = [
     coverWidth: 1448,
     coverHeight: 2835,
     tags: ["Henna"],
+    images: [
+      {
+        src: "/genres/henna/hands/henna-1.png",
+        width: 1344,
+        height: 1600,
+        alt: "Henna design piece",
+        description: "A short placeholder description of this piece.",
+      },
+      {
+        src: "/genres/henna/hands/henna-5.png",
+        width: 1403,
+        height: 1600,
+        alt: "Henna design piece",
+        description: "A short placeholder description of this piece.",
+      },
+      {
+        src: "/genres/henna/hands/henna-9.png",
+        width: 962,
+        height: 1600,
+        alt: "Henna design piece",
+        description: "A short placeholder description of this piece.",
+      },
+      {
+        src: "/genres/henna/hands/henna-13.png",
+        width: 735,
+        height: 1600,
+        alt: "Henna design piece",
+        description: "A short placeholder description of this piece.",
+      },
+    ],
   },
   {
     slug: "paintings",

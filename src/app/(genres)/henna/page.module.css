@@ -1,6 +1,6 @@
 .page {
   min-height: 100dvh;
-  padding: 4rem 2rem;
+  padding: 4rem 260px;
 }
 
 .title {
@@ -8,16 +8,8 @@
   margin-bottom: 3rem;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.tile {
-  aspect-ratio: 1;
-  border: 1px dashed #888;
-  border-radius: 8px;
+@media (max-width: 900px) {
+  .page {
+    padding: 4rem 2rem;
+  }
 }

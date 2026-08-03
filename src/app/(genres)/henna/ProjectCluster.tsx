@@ -6,13 +6,7 @@ import type { Project } from "./projects";
 import { ProjectDialog } from "./ProjectDialog";
 import styles from "./ProjectCluster.module.css";
 
-export function ProjectCluster({
-  project,
-  size = "default",
-}: {
-  project: Project;
-  size?: "default" | "large";
-}) {
+export function ProjectCluster({ project }: { project: Project }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -20,7 +14,7 @@ export function ProjectCluster({
     <section className={styles.cluster}>
       <h2 className={styles.name}>{project.name}</h2>
       <p className={styles.summary}>{project.summary}</p>
-      <div className={styles.grid} data-size={size}>
+      <div className={styles.grid}>
         {project.items.map((item, index) => {
           const isPortraitVideo = item.type === "video" && item.height > item.width;
           const clickable = item.clickable !== false;
@@ -50,11 +44,7 @@ export function ProjectCluster({
                 alt={item.alt}
                 width={item.width}
                 height={item.height}
-                sizes={
-                  size === "large"
-                    ? "(max-width: 900px) 60vw, 420px"
-                    : "(max-width: 900px) 45vw, 300px"
-                }
+                sizes="(max-width: 900px) 90vw, 800px"
                 className={styles.media}
               />
             );

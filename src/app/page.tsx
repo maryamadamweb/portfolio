@@ -6,7 +6,6 @@ import styles from "./page.module.css";
 // Entry point. Each card is a genre — click into it to go to that genre's page.
 // Positions are hand-placed via CSS grid-area (one class per slug in page.module.css)
 // to match the intended collage layout, not a generic repeating grid.
-const EAGER_SLUGS = new Set(["illustrations", "graphic-design", "henna"]);
 
 export default function MainPage() {
   return (
@@ -31,7 +30,7 @@ export default function MainPage() {
         />
         {genres.map((genre) => (
           <div key={genre.slug} className={styles[genre.slug]}>
-            <GenreCard genre={genre} eager={EAGER_SLUGS.has(genre.slug)} />
+            <GenreCard genre={genre} />
           </div>
         ))}
       </div>

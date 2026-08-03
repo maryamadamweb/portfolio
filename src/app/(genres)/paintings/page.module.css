@@ -1,23 +1,119 @@
 .page {
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   padding: 4rem 2rem;
 }
 
-.title {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.gallery {
+.grid {
+  flex: 1;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  max-width: 1000px;
+  grid-template-columns: 1.1fr 0.9fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "tall square about2"
+    "about1 item3 item4";
+  gap: 3rem;
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
+  align-items: center;
 }
 
-.tile {
-  aspect-ratio: 1;
-  border: 1px dashed #888;
-  border-radius: 8px;
+.name {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  margin-bottom: 1rem;
+}
+
+.aboutHeading {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: 1rem;
+}
+
+.image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 70vh;
+}
+
+.tallItem {
+  grid-area: tall;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.verticalName {
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  writing-mode: vertical-rl;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.about1 {
+  grid-area: about1;
+  color: var(--color-text-muted);
+  max-width: 40ch;
+}
+
+.squareItem {
+  grid-area: square;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about2 {
+  grid-area: about2;
+  color: var(--color-text-muted);
+  max-width: 40ch;
+}
+
+.simpleItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item3 {
+  grid-area: item3;
+}
+
+.item4 {
+  grid-area: item4;
+}
+
+.caption {
+  color: var(--color-text-muted);
+  max-width: 40ch;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "tall"
+      "about1"
+      "square"
+      "about2"
+      "item3"
+      "item4";
+    gap: 2.5rem;
+  }
+
+  .verticalName {
+    left: -1.25rem;
+  }
 }

@@ -35,6 +35,10 @@
   cursor: pointer;
 }
 
+.tileStatic {
+  cursor: default;
+}
+
 .media {
   width: 100%;
   height: auto;

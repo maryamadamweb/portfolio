@@ -12,6 +12,15 @@ export const genres: GenreMeta[] = [
     coverWidth: 1427,
     coverHeight: 1606,
     tags: ["Design", "Web"],
+    images: [
+      {
+        src: "/genres/illustrations/islamic-relief.jpeg",
+        width: 960,
+        height: 1165,
+        alt: "Islamic Relief Artwork",
+        description: "A short placeholder description of this piece.",
+      },
+    ],
   },
   {
     slug: "graphic-design",
@@ -21,6 +30,15 @@ export const genres: GenreMeta[] = [
     coverWidth: 1188,
     coverHeight: 1147,
     tags: ["Design"],
+    images: [
+      {
+        src: "/genres/graphic-design/cover.png",
+        width: 1188,
+        height: 1147,
+        alt: "Graphic design piece",
+        description: "A short placeholder description of this piece.",
+      },
+    ],
   },
   {
     slug: "henna",

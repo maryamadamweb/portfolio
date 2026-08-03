@@ -1,3 +1,11 @@
+export type GalleryImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  description: string;
+};
+
 export type GenreMeta = {
   slug: string;
   title: string;
@@ -8,4 +16,5 @@ export type GenreMeta = {
   coverVideo?: string;
   coverAnimation?: string;
   tags: string[];
+  images?: GalleryImage[];
 };

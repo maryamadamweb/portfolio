@@ -1,0 +1,109 @@
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlayFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes contentFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 40%);
+  z-index: 50;
+}
+
+.overlay[data-state="open"] {
+  animation: overlayFadeIn var(--duration-base) var(--ease-default);
+}
+
+.overlay[data-state="closed"] {
+  animation: overlayFadeOut var(--duration-base) var(--ease-default);
+}
+
+.content {
+  position: fixed;
+  inset: var(--space-md);
+  background: var(--color-bg);
+  display: flex;
+  z-index: 51;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.content[data-state="open"] {
+  animation: contentFadeIn var(--duration-base) var(--ease-default);
+}
+
+.content[data-state="closed"] {
+  animation: contentFadeOut var(--duration-base) var(--ease-default);
+}
+
+.imagePane {
+  position: relative;
+  flex: 1 1 60%;
+  background: var(--color-bg);
+}
+
+.image {
+  object-fit: contain;
+}
+
+.textPane {
+  flex: 1 1 40%;
+  padding: var(--space-lg);
+  overflow-y: auto;
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  font-family: var(--font-heading);
+}
+
+.closeButton {
+  align-self: flex-end;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.title {
+  font-size: var(--fs-xl);
+}
+
+.description {
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+}

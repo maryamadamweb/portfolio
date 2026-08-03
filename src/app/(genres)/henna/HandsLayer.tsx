@@ -11,6 +11,7 @@ export function HandsLayer({ hands }: { hands: HandImage[] }) {
           top: `${hand.top}%`,
           left: `${hand.left}%`,
           "--rotate": `${hand.rotate ?? 0}deg`,
+          "--scale": hand.scale ?? 1,
         } as CSSProperties;
 
         return (

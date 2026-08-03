@@ -11,10 +11,9 @@ export default function HennaPage() {
   return (
     <main className={styles.page}>
       <HandsLayer hands={hands} />
-      <div className={styles.center}>
-        <h1 className={styles.title}>{meta.title}</h1>
+      {/* <div className={styles.center}>
         <GenreGallery genre={meta} />
-      </div>
+      </div> */}
     </main>
   );
 }

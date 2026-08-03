@@ -1,0 +1,17 @@
+.link {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+.link:hover {
+  color: var(--color-text);
+}
+
+.active {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
+}

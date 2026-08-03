@@ -1,6 +1,4 @@
 .nav {
-  /* Rendered as a sibling before each page's <main>, not nested inside its
-     max-width column, so 100% here is the true full viewport width. */
   width: 100%;
   display: flex;
   align-items: center;
@@ -29,20 +27,8 @@
   gap: 1.25rem;
 }
 
-.link {
-  color: var(--color-text-muted);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  text-transform: lowercase;
-}
-
-.link:hover {
-  color: var(--color-text);
-}
-
-.active {
-  color: var(--color-text);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 0.4em;
+@media (max-width: 900px) {
+  .list {
+    display: none;
+  }
 }

@@ -1,0 +1,117 @@
+.menuButton {
+  display: none;
+  padding: 0;
+}
+
+.menuButtonImage {
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlayFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes sheetSlideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sheetSlideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 40%);
+  z-index: 50;
+}
+
+.overlay[data-state="open"] {
+  animation: overlayFadeIn 0.4s ease-in-out;
+}
+
+.overlay[data-state="closed"] {
+  animation: overlayFadeOut 0.4s ease-in-out;
+}
+
+.sheet {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(80vw, 320px);
+  background: var(--color-bg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  z-index: 51;
+  font-family: var(--font-heading);
+}
+
+.sheet[data-state="open"] {
+  animation: sheetSlideIn 0.4s ease-in-out;
+}
+
+.sheet[data-state="closed"] {
+  animation: sheetSlideOut 0.4s ease-in-out;
+}
+
+.closeButton {
+  align-self: flex-end;
+  font-family: var(--font-heading);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.sheetList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .menuButton {
+    display: block;
+  }
+}

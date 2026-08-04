@@ -21,7 +21,17 @@ export function ProjectCluster({
       <h2 className={styles.name}>{project.name}</h2>
       {project.credit && <p className={styles.credit}>{project.credit}</p>}
       <p className={styles.summary}>{project.summary}</p>
-      <div className={styles.grid} data-size={size}>
+      {project.link && (
+        <a
+          href={project.link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          {project.link.label}
+        </a>
+      )}
+      <div className={styles.grid} data-size={size} data-single={project.items.length === 1}>
         {project.items.map((item, index) => {
           const isPortraitVideo = item.type === "video" && item.height > item.width;
           const showCaption = isPortraitVideo && project.summary.length <= 160;

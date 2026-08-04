@@ -22,6 +22,7 @@ export type Project = {
   name: string;
   credit?: string;
   summary: string;
+  link?: { href: string; label: string };
   items: ProjectItem[];
 };
 
@@ -231,6 +232,23 @@ export const projects: Project[] = [
         src: "/genres/henna/levis/levis-clip.mp4",
         width: 720,
         height: 1280,
+        description: placeholder,
+      },
+    ],
+  },
+  {
+    slug: "colours",
+    name: "'The Colours of Henna'",
+    credit: "By Ruqaiyyah Patel (Henna Artist and Creative Director/Producer)",
+    summary:
+      "'The Colours of Henna' explores the hues of henna from powder to natural stain through colour, art and culture.\n\n\"This film addresses my love for the art of henna in 3 acts. These acts reflect the physical and aesthetic development of henna whilst exploring the many memories and thoughts I hold of this art and medium.\" — Ruqaiyyah Patel\n\nMaryam Adam — Key Cast, 'Act 2 Henna Artist'.",
+    link: { href: "https://vimeo.com/1102983081", label: "Full film" },
+    items: [
+      {
+        type: "video",
+        src: "/genres/henna/colours/colours-clip.mp4",
+        width: 1276,
+        height: 718,
         description: placeholder,
       },
     ],

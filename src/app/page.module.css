@@ -87,9 +87,10 @@
   .layout {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     height: auto;
-    gap: 2.5rem;
+    gap: 1.5rem;
+    overflow-x: hidden;
   }
 
   .centerImage,
@@ -109,6 +110,49 @@
     max-width: 320px;
     width: 100%;
     height: auto;
-    margin: 0 auto;
+    margin: 0 auto 1rem;
+  }
+
+  .illustrations {
+    align-self: flex-start;
+    margin-left: 4%;
+    transform: rotate(-4deg);
+  }
+
+  .graphic-design {
+    align-self: center;
+    margin-top: 0.5rem;
+    transform: rotate(3deg);
+  }
+
+  .henna {
+    align-self: flex-end;
+    margin-right: 6%;
+    transform: rotate(-3deg);
+  }
+
+  .paintings {
+    align-self: flex-start;
+    margin-left: 10%;
+    transform: rotate(4deg);
+  }
+
+  .animations {
+    align-self: center;
+    margin-top: 0.5rem;
+    transform: rotate(-2deg);
+  }
+
+  .residencies {
+    align-self: flex-end;
+    margin-right: 2%;
+    transform: rotate(3deg);
+  }
+
+  .about {
+    align-self: flex-start;
+    margin-left: 6%;
+    margin-bottom: 1rem;
+    transform: rotate(-3deg);
   }
 }

@@ -7,10 +7,17 @@
   margin-bottom: 0.5rem;
 }
 
+.credit {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: 0.75rem;
+}
+
 .summary {
   color: var(--color-text-muted);
   margin-bottom: 1.5rem;
   max-width: 60ch;
+  white-space: pre-line;
 }
 
 .grid {

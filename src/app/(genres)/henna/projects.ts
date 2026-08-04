@@ -20,18 +20,18 @@ export type ProjectItem =
 export type Project = {
   slug: string;
   name: string;
+  credit?: string;
   summary: string;
   items: ProjectItem[];
 };
 
 const placeholder = "A short placeholder description of this piece.";
-const projectSummary = "A sentence or two about this project.";
 
 export const projects: Project[] = [
   {
     slug: "hue",
     name: "Hue",
-    summary: projectSummary,
+    summary: "Featured on Hue as 'Muse of the Month'.",
     items: [
       {
         type: "video",
@@ -62,8 +62,10 @@ export const projects: Project[] = [
   },
   {
     slug: "aunty-ji",
-    name: "Aunty Ji",
-    summary: projectSummary,
+    name: "ਆਂਟੀ ਜੀ / آنٹی جی / AUNTY JI",
+    credit: "Written by M Zain Dada, directed by Milli Bhatia",
+    summary:
+      "AuntyJi is a film born out of grief, the ugly, disorientating kind that distorts time, reality, and language itself. Centred on an elderly South Asian woman, a figure so often overlooked or reduced to stereotype in British narratives, the film uses surrealism to give her full emotional interiority, exploring the immigrant experience of displacement, codeswitching, and the negotiation between survival and belonging. It is ultimately a film about grief and love intertwined, and an invitation to sit with both in all their distortion.\n\nI created the henna work for the film, applied with a deliberately faded effect that needed a couple of days to set, so it could visually echo the grief and yearning at the film's core. Alongside Urdu poetry and imagery of the lote tree, the henna helped root the film's surrealism in something ancestral. I really enjoyed that the henna was a subtle, but well thought out detail of this film.",
     items: [
       {
         type: "image",
@@ -86,7 +88,7 @@ export const projects: Project[] = [
   {
     slug: "dazed",
     name: "Dazed",
-    summary: projectSummary,
+    summary: "Featured on Dazed & Dazed Beauty for Eid.",
     items: [
       {
         type: "image",
@@ -116,8 +118,9 @@ export const projects: Project[] = [
   },
   {
     slug: "levis",
-    name: "Levis",
-    summary: projectSummary,
+    name: "Levis x Hadiyah Hussain",
+    summary:
+      "Henna designs featured in Hadiyah Hussain's meri jaan / میری جان campaign, used as patches in the Levi's collaboration.\n\nMehndi for Hadiyah Hussain's Valentine's Day campaign, featuring original designs.",
     items: [
       {
         type: "image",

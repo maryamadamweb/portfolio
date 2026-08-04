@@ -19,10 +19,12 @@ export function ProjectCluster({
   return (
     <section className={styles.cluster}>
       <h2 className={styles.name}>{project.name}</h2>
+      {project.credit && <p className={styles.credit}>{project.credit}</p>}
       <p className={styles.summary}>{project.summary}</p>
       <div className={styles.grid} data-size={size}>
         {project.items.map((item, index) => {
           const isPortraitVideo = item.type === "video" && item.height > item.width;
+          const showCaption = isPortraitVideo && project.summary.length <= 160;
           const clickable = item.clickable !== false;
 
           const media =
@@ -38,7 +40,7 @@ export function ProjectCluster({
                   playsInline
                   className={styles.media}
                 />
-                {isPortraitVideo && (
+                {showCaption && (
                   <span className={styles.verticalCaption}>
                     {project.summary}
                   </span>

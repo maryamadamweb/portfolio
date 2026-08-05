@@ -3,21 +3,37 @@
   padding: 4rem 2rem;
 }
 
-.title {
-  text-align: center;
-  margin-bottom: 3rem;
+.wall {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  max-width: 1000px;
-  margin: 0 auto;
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
-.tile {
-  aspect-ratio: 1;
-  border: 1px dashed #888;
-  border-radius: 8px;
+.column[data-offset="1"] {
+  margin-top: 6rem;
+}
+
+.column[data-offset="2"] {
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 900px) {
+  .wall {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .column[data-offset="1"],
+  .column[data-offset="2"] {
+    margin-top: 0;
+  }
 }

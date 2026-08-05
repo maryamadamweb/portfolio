@@ -1,18 +1,26 @@
-import { getGenreMeta } from "@/lib/genres";
+import { ProjectCluster } from "./ProjectCluster";
+import { projects } from "./projects";
 import styles from "./page.module.css";
 
-// Fully custom layout for this genre — no shared template, no MDX.
-// Mostly visual: swap this placeholder grid for the real gallery/gifs.
+// Three columns, mixing residencies/workshops/exhibitions rather than
+// grouping by category — order follows the sequence in projects.ts, split
+// round-robin across columns so reading order stays roughly preserved.
 export default function ResidenciesWorkshopsExhibitionsPage() {
-  const meta = getGenreMeta("residencies-workshops-exhibitions");
+  const columns: (typeof projects)[] = [[], [], []];
+  projects.forEach((project, index) => {
+    columns[index % 3].push(project);
+  });
 
   return (
     <main className={styles.page}>
-      <h1 className={styles.title}>{meta?.title}</h1>
-      <div className={styles.gallery}>
-        <div className={styles.tile} />
-        <div className={styles.tile} />
-        <div className={styles.tile} />
+      <div className={styles.wall}>
+        {columns.map((column, index) => (
+          <div key={index} className={styles.column} data-offset={index}>
+            {column.map((project) => (
+              <ProjectCluster key={project.slug} project={project} />
+            ))}
+          </div>
+        ))}
       </div>
     </main>
   );

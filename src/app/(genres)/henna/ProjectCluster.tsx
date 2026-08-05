@@ -1,10 +1,59 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Project } from "./projects";
 import { ProjectDialog } from "./ProjectDialog";
 import styles from "./ProjectCluster.module.css";
+
+// Videos are heavy static files served as-is from /public (no transcoding,
+// no CDN optimization). Only attach `src` once the tile scrolls into view,
+// so a visitor who never reaches this section never downloads it.
+function LazyVideo({
+  src,
+  width,
+  height,
+  className,
+}: {
+  src: string;
+  width: number;
+  height: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      src={inView ? src : undefined}
+      width={width}
+      height={height}
+      preload="none"
+      muted
+      loop
+      autoPlay={inView}
+      playsInline
+      className={className}
+    />
+  );
+}
 
 export function ProjectCluster({
   project,
@@ -40,14 +89,10 @@ export function ProjectCluster({
           const media =
             item.type === "video" ? (
               <div className={styles.videoWrap}>
-                <video
+                <LazyVideo
                   src={item.src}
                   width={item.width}
                   height={item.height}
-                  muted
-                  loop
-                  autoPlay
-                  playsInline
                   className={styles.media}
                 />
                 {showCaption && (

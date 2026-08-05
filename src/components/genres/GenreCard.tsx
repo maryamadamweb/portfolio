@@ -25,6 +25,7 @@ export function GenreCard({ genre }: { genre: GenreMeta }) {
           poster={genre.cover}
           width={genre.coverWidth}
           height={genre.coverHeight}
+          preload="metadata"
           autoPlay
           loop
           muted

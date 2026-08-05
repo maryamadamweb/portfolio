@@ -29,6 +29,7 @@ export function GenreGalleryDialog({
                   src={image.src}
                   alt={image.alt}
                   fill
+                  sizes="90vw"
                   className={styles.image}
                 />
               </div>

@@ -37,6 +37,7 @@ export function ProjectDialog({
                     src={item.src}
                     alt={item.alt}
                     fill
+                    sizes="90vw"
                     className={styles.media}
                   />
                 )}

@@ -69,17 +69,19 @@ export function ProjectCluster({
     <section className={styles.cluster}>
       <h2 className={styles.name}>{project.name}</h2>
       {project.credit && <p className={styles.credit}>{project.credit}</p>}
-      <p className={styles.summary}>{project.summary}</p>
-      {project.link && (
-        <a
-          href={project.link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.link}
-        >
-          {project.link.label}
-        </a>
-      )}
+      <div className={styles.textBackdrop}>
+        <p className={styles.summary}>{project.summary}</p>
+        {project.link && (
+          <a
+            href={project.link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.link}
+          >
+            {project.link.label}
+          </a>
+        )}
+      </div>
       <div className={styles.grid} data-size={size} data-single={project.items.length === 1}>
         {project.items.map((item, index) => {
           const showCaption = item.type === "image" && item.caption;

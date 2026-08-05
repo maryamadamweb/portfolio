@@ -13,10 +13,20 @@
   margin-bottom: 0.75rem;
 }
 
+.textBackdrop {
+  max-width: 60ch;
+  margin-bottom: 1.5rem;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--color-bg) 92%, transparent) 0%,
+    color-mix(in srgb, var(--color-bg) 45%, transparent) 100%,
+    transparent 100%
+  );
+}
+
 .summary {
   color: var(--color-text-muted);
-  margin-bottom: 1.5rem;
-  max-width: 60ch;
+  margin-bottom: 1rem;
   white-space: pre-line;
   text-align: justify;
 }
@@ -26,7 +36,6 @@
   color: var(--color-text);
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  margin-bottom: 1.5rem;
 }
 
 .grid {

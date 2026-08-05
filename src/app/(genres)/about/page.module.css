@@ -41,7 +41,6 @@
 .bio {
   color: var(--color-text-muted);
   white-space: pre-line;
-  text-align: justify;
 }
 
 .articlesPane {

@@ -28,7 +28,6 @@
   color: var(--color-text-muted);
   margin-bottom: 1rem;
   white-space: pre-line;
-  text-align: justify;
 }
 
 .link {

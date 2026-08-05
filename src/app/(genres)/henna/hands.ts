@@ -2,7 +2,11 @@ export type HandImage = {
   src: string;
   width: number;
   height: number;
-  top: number; // percentage down the page
+  // Exactly one of top/bottom anchors the image vertically — top for images
+  // in the normal flow, bottom for images that should stay pinned to the
+  // end of the page even if content above them changes height.
+  top?: number; // percentage down the page
+  bottom?: number; // percentage up from the bottom of the page
   left: number; // percentage across the page
   rotate?: number; // degrees, defaults to 0
   scale?: number; // multiplier, defaults to 1
@@ -42,8 +46,8 @@ export const hands: HandImage[] = [
     src: "/genres/henna/hands/henna-4.png",
     width: 1374,
     height: 1600,
-    top: 50,
-    left: 4,
+    top: 70,
+    left: 5,
     rotate: 8,
   },
   {

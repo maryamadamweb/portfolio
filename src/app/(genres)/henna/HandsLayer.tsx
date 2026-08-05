@@ -8,7 +8,8 @@ export function HandsLayer({ hands }: { hands: HandImage[] }) {
     <div className={styles.layer}>
       {hands.map((hand) => {
         const style = {
-          top: `${hand.top}%`,
+          top: hand.bottom === undefined ? `${hand.top}%` : undefined,
+          bottom: hand.bottom === undefined ? undefined : `${hand.bottom}%`,
           left: `${hand.left}%`,
           "--rotate": `${hand.rotate ?? 0}deg`,
           "--scale": hand.scale ?? 1,

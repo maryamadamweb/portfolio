@@ -46,8 +46,7 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className={styles.articleLink}
               >
-                Huq That: The South Asian collective turning henna into
-                high art
+                Huq That: The South Asian collective turning henna into high art
               </a>
               <span className={styles.articlePublication}>Dazed</span>
             </li>
@@ -58,8 +57,8 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className={styles.articleLink}
               >
-                &apos;A sign of who I am, right here on my hands&apos;: meet
-                the artists behind the new-school henna boom
+                &apos;A sign of who I am, right here on my hands&apos;: meet the
+                artists behind the new-school henna boom
               </a>
               <span className={styles.articlePublication}>The Guardian</span>
             </li>
@@ -70,8 +69,8 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className={styles.articleLink}
               >
-                A New Henna Art Era: The South Asian Gen Z Artists Leading
-                the Movement
+                A New Henna Art Era: The South Asian Gen Z Artists Leading the
+                Movement
               </a>
               <span className={styles.articlePublication}>EnVi Media</span>
             </li>
@@ -91,6 +90,33 @@ export default function AboutPage() {
           </ul>
         </div>
       </div>
+      <section className={styles.contact}>
+        <h2 className={styles.contactHeading}>Contact</h2>
+        <div className={styles.contactDetails}>
+          <a
+            href="mailto:maryam.arts@outlook.com"
+            className={styles.contactItem}
+          >
+            maryam.arts@outlook.com
+          </a>
+          <a
+            href="https://instagram.com/paintingonmars"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.contactItem}
+          >
+            @paintingonmars
+          </a>
+          <a
+            href="https://instagram.com/naramhands"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.contactItem}
+          >
+            @naramhands
+          </a>
+        </div>
+      </section>
     </main>
   );
 }

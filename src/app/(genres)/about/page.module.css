@@ -28,7 +28,7 @@
 }
 
 .textPane {
-  flex: 1 1 auto;
+  flex: 0 1 34ch;
   min-width: 0;
   padding-top: 0.5rem;
 }
@@ -40,9 +40,45 @@
 
 .bio {
   color: var(--color-text-muted);
-  max-width: 60ch;
   white-space: pre-line;
   text-align: justify;
+}
+
+.articlesPane {
+  flex: 0 0 260px;
+  padding-top: 0.5rem;
+}
+
+.articlesHeading {
+  font-size: var(--fs-lg);
+  margin-bottom: 1.5rem;
+}
+
+.articlesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.articleLink {
+  color: var(--color-text);
+  font-size: var(--fs-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.articlePublication {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
 }
 
 @media (max-width: 900px) {
@@ -55,5 +91,10 @@
     flex: 0 0 auto;
     width: 100%;
     max-width: 360px;
+  }
+
+  .articlesPane {
+    flex: 0 0 auto;
+    width: 100%;
   }
 }

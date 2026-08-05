@@ -36,6 +36,60 @@ export default function AboutPage() {
             and Islamic Relief.
           </p>
         </div>
+        <div className={styles.articlesPane}>
+          <h2 className={styles.articlesHeading}>Articles</h2>
+          <ul className={styles.articlesList}>
+            <li className={styles.article}>
+              <a
+                href="https://www.dazeddigital.com/beauty/article/66042/1/huq-that-the-south-asian-collective-turning-henna-into-high-art"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.articleLink}
+              >
+                Huq That: The South Asian collective turning henna into
+                high art
+              </a>
+              <span className={styles.articlePublication}>Dazed</span>
+            </li>
+            <li className={styles.article}>
+              <a
+                href="https://www.theguardian.com/fashion/2025/nov/07/a-sign-of-who-i-am-right-here-on-my-hands-meet-the-artists-behind-the-new-school-henna-boom"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.articleLink}
+              >
+                &apos;A sign of who I am, right here on my hands&apos;: meet
+                the artists behind the new-school henna boom
+              </a>
+              <span className={styles.articlePublication}>The Guardian</span>
+            </li>
+            <li className={styles.article}>
+              <a
+                href="https://envimedia.co/a-new-henna-art-era-the-south-asian-gen-z-artists-leading-the-movement/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.articleLink}
+              >
+                A New Henna Art Era: The South Asian Gen Z Artists Leading
+                the Movement
+              </a>
+              <span className={styles.articlePublication}>EnVi Media</span>
+            </li>
+            <li className={styles.article}>
+              <a
+                href="https://www.newhamheritagemonth.org/records/drawing-on-heritage-maryam-adam/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.articleLink}
+              >
+                Drawing on Heritage: Maryam Adam
+              </a>
+              <span className={styles.articlePublication}>
+                Newham Heritage Month
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </main>
   );

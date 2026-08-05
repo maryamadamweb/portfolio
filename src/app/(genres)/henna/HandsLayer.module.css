@@ -7,13 +7,14 @@
 .item {
   position: absolute;
   width: 220px;
-  transform: translate(-50%, -50%) rotate(var(--rotate)) scale(var(--scale));
+  transform: translate(-50%, var(--translate-y)) rotate(var(--rotate))
+    scale(var(--scale));
   transition: transform 0.25s var(--ease-default);
   pointer-events: auto;
 }
 
 .item:hover {
-  transform: translate(-50%, -50%) rotate(var(--rotate))
+  transform: translate(-50%, var(--translate-y)) rotate(var(--rotate))
     scale(calc(var(--scale) * 1.1));
   z-index: 2;
 }

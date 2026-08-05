@@ -13,6 +13,10 @@ export function HandsLayer({ hands }: { hands: HandImage[] }) {
           left: `${hand.left}%`,
           "--rotate": `${hand.rotate ?? 0}deg`,
           "--scale": hand.scale ?? 1,
+          // translate(-50%) centers a top-anchored point; a bottom-anchored
+          // point needs the opposite sign to land on its center instead of
+          // half a box-height above it.
+          "--translate-y": hand.bottom === undefined ? "-50%" : "50%",
         } as CSSProperties;
 
         return (

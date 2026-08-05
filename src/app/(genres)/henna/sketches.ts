@@ -11,7 +11,7 @@ export const sketches: HandImage[] = [
     top: 60,
     left: 6,
     rotate: -8,
-    scale: 0.75,
+    scale: 1.05,
   },
   {
     src: "/genres/henna/sketches/sketch-2.png",
@@ -20,7 +20,7 @@ export const sketches: HandImage[] = [
     top: 70,
     left: 10,
     rotate: 10,
-    scale: 0.7,
+    scale: 0.98,
   },
   {
     src: "/genres/henna/sketches/sketch-3.png",
@@ -29,7 +29,7 @@ export const sketches: HandImage[] = [
     top: 80,
     left: 5,
     rotate: -5,
-    scale: 0.7,
+    scale: 0.98,
   },
   {
     src: "/genres/henna/sketches/sketch-4.png",
@@ -38,7 +38,7 @@ export const sketches: HandImage[] = [
     top: 90,
     left: 9,
     rotate: 6,
-    scale: 0.7,
+    scale: 0.98,
   },
   {
     src: "/genres/henna/sketches/sketch-5.png",
@@ -47,7 +47,7 @@ export const sketches: HandImage[] = [
     top: 60,
     left: 92,
     rotate: 8,
-    scale: 0.75,
+    scale: 1.05,
   },
   {
     src: "/genres/henna/sketches/sketch-6.png",
@@ -56,7 +56,7 @@ export const sketches: HandImage[] = [
     top: 70,
     left: 96,
     rotate: -10,
-    scale: 0.7,
+    scale: 0.98,
   },
   {
     src: "/genres/henna/sketches/sketch-7.png",
@@ -65,7 +65,7 @@ export const sketches: HandImage[] = [
     top: 80,
     left: 90,
     rotate: 5,
-    scale: 0.7,
+    scale: 0.98,
   },
   {
     src: "/genres/henna/sketches/sketch-8.png",
@@ -74,7 +74,7 @@ export const sketches: HandImage[] = [
     top: 90,
     left: 94,
     rotate: -6,
-    scale: 0.7,
+    scale: 0.98,
   },
   {
     src: "/genres/henna/sketches/sketch-9.png",
@@ -83,7 +83,7 @@ export const sketches: HandImage[] = [
     top: 15,
     left: 20,
     rotate: -12,
-    scale: 0.55,
+    scale: 0.77,
   },
   {
     src: "/genres/henna/sketches/sketch-10.png",
@@ -92,7 +92,7 @@ export const sketches: HandImage[] = [
     top: 15,
     left: 80,
     rotate: 12,
-    scale: 0.55,
+    scale: 0.77,
   },
   {
     src: "/genres/henna/sketches/sketch-11.png",
@@ -101,7 +101,7 @@ export const sketches: HandImage[] = [
     top: 35,
     left: 18,
     rotate: 8,
-    scale: 0.55,
+    scale: 0.77,
   },
   {
     src: "/genres/henna/sketches/sketch-12.png",
@@ -110,6 +110,6 @@ export const sketches: HandImage[] = [
     top: 96,
     left: 50,
     rotate: 0,
-    scale: 0.8,
+    scale: 1.12,
   },
 ];

@@ -1,5 +1,6 @@
 import { HandsLayer } from "./HandsLayer";
 import { hands } from "./hands";
+import { sketches } from "./sketches";
 import { ProjectCluster } from "./ProjectCluster";
 import { projects } from "./projects";
 import styles from "./page.module.css";
@@ -15,6 +16,7 @@ export default function HennaPage() {
   return (
     <main className={styles.page}>
       <HandsLayer hands={hands} />
+      <HandsLayer hands={sketches} />
       <div className={styles.center}>
         <div className={styles.wall}>
           <div className={styles.column}>

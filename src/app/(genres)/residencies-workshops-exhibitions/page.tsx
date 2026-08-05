@@ -3,8 +3,8 @@ import styles from "./page.module.css";
 
 // Fully custom layout for this genre — no shared template, no MDX.
 // Mostly visual: swap this placeholder grid for the real gallery/gifs.
-export default function ResidenciesPage() {
-  const meta = getGenreMeta("residencies");
+export default function ResidenciesWorkshopsExhibitionsPage() {
+  const meta = getGenreMeta("residencies-workshops-exhibitions");
 
   return (
     <main className={styles.page}>

@@ -69,10 +69,10 @@ export const genres: GenreMeta[] = [
     tags: ["Animation"],
   },
   {
-    slug: "residencies",
-    title: "Residencies",
+    slug: "residencies-workshops-exhibitions",
+    title: "Residencies / Workshops / Exhibitions",
     summary: "A short one-line description of this genre.",
-    cover: "/genres/residencies/cover.jpg",
+    cover: "/genres/residencies-workshops-exhibitions/cover.jpg",
     coverWidth: 561,
     coverHeight: 394,
     tags: ["Residencies"],

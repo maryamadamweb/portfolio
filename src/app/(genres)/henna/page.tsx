@@ -10,8 +10,14 @@ export default function HennaPage() {
     project,
     size: index < 3 ? ("large" as const) : ("default" as const),
   }));
-  const columnA = sized.filter((_, index) => index % 2 === 0);
-  const columnB = sized.filter((_, index) => index % 2 === 1);
+  const columnA = sized.filter(
+    ({ project }, index) =>
+      project.column === "left" || (!project.column && index % 2 === 0)
+  );
+  const columnB = sized.filter(
+    ({ project }, index) =>
+      project.column === "right" || (!project.column && index % 2 === 1)
+  );
 
   return (
     <main className={styles.page}>

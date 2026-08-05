@@ -24,6 +24,10 @@ export type Project = {
   summary: string;
   link?: { href: string; label: string };
   items: ProjectItem[];
+  // Forces placement into a specific wall column instead of the default
+  // alternating layout — used when a project needs to sit under a specific
+  // neighbour regardless of its position in this array.
+  column?: "left" | "right";
 };
 
 const placeholder = "A short placeholder description of this piece.";
@@ -249,6 +253,36 @@ export const projects: Project[] = [
         src: "/genres/henna/colours/colours-clip.mp4",
         width: 1276,
         height: 718,
+        description: placeholder,
+      },
+    ],
+  },
+  {
+    slug: "mother-tongue",
+    name: "Mother Tongue",
+    summary: "A short placeholder description of this project.",
+    column: "left",
+    items: [
+      {
+        type: "video",
+        src: "/genres/henna/mother-tongue/mother-tongue-clip.mp4",
+        width: 720,
+        height: 576,
+        description: placeholder,
+      },
+      {
+        type: "video",
+        src: "/genres/henna/mother-tongue/mother-tongue-2.mp4",
+        width: 540,
+        height: 960,
+        description: placeholder,
+      },
+      {
+        type: "image",
+        src: "/genres/henna/mother-tongue/mother-tongue-1.jpg",
+        width: 1400,
+        height: 1750,
+        alt: "Mother Tongue henna piece",
         description: placeholder,
       },
     ],

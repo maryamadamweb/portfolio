@@ -7,6 +7,8 @@ export type ProjectItem =
       alt: string;
       description: string;
       clickable?: boolean;
+      // Shown as a vertical caption beside this image.
+      caption?: string;
     }
   | {
       type: "video";
@@ -53,6 +55,7 @@ export const projects: Project[] = [
         alt: "Henna extra",
         description: placeholder,
         clickable: false,
+        caption: "Juicy Couture x Huq That",
       },
       {
         type: "image",
@@ -271,18 +274,18 @@ export const projects: Project[] = [
         description: placeholder,
       },
       {
-        type: "video",
-        src: "/genres/henna/mother-tongue/mother-tongue-2.mp4",
-        width: 540,
-        height: 960,
-        description: placeholder,
-      },
-      {
         type: "image",
         src: "/genres/henna/mother-tongue/mother-tongue-1.jpg",
         width: 1400,
         height: 1750,
         alt: "Mother Tongue henna piece",
+        description: placeholder,
+      },
+      {
+        type: "video",
+        src: "/genres/henna/mother-tongue/mother-tongue-2.mp4",
+        width: 540,
+        height: 960,
         description: placeholder,
       },
     ],

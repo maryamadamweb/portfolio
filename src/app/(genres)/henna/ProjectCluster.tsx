@@ -82,24 +82,32 @@ export function ProjectCluster({
       )}
       <div className={styles.grid} data-size={size} data-single={project.items.length === 1}>
         {project.items.map((item, index) => {
-          const isPortraitVideo = item.type === "video" && item.height > item.width;
-          const showCaption = isPortraitVideo && project.summary.length <= 160;
+          const showCaption = item.type === "image" && item.caption;
           const clickable = item.clickable !== false;
 
           const media =
             item.type === "video" ? (
-              <div className={styles.videoWrap}>
-                <LazyVideo
+              <LazyVideo
+                src={item.src}
+                width={item.width}
+                height={item.height}
+                className={styles.media}
+              />
+            ) : showCaption ? (
+              <div className={styles.captionWrap}>
+                <Image
                   src={item.src}
+                  alt={item.alt}
                   width={item.width}
                   height={item.height}
+                  sizes={
+                    size === "large"
+                      ? "(max-width: 900px) 60vw, 420px"
+                      : "(max-width: 900px) 45vw, 300px"
+                  }
                   className={styles.media}
                 />
-                {showCaption && (
-                  <span className={styles.verticalCaption}>
-                    {project.summary}
-                  </span>
-                )}
+                <span className={styles.verticalCaption}>{item.caption}</span>
               </div>
             ) : (
               <Image

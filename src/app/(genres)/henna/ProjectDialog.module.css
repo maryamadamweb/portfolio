@@ -76,6 +76,10 @@
   animation: contentFadeOut var(--duration-base) var(--ease-default);
 }
 
+.contentCentered {
+  justify-content: center;
+}
+
 .mediaPane {
   position: relative;
   height: 100%;
@@ -112,4 +116,16 @@
 
 .description {
   color: var(--color-text-muted);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

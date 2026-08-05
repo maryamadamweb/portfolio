@@ -18,7 +18,7 @@ export const genres: GenreMeta[] = [
         width: 960,
         height: 1165,
         alt: "Islamic Relief Artwork",
-        description: "A short placeholder description of this piece.",
+        // description: "A short placeholder description of this piece.",
       },
     ],
   },

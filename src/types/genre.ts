@@ -3,7 +3,7 @@ export type GalleryImage = {
   width: number;
   height: number;
   alt: string;
-  description: string;
+  description?: string;
 };
 
 export type GenreMeta = {

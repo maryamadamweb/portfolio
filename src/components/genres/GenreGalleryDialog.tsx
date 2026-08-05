@@ -14,11 +14,19 @@ export function GenreGalleryDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const hasDescription = Boolean(image?.description);
+
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay} />
-        <Dialog.Content className={styles.content}>
+        <Dialog.Content
+          className={
+            hasDescription
+              ? styles.content
+              : `${styles.content} ${styles.contentCentered}`
+          }
+        >
           {image && (
             <>
               <div
@@ -33,21 +41,27 @@ export function GenreGalleryDialog({
                   className={styles.image}
                 />
               </div>
-              <div className={styles.textPane}>
-                <Dialog.Close asChild>
-                  <button
-                    type="button"
-                    className={styles.closeButton}
-                    aria-label="Close"
-                  >
-                    close
-                  </button>
-                </Dialog.Close>
-                <Dialog.Title className={styles.title}>About</Dialog.Title>
-                <Dialog.Description className={styles.description}>
-                  {image.description}
-                </Dialog.Description>
-              </div>
+              {hasDescription ? (
+                <div className={styles.textPane}>
+                  <Dialog.Close asChild>
+                    <button
+                      type="button"
+                      className={styles.closeButton}
+                      aria-label="Close"
+                    >
+                      close
+                    </button>
+                  </Dialog.Close>
+                  <Dialog.Title className={styles.title}>About</Dialog.Title>
+                  <Dialog.Description className={styles.description}>
+                    {image.description}
+                  </Dialog.Description>
+                </div>
+              ) : (
+                <Dialog.Title className={styles.srOnly}>
+                  {image.alt}
+                </Dialog.Title>
+              )}
             </>
           )}
         </Dialog.Content>

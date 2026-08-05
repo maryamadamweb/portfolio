@@ -1,6 +1,59 @@
 .page {
   min-height: 100dvh;
   padding: 4rem 2rem;
-  max-width: 720px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 4rem;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.imageWrap {
+  flex: 0 0 400px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.caption {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  margin-top: 0.5rem;
+}
+
+.textPane {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-top: 0.5rem;
+}
+
+.name {
+  font-size: var(--fs-lg);
+  margin-bottom: 1.5rem;
+}
+
+.bio {
+  color: var(--color-text-muted);
+  max-width: 60ch;
+  white-space: pre-line;
+  text-align: justify;
+}
+
+@media (max-width: 900px) {
+  .row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .imageWrap {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 360px;
+  }
 }

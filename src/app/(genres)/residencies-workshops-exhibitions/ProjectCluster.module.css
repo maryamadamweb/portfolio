@@ -13,11 +13,6 @@
   max-width: 60ch;
 }
 
-.grid {
-  column-width: 220px;
-  column-gap: 1rem;
-}
-
 .tile {
   display: block;
   width: 100%;

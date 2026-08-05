@@ -19,11 +19,11 @@ export const projects: Project[] = [
     summary: summaryPlaceholder,
     images: [
       { src: `${BASE}/residencies/rabbits-road-press/residency-1.jpg`, width: 1200, height: 1600, alt: "Rabbits Road Press residency", description: piece },
+      { src: `${BASE}/residencies/rabbits-road-press/residency-3.png`, width: 726, height: 504, alt: "Rabbits Road Press residency", description: piece },
+      { src: `${BASE}/residencies/rabbits-road-press/residency-4.png`, width: 788, height: 569, alt: "Rabbits Road Press residency", description: piece },
       { src: `${BASE}/residencies/rabbits-road-press/residency-2.jpg`, width: 1200, height: 1600, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-3.png`, width: 788, height: 1400, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-4.png`, width: 788, height: 1400, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-5.png`, width: 788, height: 1400, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-6.png`, width: 788, height: 1400, alt: "Rabbits Road Press residency", description: piece },
+      { src: `${BASE}/residencies/rabbits-road-press/residency-5.png`, width: 682, height: 474, alt: "Rabbits Road Press residency", description: piece },
+      { src: `${BASE}/residencies/rabbits-road-press/residency-6.png`, width: 724, height: 523, alt: "Rabbits Road Press residency", description: piece },
     ],
   },
   {

@@ -29,7 +29,13 @@
 @media (max-width: 900px) {
   .wall {
     flex-direction: column;
+    align-items: center;
     gap: 3rem;
+  }
+
+  .column {
+    width: 100%;
+    max-width: 500px;
   }
 
   .column[data-offset="1"],

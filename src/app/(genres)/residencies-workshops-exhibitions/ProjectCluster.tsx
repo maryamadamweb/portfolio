@@ -14,28 +14,26 @@ export function ProjectCluster({ project }: { project: Project }) {
     <section className={styles.cluster}>
       <h2 className={styles.name}>{project.name}</h2>
       <p className={styles.summary}>{project.summary}</p>
-      <div className={styles.grid}>
-        {project.images.map((image, index) => (
-          <button
-            key={image.src}
-            type="button"
-            className={styles.tile}
-            onClick={() => {
-              setSelectedIndex(index);
-              setDialogOpen(true);
-            }}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-              sizes="(max-width: 900px) 45vw, 300px"
-              className={styles.media}
-            />
-          </button>
-        ))}
-      </div>
+      {project.images.map((image, index) => (
+        <button
+          key={image.src}
+          type="button"
+          className={styles.tile}
+          onClick={() => {
+            setSelectedIndex(index);
+            setDialogOpen(true);
+          }}
+        >
+          <Image
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            sizes="(max-width: 900px) 90vw, 400px"
+            className={styles.media}
+          />
+        </button>
+      ))}
       <GenreGalleryDialog
         image={selectedIndex !== null ? project.images[selectedIndex] : null}
         open={dialogOpen}

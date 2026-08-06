@@ -5,41 +5,8 @@
 
 .wall {
   display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-  width: 100%;
-}
-
-.column {
-  display: flex;
   flex-direction: column;
-  gap: 3rem;
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.column[data-offset="1"] {
-  margin-top: 6rem;
-}
-
-.column[data-offset="2"] {
-  margin-top: 2.5rem;
-}
-
-@media (max-width: 900px) {
-  .wall {
-    flex-direction: column;
-    align-items: center;
-    gap: 3rem;
-  }
-
-  .column {
-    width: 100%;
-    max-width: 500px;
-  }
-
-  .column[data-offset="1"],
-  .column[data-offset="2"] {
-    margin-top: 0;
-  }
+  gap: 5rem;
+  max-width: 1500px;
+  margin: 0 auto;
 }

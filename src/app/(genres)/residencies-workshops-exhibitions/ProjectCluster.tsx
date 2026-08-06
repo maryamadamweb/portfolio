@@ -1,72 +1,124 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { GenreGalleryDialog } from "@/components/genres/GenreGalleryDialog";
 import type { Project } from "./projects";
 import styles from "./ProjectCluster.module.css";
 
-// First image is the standout piece for the cluster; the rest alternate
-// between two smaller sizes so the group doesn't read as a uniform grid.
-function sizeFor(index: number) {
-  if (index === 0) return "large";
-  return index % 2 === 1 ? "medium" : "small";
+type GalleryImage = Project["images"][number];
+
+const HERO_WIDTH = 340;
+const REST_WIDTH = 230;
+const GAP = 16;
+
+function estimatedHeight(image: GalleryImage, width: number) {
+  return (width / image.width) * image.height;
 }
 
-// Deterministic scatter presets cycled by index — real overlap (negative
-// margin pulling each frame over the previous one) plus a slight rotation,
-// like photos taped up on a wall rather than a tidy row. The first frame in
-// each cluster stays put as the anchor the rest overlap onto.
-const JITTER: { rotate: number; top: number; left: number }[] = [
-  { rotate: 0, top: 0, left: 0 },
-  { rotate: 4, top: 4, left: -6 },
-  { rotate: -3, top: -3.5, left: -5.5 },
-  { rotate: 3, top: 5, left: -7 },
-  { rotate: -4, top: -2.5, left: -5 },
-  { rotate: 2.5, top: 3, left: -6.5 },
-  { rotate: -2.5, top: -4, left: -5.5 },
-];
+// The first image is the standout piece, sized on its own. The rest are
+// bin-packed into as many side columns as it takes to roughly match the
+// hero's height — so a handful of shorter images actually stack up to fill
+// the space alongside one tall image, instead of leaving it mostly empty.
+function layoutCluster(images: GalleryImage[]) {
+  const [hero, ...rest] = images;
+  const heroHeight = estimatedHeight(hero, HERO_WIDTH);
 
-function jitterStyle(index: number): CSSProperties {
-  const jitter = JITTER[index % JITTER.length];
-  return {
-    transform: `rotate(${jitter.rotate}deg)`,
-    marginTop: index === 0 ? 0 : `${jitter.top}rem`,
-    marginLeft: index === 0 ? 0 : `${jitter.left}rem`,
-    zIndex: index,
-  };
+  if (rest.length === 0) {
+    return { hero, columns: [] as GalleryImage[][] };
+  }
+
+  const restTotalHeight = rest.reduce(
+    (sum, image) => sum + estimatedHeight(image, REST_WIDTH) + GAP,
+    0
+  );
+  const columnCount = Math.max(1, Math.ceil(restTotalHeight / heroHeight));
+
+  const columns: GalleryImage[][] = Array.from(
+    { length: columnCount },
+    () => []
+  );
+  const columnHeights = new Array(columnCount).fill(0);
+
+  for (const image of rest) {
+    const shortest = columnHeights.indexOf(Math.min(...columnHeights));
+    columns[shortest].push(image);
+    columnHeights[shortest] += estimatedHeight(image, REST_WIDTH) + GAP;
+  }
+
+  return { hero, columns };
+}
+
+// Slight vertical overlap between images stacked in the same column, like
+// items pinned close together rather than evenly spaced apart.
+const COLUMN_OVERLAP = [0, -0.75, 1, -1, 0.5, -0.5];
+
+function overlapStyle(indexInColumn: number): CSSProperties {
+  if (indexInColumn === 0) return {};
+  return { marginTop: `${COLUMN_OVERLAP[indexInColumn % COLUMN_OVERLAP.length]}rem` };
+}
+
+function clusterWidth(columnCount: number) {
+  return HERO_WIDTH + GAP + columnCount * (REST_WIDTH + GAP) + 40;
 }
 
 export function ProjectCluster({ project }: { project: Project }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
+  const { hero, columns } = useMemo(
+    () => layoutCluster(project.images),
+    [project.images]
+  );
+
+  function openAt(image: GalleryImage) {
+    setSelectedIndex(project.images.indexOf(image));
+    setDialogOpen(true);
+  }
+
   return (
-    <section className={styles.cluster}>
+    <section
+      className={styles.cluster}
+      style={{ maxWidth: clusterWidth(columns.length) }}
+    >
       <h2 className={styles.name}>{project.name}</h2>
       <p className={styles.summary}>{project.summary}</p>
       <div className={styles.collage}>
-        {project.images.map((image, index) => (
-          <button
-            key={image.src}
-            type="button"
-            className={styles.frame}
-            data-size={sizeFor(index)}
-            style={jitterStyle(index)}
-            onClick={() => {
-              setSelectedIndex(index);
-              setDialogOpen(true);
-            }}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-              sizes="(max-width: 700px) 60vw, 320px"
-              className={styles.media}
-            />
-          </button>
+        <button
+          type="button"
+          className={styles.hero}
+          onClick={() => openAt(hero)}
+        >
+          <Image
+            src={hero.src}
+            alt={hero.alt}
+            width={hero.width}
+            height={hero.height}
+            sizes="(max-width: 700px) 60vw, 340px"
+            className={styles.media}
+          />
+        </button>
+        {columns.map((column, columnIndex) => (
+          <div key={columnIndex} className={styles.column}>
+            {column.map((image, index) => (
+              <button
+                key={image.src}
+                type="button"
+                className={styles.frame}
+                style={overlapStyle(index)}
+                onClick={() => openAt(image)}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  sizes="(max-width: 700px) 45vw, 230px"
+                  className={styles.media}
+                />
+              </button>
+            ))}
+          </div>
         ))}
       </div>
       <GenreGalleryDialog

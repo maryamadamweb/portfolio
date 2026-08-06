@@ -5,8 +5,10 @@
 
 .wall {
   display: flex;
-  flex-direction: column;
-  gap: 5rem;
-  max-width: 1500px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 3rem 2.5rem;
+  max-width: 1600px;
   margin: 0 auto;
 }

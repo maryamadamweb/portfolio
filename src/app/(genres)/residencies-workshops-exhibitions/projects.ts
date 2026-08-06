@@ -12,6 +12,10 @@ const piece = "A short placeholder description of this piece.";
 
 const BASE = "/genres/residencies-workshops-exhibitions";
 
+// Order is loosely by category (residency, workshops, exhibitions) but the
+// single-image exhibitions are interspersed throughout rather than left to
+// clump at the end, so the page doesn't read as "big stuff, then a row of
+// tiny leftovers" — each one sits next to a larger cluster instead.
 export const projects: Project[] = [
   {
     slug: "rabbits-road-press",
@@ -40,6 +44,14 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "somewhere-i-live",
+    name: "Somewhere I Live",
+    summary: summaryPlaceholder,
+    images: [
+      { src: `${BASE}/exhibitions/somewhere-i-live/somewhere-i-live-1.jpg`, width: 1200, height: 1600, alt: "Somewhere I Live exhibition", description: piece },
+    ],
+  },
+  {
     slug: "rosetta-arts",
     name: "Rosetta Arts (Artist Accelerator Programme)",
     summary: summaryPlaceholder,
@@ -58,6 +70,14 @@ export const projects: Project[] = [
       { src: `${BASE}/workshops/va-east/va-east-1.jpg`, width: 1600, height: 1067, alt: "V&A East workshop", description: piece },
       { src: `${BASE}/workshops/va-east/va-east-2.jpg`, width: 1600, height: 1067, alt: "V&A East workshop", description: piece },
       { src: `${BASE}/workshops/va-east/va-east-3.jpg`, width: 1600, height: 1067, alt: "V&A East workshop", description: piece },
+    ],
+  },
+  {
+    slug: "william-morris-gallery",
+    name: "William Morris Gallery",
+    summary: summaryPlaceholder,
+    images: [
+      { src: `${BASE}/exhibitions/william-morris-gallery/william-morris-gallery-1.jpg`, width: 1280, height: 1600, alt: "William Morris Gallery exhibition", description: piece },
     ],
   },
   {
@@ -97,22 +117,6 @@ export const projects: Project[] = [
       { src: `${BASE}/exhibitions/humble-abode/humble-abode-1.jpg`, width: 1200, height: 1600, alt: "Humble Abode exhibition", description: piece },
       { src: `${BASE}/exhibitions/humble-abode/humble-abode-2.jpg`, width: 1292, height: 1600, alt: "Humble Abode exhibition", description: piece },
       { src: `${BASE}/exhibitions/humble-abode/humble-abode-3.jpg`, width: 960, height: 1280, alt: "Humble Abode exhibition", description: piece },
-    ],
-  },
-  {
-    slug: "william-morris-gallery",
-    name: "William Morris Gallery",
-    summary: summaryPlaceholder,
-    images: [
-      { src: `${BASE}/exhibitions/william-morris-gallery/william-morris-gallery-1.jpg`, width: 1280, height: 1600, alt: "William Morris Gallery exhibition", description: piece },
-    ],
-  },
-  {
-    slug: "somewhere-i-live",
-    name: "Somewhere I Live",
-    summary: summaryPlaceholder,
-    images: [
-      { src: `${BASE}/exhibitions/somewhere-i-live/somewhere-i-live-1.jpg`, width: 1200, height: 1600, alt: "Somewhere I Live exhibition", description: piece },
     ],
   },
   {

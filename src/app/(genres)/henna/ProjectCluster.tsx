@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import type { Project } from "./projects";
 import { ProjectDialog } from "./ProjectDialog";
+import { useHlsSource } from "./useHlsSource";
 import styles from "./ProjectCluster.module.css";
 
-// Videos are heavy static files served as-is from /public (no transcoding,
-// no CDN optimization). Only attach `src` once the tile scrolls into view,
-// so a visitor who never reaches this section never downloads it.
+// Videos stream as adaptive-bitrate HLS from Bunny Stream. Only attach the
+// manifest once the tile scrolls into view, so a visitor who never reaches
+// this section never downloads it.
 function LazyVideo({
   src,
   width,
@@ -20,12 +21,11 @@ function LazyVideo({
   height: number;
   className?: string;
 }) {
-  const ref = useRef<HTMLVideoElement>(null);
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    if (!videoEl) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -35,14 +35,15 @@ function LazyVideo({
       },
       { rootMargin: "200px" }
     );
-    observer.observe(el);
+    observer.observe(videoEl);
     return () => observer.disconnect();
-  }, []);
+  }, [videoEl]);
+
+  useHlsSource(videoEl, inView ? src : undefined, inView);
 
   return (
     <video
-      ref={ref}
-      src={inView ? src : undefined}
+      ref={setVideoEl}
       width={width}
       height={height}
       preload="none"

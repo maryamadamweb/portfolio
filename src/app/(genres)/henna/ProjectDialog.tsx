@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import Image from "next/image";
 import type { ProjectItem } from "./projects";
+import { useHlsSource } from "./useHlsSource";
 import styles from "./ProjectDialog.module.css";
 
 export function ProjectDialog({
@@ -14,7 +16,10 @@ export function ProjectDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
   const hasDescription = Boolean(item?.description);
+
+  useHlsSource(videoEl, item?.type === "video" ? item.src : undefined, true);
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -35,7 +40,7 @@ export function ProjectDialog({
               >
                 {item.type === "video" ? (
                   <video
-                    src={item.src}
+                    ref={setVideoEl}
                     controls
                     autoPlay
                     className={styles.media}

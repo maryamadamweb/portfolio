@@ -5,6 +5,10 @@ export type Project = {
   name: string;
   summary: string;
   images: GalleryImage[];
+  // Overrides ProjectCluster's auto-computed side-column count. Only needed
+  // when a hero image is an outlier aspect ratio that the formula can't
+  // balance well (see Reinstate below).
+  restColumnCount?: number;
 };
 
 const summaryPlaceholder = "A short placeholder description of this project.";
@@ -100,6 +104,11 @@ export const projects: Project[] = [
     slug: "reinstate",
     name: "Reinstate — Workshops and Community Mural",
     summary: summaryPlaceholder,
+    // reinstate-1's extreme tall/narrow aspect ratio makes it the hero, but
+    // that leaves the auto-computed 2 side columns each short of its height
+    // (a visible gap once both columns fit beside it in one row). One
+    // taller column instead removes the gap entirely.
+    restColumnCount: 1,
     images: [
       { src: `${BASE}/workshops/reinstate/reinstate-1.jpg`, width: 461, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
       { src: `${BASE}/workshops/reinstate/reinstate-2.jpg`, width: 900, height: 1600, alt: "Reinstate workshop and community mural", description: piece },

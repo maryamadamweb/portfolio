@@ -20,7 +20,13 @@ function estimatedHeight(image: GalleryImage, width: number) {
 // bin-packed into as many side columns as it takes to roughly match the
 // hero's height — so a handful of shorter images actually stack up to fill
 // the space alongside one tall image, instead of leaving it mostly empty.
-function layoutCluster(images: GalleryImage[]) {
+//
+// `columnOverride` exists for clusters whose hero is an outlier aspect
+// ratio (e.g. Reinstate's very tall portrait scan) where the auto-computed
+// column count leaves each column short of the hero's height no matter how
+// the images are split — forcing fewer, taller columns there fixes it
+// without changing the formula for every other cluster.
+function layoutCluster(images: GalleryImage[], columnOverride?: number) {
   const [hero, ...rest] = images;
   const heroHeight = estimatedHeight(hero, HERO_WIDTH);
 
@@ -32,7 +38,8 @@ function layoutCluster(images: GalleryImage[]) {
     (sum, image) => sum + estimatedHeight(image, REST_WIDTH) + GAP,
     0
   );
-  const columnCount = Math.max(1, Math.ceil(restTotalHeight / heroHeight));
+  const columnCount =
+    columnOverride ?? Math.max(1, Math.ceil(restTotalHeight / heroHeight));
 
   const columns: GalleryImage[][] = Array.from(
     { length: columnCount },
@@ -67,8 +74,8 @@ export function ProjectCluster({ project }: { project: Project }) {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const { hero, columns } = useMemo(
-    () => layoutCluster(project.images),
-    [project.images]
+    () => layoutCluster(project.images, project.restColumnCount),
+    [project.images, project.restColumnCount]
   );
 
   function openAt(image: GalleryImage) {

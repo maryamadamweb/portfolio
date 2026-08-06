@@ -30,6 +30,7 @@ export function GenreMobileMenu({
             alt=""
             width={menuButtonGenre.coverWidth}
             height={menuButtonGenre.coverHeight}
+            sizes="44px"
             className={styles.menuButtonImage}
           />
         </button>

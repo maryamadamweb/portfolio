@@ -27,6 +27,7 @@ export function GenreNav() {
           alt="Home"
           width={2323}
           height={378}
+          sizes="100px"
           className={styles.homeImage}
         />
       </Link>

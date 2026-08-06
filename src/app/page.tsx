@@ -25,6 +25,7 @@ export default function MainPage() {
           alt="Maryam Adam"
           width={2323}
           height={378}
+          sizes="(max-width: 900px) 320px, 55vw"
           className={styles.centerImage}
           preload
         />

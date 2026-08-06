@@ -30,6 +30,7 @@ export function GenreGalleryTile({
         alt=""
         width={badgeWidth}
         height={badgeHeight}
+        sizes="100px"
         className={styles.badge}
       />
     </button>

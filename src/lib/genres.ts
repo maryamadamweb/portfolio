@@ -30,15 +30,6 @@ export const genres: GenreMeta[] = [
     coverWidth: 800,
     coverHeight: 766,
     tags: ["Design"],
-    images: [
-      {
-        src: "/genres/graphic-design/cover-v3.png",
-        width: 800,
-        height: 766,
-        alt: "Graphic design piece",
-        description: "A short placeholder description of this piece.",
-      },
-    ],
   },
   {
     slug: "henna",

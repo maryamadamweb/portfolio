@@ -1,5 +1,6 @@
 import { getGenreMeta } from "@/lib/genres";
-import { GenreGallery } from "@/components/genres/GenreGallery";
+import { Wall } from "./Wall";
+import { projects } from "./projects";
 import styles from "./page.module.css";
 
 export default function GraphicDesignPage() {
@@ -9,7 +10,7 @@ export default function GraphicDesignPage() {
   return (
     <main className={styles.page}>
       <h1 className={styles.title}>{meta.title}</h1>
-      <GenreGallery genre={meta} />
+      <Wall projects={projects} />
     </main>
   );
 }

@@ -9,6 +9,13 @@ export type Project = {
   // when a hero image is an outlier aspect ratio that the formula can't
   // balance well (see Reinstate below).
   restColumnCount?: number;
+  // Opts into a bespoke stacked-rows layout instead of the default
+  // hero+side-columns one: images are grouped in array order into rows of
+  // these sizes (e.g. [1, 2, 3] = one full-width image, then a row of 2,
+  // then a row of 3), each row shorter than the last. Used for clusters
+  // the client wants a specific curated composition for rather than the
+  // auto-computed one.
+  rows?: number[];
 };
 
 const summaryPlaceholder = "A short placeholder description of this project.";
@@ -26,12 +33,17 @@ export const projects: Project[] = [
     name: "Rabbits Road Press (Residency)",
     summary:
       "Rabbits Road Press Residency (2023) — Explored early POC-owned businesses in Newham through archival research and design, using shop fronts as visual markers of care, migration, and belonging.",
+    // Client feedback: the second postcard set and the printed-zine stack
+    // should read as big as the hero postcard image, clearly separated
+    // rather than tucked into small side columns — a curated 1/2/3 stack
+    // instead of the auto-computed hero+columns split.
+    rows: [1, 2, 3],
     images: [
       { src: `${BASE}/residencies/rabbits-road-press/residency-1.jpg`, width: 1200, height: 1600, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-3.png`, width: 726, height: 504, alt: "Rabbits Road Press residency", description: piece },
       { src: `${BASE}/residencies/rabbits-road-press/residency-4.png`, width: 788, height: 569, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-2.jpg`, width: 1200, height: 1600, alt: "Rabbits Road Press residency", description: piece },
       { src: `${BASE}/residencies/rabbits-road-press/residency-5.png`, width: 682, height: 474, alt: "Rabbits Road Press residency", description: piece },
+      { src: `${BASE}/residencies/rabbits-road-press/residency-2.jpg`, width: 1200, height: 1600, alt: "Rabbits Road Press residency", description: piece },
+      { src: `${BASE}/residencies/rabbits-road-press/residency-3.png`, width: 726, height: 504, alt: "Rabbits Road Press residency", description: piece },
       { src: `${BASE}/residencies/rabbits-road-press/residency-6.png`, width: 724, height: 523, alt: "Rabbits Road Press residency", description: piece },
     ],
   },
@@ -40,12 +52,17 @@ export const projects: Project[] = [
     name: "Newham Heritage Month (Workshops)",
     summary:
       "Newham Heritage Month (2022-2023) — Led creative workshops for local children, exploring heritage and identity through art to build confidence and pride in their stories.",
+    // Client feedback: "can these be aligned like this but neater" — a
+    // curated 2/3/1 stack (rugs+beads, then 3 craft close-ups, then the
+    // floral illustration full-width at the bottom) instead of the
+    // auto-computed hero+columns split.
+    rows: [2, 3, 1],
     images: [
+      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-5.jpg`, width: 1280, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
       { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-1.jpg`, width: 1072, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
-      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-2.jpg`, width: 900, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
       { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-3.jpg`, width: 900, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
       { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-4.jpg`, width: 900, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
-      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-5.jpg`, width: 1280, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
+      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-2.jpg`, width: 900, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
       { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-6.jpg`, width: 1600, height: 800, alt: "Newham Heritage Month workshop", description: piece },
     ],
   },
@@ -62,6 +79,10 @@ export const projects: Project[] = [
     name: "Rosetta Arts (Artist Accelerator Programme)",
     summary:
       "Frottage in nature workshop with locals at the Stratford Waterglades.",
+    // Client feedback: put rosetta-arts-3 and rosetta-arts-4 next to each
+    // other instead of stacked in the same column — one column per rest
+    // image puts all 3 side by side.
+    restColumnCount: 3,
     images: [
       { src: `${BASE}/workshops/rosetta-arts/rosetta-arts-1.jpg`, width: 1280, height: 1600, alt: "Rosetta Arts Artist Accelerator Programme", description: piece },
       { src: `${BASE}/workshops/rosetta-arts/rosetta-arts-2.jpg`, width: 1280, height: 1600, alt: "Rosetta Arts Artist Accelerator Programme", description: piece },
@@ -92,6 +113,14 @@ export const projects: Project[] = [
     slug: "henna-workshops",
     name: "Henna Workshops",
     summary: "Various co-led henna workshops for Huq That.",
+    // Client feedback: too much dead space next to the hero. 8 rest images
+    // against this hero's height auto-computes to 7 fragmented columns;
+    // even capped lower, 2-3 columns still don't fit beside the hero at
+    // this cluster's typical available width, so they wrap to a new line
+    // that starts below the shortest column instead of below the hero —
+    // still a gap, just relocated. A single column guarantees everything
+    // fits in one row with no wrap, at any width.
+    restColumnCount: 1,
     images: [
       { src: `${BASE}/workshops/henna-workshops/henna-workshops-1.jpg`, width: 1280, height: 1600, alt: "Henna workshop", description: piece },
       { src: `${BASE}/workshops/henna-workshops/henna-workshops-2.jpg`, width: 1280, height: 1600, alt: "Henna workshop", description: piece },
@@ -100,8 +129,9 @@ export const projects: Project[] = [
       { src: `${BASE}/workshops/henna-workshops/henna-workshops-5.jpg`, width: 900, height: 1600, alt: "Henna workshop", description: piece },
       { src: `${BASE}/workshops/henna-workshops/henna-workshops-6.jpg`, width: 1280, height: 1600, alt: "Henna workshop", description: piece },
       { src: `${BASE}/workshops/henna-workshops/henna-workshops-7.jpg`, width: 1200, height: 1600, alt: "Henna workshop", description: piece },
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-8.jpg`, width: 900, height: 1600, alt: "Henna workshop", description: piece },
+      // Client feedback: swap 8 and 9.
       { src: `${BASE}/workshops/henna-workshops/henna-workshops-9.jpg`, width: 900, height: 1600, alt: "Henna workshop", description: piece },
+      { src: `${BASE}/workshops/henna-workshops/henna-workshops-8.jpg`, width: 900, height: 1600, alt: "Henna workshop", description: piece },
     ],
   },
   {
@@ -109,15 +139,15 @@ export const projects: Project[] = [
     name: "Reinstate — Workshops and Community Mural",
     summary:
       "Reinstate (2024) — Co-led participatory mural workshops with former Tate & Lyle workers and residents, transforming shared histories into collective visual storytelling. Commissioned by Newham Council.",
-    // reinstate-1's extreme tall/narrow aspect ratio makes it the hero, but
-    // that leaves the auto-computed 2 side columns each short of its height
-    // (a visible gap once both columns fit beside it in one row). One
-    // taller column instead removes the gap entirely.
-    restColumnCount: 1,
+    // Client feedback: lead with the mural building itself, then pair the
+    // kids' original pencil drawing with a close-up of the painted panel
+    // it became, then the 3 workshop-process shots at the bottom — a
+    // curated 1/2/3 stack instead of the auto-computed hero+columns split.
+    rows: [1, 2, 3],
     images: [
+      { src: `${BASE}/workshops/reinstate/reinstate-3.jpg`, width: 1600, height: 1200, alt: "Reinstate workshop and community mural", description: piece },
       { src: `${BASE}/workshops/reinstate/reinstate-1.jpg`, width: 461, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
       { src: `${BASE}/workshops/reinstate/reinstate-2.jpg`, width: 900, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
-      { src: `${BASE}/workshops/reinstate/reinstate-3.jpg`, width: 1600, height: 1200, alt: "Reinstate workshop and community mural", description: piece },
       { src: `${BASE}/workshops/reinstate/reinstate-4.jpg`, width: 1200, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
       { src: `${BASE}/workshops/reinstate/reinstate-5.jpg`, width: 1200, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
       { src: `${BASE}/workshops/reinstate/reinstate-6.jpg`, width: 900, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
@@ -127,6 +157,9 @@ export const projects: Project[] = [
     slug: "humble-abode",
     name: "Humble Abode",
     summary: summaryPlaceholder,
+    // Client feedback: align the group photo and the room shot as one
+    // stacked column instead of side-by-side columns.
+    restColumnCount: 1,
     images: [
       { src: `${BASE}/exhibitions/humble-abode/humble-abode-1.jpg`, width: 1200, height: 1600, alt: "Humble Abode exhibition", description: piece },
       { src: `${BASE}/exhibitions/humble-abode/humble-abode-2.jpg`, width: 1292, height: 1600, alt: "Humble Abode exhibition", description: piece },
@@ -137,6 +170,8 @@ export const projects: Project[] = [
     slug: "fruit-salad",
     name: "Fruit Salad",
     summary: "Exhibition display.",
+    // Client feedback: make this bigger.
+    rows: [1],
     images: [
       { src: `${BASE}/exhibitions/fruit-salad/fruit-salad-1.jpg`, width: 1600, height: 1200, alt: "Fruit Salad exhibition", description: piece },
     ],

@@ -24,7 +24,8 @@ export const projects: Project[] = [
   {
     slug: "rabbits-road-press",
     name: "Rabbits Road Press (Residency)",
-    summary: summaryPlaceholder,
+    summary:
+      "Rabbits Road Press Residency (2023) — Explored early POC-owned businesses in Newham through archival research and design, using shop fronts as visual markers of care, migration, and belonging.",
     images: [
       { src: `${BASE}/residencies/rabbits-road-press/residency-1.jpg`, width: 1200, height: 1600, alt: "Rabbits Road Press residency", description: piece },
       { src: `${BASE}/residencies/rabbits-road-press/residency-3.png`, width: 726, height: 504, alt: "Rabbits Road Press residency", description: piece },
@@ -37,7 +38,8 @@ export const projects: Project[] = [
   {
     slug: "newham-heritage-month",
     name: "Newham Heritage Month (Workshops)",
-    summary: summaryPlaceholder,
+    summary:
+      "Newham Heritage Month (2022-2023) — Led creative workshops for local children, exploring heritage and identity through art to build confidence and pride in their stories.",
     images: [
       { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-1.jpg`, width: 1072, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
       { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-2.jpg`, width: 900, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
@@ -50,7 +52,7 @@ export const projects: Project[] = [
   {
     slug: "somewhere-i-live",
     name: "Somewhere I Live",
-    summary: summaryPlaceholder,
+    summary: "Exhibition display.",
     images: [
       { src: `${BASE}/exhibitions/somewhere-i-live/somewhere-i-live-1.jpg`, width: 1200, height: 1600, alt: "Somewhere I Live exhibition", description: piece },
     ],
@@ -58,7 +60,8 @@ export const projects: Project[] = [
   {
     slug: "rosetta-arts",
     name: "Rosetta Arts (Artist Accelerator Programme)",
-    summary: summaryPlaceholder,
+    summary:
+      "Frottage in nature workshop with locals at the Stratford Waterglades.",
     images: [
       { src: `${BASE}/workshops/rosetta-arts/rosetta-arts-1.jpg`, width: 1280, height: 1600, alt: "Rosetta Arts Artist Accelerator Programme", description: piece },
       { src: `${BASE}/workshops/rosetta-arts/rosetta-arts-2.jpg`, width: 1280, height: 1600, alt: "Rosetta Arts Artist Accelerator Programme", description: piece },
@@ -69,7 +72,8 @@ export const projects: Project[] = [
   {
     slug: "va-east",
     name: "V&A East (Workshops)",
-    summary: summaryPlaceholder,
+    summary:
+      "V&A East Summer School (Workshops) — Co-facilitated screen-print workshops with Memunatu Barrie for young people in Stratford.",
     images: [
       { src: `${BASE}/workshops/va-east/va-east-1.jpg`, width: 1600, height: 1067, alt: "V&A East workshop", description: piece },
       { src: `${BASE}/workshops/va-east/va-east-2.jpg`, width: 1600, height: 1067, alt: "V&A East workshop", description: piece },
@@ -79,7 +83,7 @@ export const projects: Project[] = [
   {
     slug: "william-morris-gallery",
     name: "William Morris Gallery",
-    summary: summaryPlaceholder,
+    summary: "Exhibition display.",
     images: [
       { src: `${BASE}/exhibitions/william-morris-gallery/william-morris-gallery-1.jpg`, width: 1280, height: 1600, alt: "William Morris Gallery exhibition", description: piece },
     ],
@@ -87,7 +91,7 @@ export const projects: Project[] = [
   {
     slug: "henna-workshops",
     name: "Henna Workshops",
-    summary: summaryPlaceholder,
+    summary: "Various co-led henna workshops for Huq That.",
     images: [
       { src: `${BASE}/workshops/henna-workshops/henna-workshops-1.jpg`, width: 1280, height: 1600, alt: "Henna workshop", description: piece },
       { src: `${BASE}/workshops/henna-workshops/henna-workshops-2.jpg`, width: 1280, height: 1600, alt: "Henna workshop", description: piece },
@@ -103,7 +107,8 @@ export const projects: Project[] = [
   {
     slug: "reinstate",
     name: "Reinstate — Workshops and Community Mural",
-    summary: summaryPlaceholder,
+    summary:
+      "Reinstate (2024) — Co-led participatory mural workshops with former Tate & Lyle workers and residents, transforming shared histories into collective visual storytelling. Commissioned by Newham Council.",
     // reinstate-1's extreme tall/narrow aspect ratio makes it the hero, but
     // that leaves the auto-computed 2 side columns each short of its height
     // (a visible gap once both columns fit beside it in one row). One
@@ -131,7 +136,7 @@ export const projects: Project[] = [
   {
     slug: "fruit-salad",
     name: "Fruit Salad",
-    summary: summaryPlaceholder,
+    summary: "Exhibition display.",
     images: [
       { src: `${BASE}/exhibitions/fruit-salad/fruit-salad-1.jpg`, width: 1600, height: 1200, alt: "Fruit Salad exhibition", description: piece },
     ],

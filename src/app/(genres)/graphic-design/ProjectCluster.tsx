@@ -19,9 +19,13 @@ function estimatedHeight(item: MediaItem, width: number) {
 // bin-packed into as many side columns as it takes to roughly match the
 // hero's height — so a handful of shorter items actually stack up to fill
 // the space alongside one tall item, instead of leaving it mostly empty.
-function layoutCluster(media: MediaItem[], columnOverride?: number) {
+function layoutCluster(
+  media: MediaItem[],
+  heroWidth: number,
+  columnOverride?: number
+) {
   const [hero, ...rest] = media;
-  const heroHeight = estimatedHeight(hero, HERO_WIDTH);
+  const heroHeight = estimatedHeight(hero, heroWidth);
 
   if (rest.length === 0) {
     return { hero, columns: [] as MediaItem[][] };
@@ -58,8 +62,8 @@ function overlapStyle(indexInColumn: number): CSSProperties {
   return { marginTop: `${COLUMN_OVERLAP[indexInColumn % COLUMN_OVERLAP.length]}rem` };
 }
 
-function clusterWidth(columnCount: number) {
-  return HERO_WIDTH + GAP + columnCount * (REST_WIDTH + GAP) + 40;
+function clusterWidth(columnCount: number, heroWidth: number) {
+  return heroWidth + GAP + columnCount * (REST_WIDTH + GAP) + 40;
 }
 
 // Videos stream as adaptive-bitrate HLS from Bunny Stream. Only attach the
@@ -147,9 +151,10 @@ export function ProjectCluster({ project }: { project: Project }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
+  const heroWidth = project.heroWidth ?? HERO_WIDTH;
   const { hero, columns } = useMemo(
-    () => layoutCluster(project.media),
-    [project.media]
+    () => layoutCluster(project.media, heroWidth),
+    [project.media, heroWidth]
   );
 
   function openAt(item: MediaItem) {
@@ -160,18 +165,19 @@ export function ProjectCluster({ project }: { project: Project }) {
   return (
     <section
       className={styles.cluster}
-      style={{ maxWidth: clusterWidth(columns.length) }}
+      style={{ maxWidth: clusterWidth(columns.length, heroWidth) }}
     >
       <h2 className={styles.name}>{project.name}</h2>
       <div className={styles.collage}>
         <button
           type="button"
           className={styles.hero}
+          style={{ flexBasis: heroWidth, maxWidth: heroWidth }}
           onClick={() => openAt(hero)}
         >
           <Media
             item={hero}
-            sizes="(max-width: 700px) 60vw, 340px"
+            sizes={`(max-width: 700px) 60vw, ${heroWidth}px`}
             className={styles.media}
           />
         </button>

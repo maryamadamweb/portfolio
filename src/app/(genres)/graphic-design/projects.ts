@@ -10,8 +10,7 @@ export type Project = {
 
 const BASE = "/genres/graphic-design";
 
-// Order follows the client's requested sequence. IWM is pending an image
-// and will slot into position 4 once the asset is provided.
+// Order follows the client's requested sequence.
 export const projects: Project[] = [
   {
     slug: "our-story-our-superpower",
@@ -46,6 +45,13 @@ export const projects: Project[] = [
     media: [
       { type: "image", src: `${BASE}/the-creative-process/the-creative-process-1.jpg`, width: 1651, height: 1173, alt: "The Creative Process graphic design piece" },
       { type: "image", src: `${BASE}/the-creative-process/the-creative-process-2.jpg`, width: 1657, height: 1173, alt: "The Creative Process graphic design piece" },
+    ],
+  },
+  {
+    slug: "international-womens-month",
+    name: "IWM",
+    media: [
+      { type: "image", src: `${BASE}/international-womens-month/international-womens-month-1.jpg`, width: 1600, height: 2000, alt: "IWM graphic design piece" },
     ],
   },
   {

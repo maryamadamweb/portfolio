@@ -9,7 +9,6 @@ export default function GraphicDesignPage() {
 
   return (
     <main className={styles.page}>
-      <h1 className={styles.title}>{meta.title}</h1>
       <Wall projects={projects} />
     </main>
   );

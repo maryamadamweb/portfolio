@@ -33,12 +33,12 @@ export const genres: GenreMeta[] = [
   },
   {
     slug: "henna",
-    title: "Henna",
+    title: "Naram Hands",
     summary: "A short one-line description of this genre.",
     cover: "/genres/henna/cover-v2.png",
     coverWidth: 409,
     coverHeight: 800,
-    tags: ["Henna"],
+    tags: ["Naram Hands"],
   },
   {
     slug: "paintings",

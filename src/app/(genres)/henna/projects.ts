@@ -140,9 +140,9 @@ export const projects: Project[] = [
       },
       {
         type: "image",
-        src: "/genres/henna/levis/levis-2.jpg",
-        width: 1200,
-        height: 1600,
+        src: "/genres/henna/levis/levis-2.png",
+        width: 1600,
+        height: 701,
         alt: "Levis henna piece",
         description: placeholder,
       },

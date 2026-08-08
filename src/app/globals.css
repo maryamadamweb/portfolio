@@ -61,6 +61,8 @@ ol {
   --color-accent: #000000;
   --color-border: #e5e5e5;
   --color-title: #242021;
+  --color-black: #000000;
+  --color-white: #ffffff;
 
   /* Typography */
   /* --font-heading and --font-body are set by next/font on <html> in layout.tsx */

@@ -262,8 +262,9 @@ export const projects: Project[] = [
   },
   {
     slug: "mother-tongue",
-    name: "Mother Tongue",
-    summary: "A short placeholder description of this project.",
+    name: "Mothertongue productions x Huqthat",
+    summary:
+      "Mothertongue productions episode 3 interview of Huqthat. Speaking on process, history of henna and personal reflections of the Henna industry",
     column: "left",
     items: [
       {

@@ -58,15 +58,7 @@ export const hands: HandImage[] = [
     left: 6,
     rotate: -6,
   },
-  {
-    src: "/genres/henna/hands/henna-17.png",
-    width: 1600,
-    height: 1473,
-    bottom: 0,
-    left: 95,
-    rotate: 120,
-    scale: 0.9,
-  },
+
   {
     src: "/genres/henna/hands/henna-18.png",
     width: 1360,
@@ -202,9 +194,9 @@ export const hands: HandImage[] = [
     src: "/genres/henna/hands/henna-23.png",
     width: 602,
     height: 429,
-    bottom: 17,
-    left: 90,
-    rotate: 10,
+    top: 52,
+    left: 4,
+    rotate: -70,
     scale: 1,
   },
   {
@@ -223,6 +215,15 @@ export const hands: HandImage[] = [
     left: 4,
     rotate: -35,
     scale: 0.5,
+  },
+  {
+    src: "/genres/henna/hands/henna-17.png",
+    width: 1600,
+    height: 1473,
+    top: 49,
+    left: 5,
+    rotate: -30,
+    scale: 1,
   },
   // Bottom-center collage — mixes in with the sketches that cluster near the
   // end of the page, rather than hugging the edges like the rest.

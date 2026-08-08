@@ -1,56 +1,55 @@
 "use client";
 
-import { useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import Image from "next/image";
-import { GenreGalleryDialog } from "@/components/genres/GenreGalleryDialog";
-import type { Project } from "./projects";
+import type { MediaItem, Project } from "./projects";
+import { ProjectDialog } from "./ProjectDialog";
+import { useHlsSource } from "./useHlsSource";
 import styles from "./ProjectCluster.module.css";
-
-type GalleryImage = Project["images"][number];
 
 const HERO_WIDTH = 340;
 const REST_WIDTH = 230;
 const GAP = 16;
 
-function estimatedHeight(image: GalleryImage, width: number) {
-  return (width / image.width) * image.height;
+function estimatedHeight(item: MediaItem, width: number) {
+  return (width / item.width) * item.height;
 }
 
-// The first image is the standout piece, sized on its own. The rest are
+// The first item is the standout piece, sized on its own. The rest are
 // bin-packed into as many side columns as it takes to roughly match the
-// hero's height — so a handful of shorter images actually stack up to fill
-// the space alongside one tall image, instead of leaving it mostly empty.
-function layoutCluster(images: GalleryImage[], columnOverride?: number) {
-  const [hero, ...rest] = images;
+// hero's height — so a handful of shorter items actually stack up to fill
+// the space alongside one tall item, instead of leaving it mostly empty.
+function layoutCluster(media: MediaItem[], columnOverride?: number) {
+  const [hero, ...rest] = media;
   const heroHeight = estimatedHeight(hero, HERO_WIDTH);
 
   if (rest.length === 0) {
-    return { hero, columns: [] as GalleryImage[][] };
+    return { hero, columns: [] as MediaItem[][] };
   }
 
   const restTotalHeight = rest.reduce(
-    (sum, image) => sum + estimatedHeight(image, REST_WIDTH) + GAP,
+    (sum, item) => sum + estimatedHeight(item, REST_WIDTH) + GAP,
     0
   );
   const columnCount =
     columnOverride ?? Math.max(1, Math.ceil(restTotalHeight / heroHeight));
 
-  const columns: GalleryImage[][] = Array.from(
+  const columns: MediaItem[][] = Array.from(
     { length: columnCount },
     () => []
   );
   const columnHeights = new Array(columnCount).fill(0);
 
-  for (const image of rest) {
+  for (const item of rest) {
     const shortest = columnHeights.indexOf(Math.min(...columnHeights));
-    columns[shortest].push(image);
-    columnHeights[shortest] += estimatedHeight(image, REST_WIDTH) + GAP;
+    columns[shortest].push(item);
+    columnHeights[shortest] += estimatedHeight(item, REST_WIDTH) + GAP;
   }
 
   return { hero, columns };
 }
 
-// Slight vertical overlap between images stacked in the same column, like
+// Slight vertical overlap between items stacked in the same column, like
 // items pinned close together rather than evenly spaced apart.
 const COLUMN_OVERLAP = [0, -0.75, 1, -1, 0.5, -0.5];
 
@@ -63,17 +62,98 @@ function clusterWidth(columnCount: number) {
   return HERO_WIDTH + GAP + columnCount * (REST_WIDTH + GAP) + 40;
 }
 
+// Videos stream as adaptive-bitrate HLS from Bunny Stream. Only attach the
+// manifest once the tile scrolls into view, so a visitor who never reaches
+// this section never downloads it.
+function LazyVideo({
+  src,
+  width,
+  height,
+  className,
+}: {
+  src: string;
+  width: number;
+  height: number;
+  className?: string;
+}) {
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!videoEl) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(videoEl);
+    return () => observer.disconnect();
+  }, [videoEl]);
+
+  useHlsSource(videoEl, inView ? src : undefined, inView);
+
+  return (
+    <video
+      ref={setVideoEl}
+      width={width}
+      height={height}
+      preload="none"
+      muted
+      loop
+      autoPlay={inView}
+      playsInline
+      className={className}
+    />
+  );
+}
+
+function Media({
+  item,
+  sizes,
+  className,
+}: {
+  item: MediaItem;
+  sizes: string;
+  className?: string;
+}) {
+  if (item.type === "video") {
+    return (
+      <LazyVideo
+        src={item.src}
+        width={item.width}
+        height={item.height}
+        className={className}
+      />
+    );
+  }
+
+  return (
+    <Image
+      src={item.src}
+      alt={item.alt}
+      width={item.width}
+      height={item.height}
+      sizes={sizes}
+      className={className}
+    />
+  );
+}
+
 export function ProjectCluster({ project }: { project: Project }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const { hero, columns } = useMemo(
-    () => layoutCluster(project.images),
-    [project.images]
+    () => layoutCluster(project.media),
+    [project.media]
   );
 
-  function openAt(image: GalleryImage) {
-    setSelectedIndex(project.images.indexOf(image));
+  function openAt(item: MediaItem) {
+    setSelectedIndex(project.media.indexOf(item));
     setDialogOpen(true);
   }
 
@@ -89,30 +169,24 @@ export function ProjectCluster({ project }: { project: Project }) {
           className={styles.hero}
           onClick={() => openAt(hero)}
         >
-          <Image
-            src={hero.src}
-            alt={hero.alt}
-            width={hero.width}
-            height={hero.height}
+          <Media
+            item={hero}
             sizes="(max-width: 700px) 60vw, 340px"
             className={styles.media}
           />
         </button>
         {columns.map((column, columnIndex) => (
           <div key={columnIndex} className={styles.column}>
-            {column.map((image, index) => (
+            {column.map((item, index) => (
               <button
-                key={image.src}
+                key={item.src}
                 type="button"
                 className={styles.frame}
                 style={overlapStyle(index)}
-                onClick={() => openAt(image)}
+                onClick={() => openAt(item)}
               >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  width={image.width}
-                  height={image.height}
+                <Media
+                  item={item}
                   sizes="(max-width: 700px) 45vw, 230px"
                   className={styles.media}
                 />
@@ -121,8 +195,8 @@ export function ProjectCluster({ project }: { project: Project }) {
           </div>
         ))}
       </div>
-      <GenreGalleryDialog
-        image={selectedIndex !== null ? project.images[selectedIndex] : null}
+      <ProjectDialog
+        item={selectedIndex !== null ? project.media[selectedIndex] : null}
         open={dialogOpen}
         onOpenChange={setDialogOpen}
       />

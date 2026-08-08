@@ -35,8 +35,8 @@ function jitterStyle(indexInColumn: number): CSSProperties {
 // distributing — doesn't need to be exact, just enough that one column
 // doesn't end up far taller than the others.
 function estimatedWeight(project: Project) {
-  return project.images.reduce(
-    (sum, image) => sum + image.height / image.width,
+  return project.media.reduce(
+    (sum, item) => sum + item.height / item.width,
     0.5
   );
 }

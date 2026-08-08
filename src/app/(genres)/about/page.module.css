@@ -42,6 +42,10 @@
   color: var(--color-text-muted);
   white-space: pre-line;
 }
+/* 
+.bio + .bio {
+  margin-top: 1rem;
+} */
 
 .articlesPane {
   flex: 1 1 auto;

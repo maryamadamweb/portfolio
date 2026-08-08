@@ -119,6 +119,18 @@ export default function AboutPage() {
           </section>
         </div>
       </div>
+      <p className={styles.fontCredit}>
+        Headings set in{" "}
+        <a
+          href="https://velvetyne.fr/fonts/flor-de-ruina/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.fontCreditLink}
+        >
+          Flor de Ruina
+        </a>{" "}
+        by Velvetyne Type Foundry.
+      </p>
     </main>
   );
 }

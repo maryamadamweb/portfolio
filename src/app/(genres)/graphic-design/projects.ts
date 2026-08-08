@@ -5,6 +5,7 @@ export type MediaItem =
 export type Project = {
   slug: string;
   name: string;
+  summary?: string;
   media: MediaItem[];
   heroWidth?: number;
 };
@@ -16,6 +17,8 @@ export const projects: Project[] = [
   {
     slug: "our-story-our-superpower",
     name: "Our Story, Our Superpower",
+    summary:
+      "Printed editorial publication documenting a community storytelling programme for Havering Changing. The final output included a multi-page zine combining participant writing, photography, and illustration, designed for public distribution and long-term community archiving.",
     heroWidth: 510,
     media: [
       // Streamed as adaptive HLS from Bunny Stream. Dimensions confirmed
@@ -31,6 +34,8 @@ export const projects: Project[] = [
   {
     slug: "from-my-mothers-hands",
     name: "From My Mother's Hands",
+    summary:
+      "A self-initiated, research-led project interrogating the marginalisation of South Asian craft within dominant design narratives. Through intergenerational interviews, indigenous textile processes, and the creation of a custom Gujarati typeface, the project reframes typography as a tactile, cultural practice. The work culminated in a khadi zine and embroidered textile pieces that centre ancestral labour, language, and memory.",
     media: [
       {
         type: "image",
@@ -86,6 +91,8 @@ export const projects: Project[] = [
   {
     slug: "the-creative-process",
     name: "The Creative Process",
+    summary:
+      "A self-initiated typographic and visual response to James Baldwin's 1962 essay The Creative Process.",
     media: [
       {
         type: "image",
@@ -106,6 +113,8 @@ export const projects: Project[] = [
   {
     slug: "international-womens-month",
     name: "IWM",
+    summary:
+      "Posters commissioned by London for Sudan for various protest related events.",
     media: [
       {
         type: "image",
@@ -117,21 +126,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "muzz-x-huq-that",
-    name: "Muzz x Huq That",
-    media: [
-      {
-        type: "image",
-        src: `${BASE}/muzz-x-huq-that/muzz-x-huq-that-1.jpg`,
-        width: 1600,
-        height: 2000,
-        alt: "Muzz x Huq That graphic design piece",
-      },
-    ],
-  },
-  {
     slug: "roots-of-collective-liberation",
     name: "Roots of Collective Liberation",
+    summary: "Graphics and logo design for Roots of Collective Liberation.",
     media: [
       {
         type: "image",
@@ -139,6 +136,21 @@ export const projects: Project[] = [
         width: 1414,
         height: 2000,
         alt: "Roots of Collective Liberation graphic design piece",
+      },
+    ],
+  },
+  {
+    slug: "muzz-x-huq-that",
+    name: "Muzz x Huq That",
+    summary:
+      "Poster commissioned by Muzz with Huq That to promote their Henna and Halwa event.",
+    media: [
+      {
+        type: "image",
+        src: `${BASE}/muzz-x-huq-that/muzz-x-huq-that-1.jpg`,
+        width: 1600,
+        height: 2000,
+        alt: "Muzz x Huq That graphic design piece",
       },
     ],
   },

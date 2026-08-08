@@ -62,8 +62,19 @@ function overlapStyle(indexInColumn: number): CSSProperties {
   return { marginTop: `${COLUMN_OVERLAP[indexInColumn % COLUMN_OVERLAP.length]}rem` };
 }
 
+// Matches the collage's actual flex layout exactly: hero width plus each
+// side column's width and the gap preceding it (.collage's `gap: 1rem` sits
+// between every adjacent child, hero included).
 function clusterWidth(columnCount: number, heroWidth: number) {
-  return heroWidth + GAP + columnCount * (REST_WIDTH + GAP) + 40;
+  return heroWidth + columnCount * (REST_WIDTH + GAP);
+}
+
+// Only the hero plus the first side column are guaranteed to share a row —
+// beyond that, .collage's flex-wrap can drop later columns to the next line
+// depending on the viewport, so capping the summary any wider risks it
+// overhanging past whatever actually rendered on the first row.
+function summaryWidth(columnCount: number, heroWidth: number) {
+  return columnCount > 0 ? heroWidth + GAP + REST_WIDTH : heroWidth;
 }
 
 // Videos stream as adaptive-bitrate HLS from Bunny Stream. Only attach the
@@ -168,6 +179,14 @@ export function ProjectCluster({ project }: { project: Project }) {
       style={{ maxWidth: clusterWidth(columns.length, heroWidth) }}
     >
       <h2 className={styles.name}>{project.name}</h2>
+      {project.summary && (
+        <p
+          className={styles.summary}
+          style={{ maxWidth: summaryWidth(columns.length, heroWidth) }}
+        >
+          {project.summary}
+        </p>
+      )}
       <div className={styles.collage}>
         <button
           type="button"

@@ -55,6 +55,14 @@
   color: var(--color-text-muted);
 }
 
+.link {
+  display: inline-block;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  margin-top: 0.5rem;
+}
+
 @media (max-width: 900px) {
   .row,
   .row:nth-child(even) {

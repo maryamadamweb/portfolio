@@ -24,6 +24,16 @@ export default function PaintingsPage() {
               <h2 className={styles.name}>{painting.name}</h2>
               <p className={styles.subtitle}>{painting.subtitle}</p>
               <p className={styles.about}>{painting.about}</p>
+              {painting.link && (
+                <a
+                  href={painting.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  Read more: {painting.link.replace(/^https?:\/\//, "")}
+                </a>
+              )}
             </div>
           </div>
         ))}

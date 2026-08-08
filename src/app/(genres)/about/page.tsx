@@ -90,35 +90,35 @@ export default function AboutPage() {
               </span>
             </li>
           </ul>
+          <section className={styles.contact}>
+            <h2 className={styles.contactHeading}>Contact</h2>
+            <div className={styles.contactDetails}>
+              <a
+                href="mailto:maryam.arts@outlook.com"
+                className={styles.contactItem}
+              >
+                maryam.arts@outlook.com
+              </a>
+              <a
+                href="https://instagram.com/paintingonmars"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.contactItem}
+              >
+                @paintingonmars
+              </a>
+              <a
+                href="https://instagram.com/naramhands"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.contactItem}
+              >
+                @naramhands
+              </a>
+            </div>
+          </section>
         </div>
       </div>
-      <section className={styles.contact}>
-        <h2 className={styles.contactHeading}>Contact</h2>
-        <div className={styles.contactDetails}>
-          <a
-            href="mailto:maryam.arts@outlook.com"
-            className={styles.contactItem}
-          >
-            maryam.arts@outlook.com
-          </a>
-          <a
-            href="https://instagram.com/paintingonmars"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.contactItem}
-          >
-            @paintingonmars
-          </a>
-          <a
-            href="https://instagram.com/naramhands"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.contactItem}
-          >
-            @naramhands
-          </a>
-        </div>
-      </section>
     </main>
   );
 }

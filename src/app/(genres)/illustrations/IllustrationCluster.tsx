@@ -44,7 +44,7 @@ export function IllustrationCluster({
               alt={image.alt}
               width={image.width}
               height={image.height}
-              sizes="(max-width: 700px) 80vw, 420px"
+              sizes="(max-width: 700px) 80vw, 610px"
               className={styles.media}
             />
           </button>

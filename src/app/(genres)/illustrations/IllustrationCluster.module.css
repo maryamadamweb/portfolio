@@ -39,7 +39,7 @@
 .frame {
   display: block;
   width: 100%;
-  max-width: 420px;
+  max-width: 610px;
   padding: 0;
   border: none;
   background: none;
@@ -47,12 +47,12 @@
 }
 
 .collage[data-count="2"] .frame {
-  max-width: 280px;
+  max-width: 405px;
 }
 
 .collage[data-count="2"] .frame:last-child {
-  max-width: 150px;
-  margin-top: 2rem;
+  max-width: 220px;
+  margin-top: 2.75rem;
 }
 
 .media {

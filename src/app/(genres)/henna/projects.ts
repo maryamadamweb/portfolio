@@ -5,7 +5,7 @@ export type ProjectItem =
       width: number;
       height: number;
       alt: string;
-      description: string;
+      description?: string;
       clickable?: boolean;
       // Shown as a vertical caption beside this image.
       caption?: string;
@@ -15,7 +15,7 @@ export type ProjectItem =
       src: string;
       width: number;
       height: number;
-      description: string;
+      description?: string;
       clickable?: boolean;
     };
 
@@ -32,8 +32,6 @@ export type Project = {
   column?: "left" | "right";
 };
 
-const placeholder = "A short placeholder description of this piece.";
-
 export const projects: Project[] = [
   {
     slug: "hue",
@@ -45,7 +43,6 @@ export const projects: Project[] = [
         src: "https://vz-cacde0a9-0c8.b-cdn.net/9c00b1f5-bc4f-4df4-8121-9d8ccc3339b1/playlist.m3u8",
         width: 720,
         height: 1280,
-        description: placeholder,
       },
       {
         type: "image",
@@ -53,7 +50,6 @@ export const projects: Project[] = [
         width: 1170,
         height: 1462,
         alt: "Henna extra",
-        description: placeholder,
         clickable: false,
         caption: "Juicy Couture x Huq That",
       },
@@ -63,7 +59,6 @@ export const projects: Project[] = [
         width: 1600,
         height: 1067,
         alt: "Henna extra",
-        description: placeholder,
         clickable: false,
       },
     ],
@@ -81,7 +76,6 @@ export const projects: Project[] = [
         width: 1093,
         height: 1457,
         alt: "Aunty Ji henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -89,7 +83,6 @@ export const projects: Project[] = [
         width: 1080,
         height: 1350,
         alt: "Aunty Ji henna piece",
-        description: placeholder,
       },
     ],
   },
@@ -104,7 +97,6 @@ export const projects: Project[] = [
         width: 1170,
         height: 1462,
         alt: "Dazed henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -112,7 +104,6 @@ export const projects: Project[] = [
         width: 1600,
         height: 1061,
         alt: "Henna extra",
-        description: placeholder,
         clickable: false,
       },
       {
@@ -120,7 +111,6 @@ export const projects: Project[] = [
         src: "https://vz-cacde0a9-0c8.b-cdn.net/fb3bf58c-e95a-409d-8af2-1a7366a9dcb1/playlist.m3u8",
         width: 720,
         height: 1280,
-        description: placeholder,
       },
     ],
   },
@@ -136,7 +126,6 @@ export const projects: Project[] = [
         width: 1067,
         height: 1600,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -144,14 +133,12 @@ export const projects: Project[] = [
         width: 1600,
         height: 701,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       {
         type: "video",
         src: "https://vz-cacde0a9-0c8.b-cdn.net/a39e28eb-70b2-4dc4-a4ad-c03a802e1f18/playlist.m3u8",
         width: 720,
         height: 1280,
-        description: placeholder,
       },
       {
         type: "image",
@@ -159,7 +146,6 @@ export const projects: Project[] = [
         width: 1200,
         height: 1600,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -167,7 +153,6 @@ export const projects: Project[] = [
         width: 1200,
         height: 1600,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -175,7 +160,6 @@ export const projects: Project[] = [
         width: 750,
         height: 422,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -183,7 +167,6 @@ export const projects: Project[] = [
         width: 1200,
         height: 1600,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -191,7 +174,6 @@ export const projects: Project[] = [
         width: 1200,
         height: 1600,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -199,7 +181,6 @@ export const projects: Project[] = [
         width: 1420,
         height: 1600,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -207,7 +188,6 @@ export const projects: Project[] = [
         width: 1200,
         height: 1600,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       {
         type: "image",
@@ -215,7 +195,6 @@ export const projects: Project[] = [
         width: 1170,
         height: 1560,
         alt: "Levis henna piece",
-        description: placeholder,
       },
       // {
       //   type: "image",
@@ -223,7 +202,6 @@ export const projects: Project[] = [
       //   width: 773,
       //   height: 1600,
       //   alt: "Levis henna piece",
-      //   description: placeholder,
       // },
       // {
       //   type: "image",
@@ -231,7 +209,6 @@ export const projects: Project[] = [
       //   width: 868,
       //   height: 1600,
       //   alt: "Levis henna piece",
-      //   description: placeholder,
       // },
       {
         type: "image",
@@ -239,7 +216,6 @@ export const projects: Project[] = [
         width: 1200,
         height: 1600,
         alt: "Levis henna piece",
-        description: placeholder,
       },
     ],
   },
@@ -256,7 +232,6 @@ export const projects: Project[] = [
         src: "https://vz-cacde0a9-0c8.b-cdn.net/f3f4b74d-ca30-418d-98a6-2f613184e4ed/playlist.m3u8",
         width: 1276,
         height: 718,
-        description: placeholder,
       },
     ],
   },
@@ -272,7 +247,6 @@ export const projects: Project[] = [
         src: "https://vz-cacde0a9-0c8.b-cdn.net/95742576-7d3f-4ded-8e88-46033497ca8f/playlist.m3u8",
         width: 720,
         height: 576,
-        description: placeholder,
       },
       {
         type: "image",
@@ -280,14 +254,12 @@ export const projects: Project[] = [
         width: 1400,
         height: 1750,
         alt: "Mother Tongue henna piece",
-        description: placeholder,
       },
       {
         type: "video",
         src: "https://vz-cacde0a9-0c8.b-cdn.net/479cc092-a4e4-4d5b-9837-9e81fa3c9d56/playlist.m3u8",
         width: 540,
         height: 960,
-        description: placeholder,
       },
     ],
   },

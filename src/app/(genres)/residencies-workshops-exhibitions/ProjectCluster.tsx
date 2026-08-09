@@ -167,7 +167,16 @@ export function ProjectCluster({ project }: { project: Project }) {
               <div
                 key={columnIndex}
                 className={styles.column}
-                style={project.growColumns ? { maxWidth: "none" } : undefined}
+                style={
+                  project.growColumns
+                    ? {
+                        maxWidth:
+                          typeof project.growColumns === "number"
+                            ? project.growColumns
+                            : "none",
+                      }
+                    : undefined
+                }
               >
                 {column.map((image, index) => (
                   <button

@@ -21,10 +21,12 @@ export type Project = {
   // stays consistent with the smaller hero). Frees up row width for the
   // rest columns to flex-grow into — paired with growColumns below.
   heroWidth?: number;
-  // Removes the rest columns' default max-width cap so flex-grow (already
-  // enabled on .column) can expand each column to fill whatever width is
-  // left in its row, instead of staying pinned at REST_WIDTH.
-  growColumns?: boolean;
+  // Loosens the rest columns' default max-width cap (REST_WIDTH) so
+  // flex-grow (already enabled on .column) can expand each column to fill
+  // whatever width is left in its row. `true` removes the cap entirely;
+  // a number sets a higher cap instead of uncapping it fully, for clusters
+  // where unlimited growth over-fills solo-image rows.
+  growColumns?: boolean | number;
   // Column indices (in the auto-computed column layout, 0 = the column
   // immediately right of the hero) that should space their images with a
   // normal gap instead of the default pinned-overlap stacking.
@@ -255,14 +257,14 @@ export const projects: Project[] = [
     slug: "henna-workshops",
     name: "Henna Workshops",
     summary: "Various co-led henna workshops for Huq That.",
-    // Client feedback: too much dead space next to the hero. 8 rest images
-    // against this hero's height auto-computes to 7 fragmented columns;
-    // even capped lower, 2-3 columns still don't fit beside the hero at
-    // this cluster's typical available width, so they wrap to a new line
-    // that starts below the shortest column instead of below the hero —
-    // still a gap, just relocated. A single column guarantees everything
-    // fits in one row with no wrap, at any width.
-    restColumnCount: 1,
+    // Client feedback: images read too small relative to the leftover
+    // column width — let each column's flex-grow (already enabled, just
+    // capped) expand into whatever width is free instead of staying
+    // pinned at REST_WIDTH. Uncapped growth over-filled the many
+    // solo-image rows this cluster's 7-column split produces, so this
+    // caps growth at 260px (~0.8x the ~325px it grew to uncapped) instead
+    // of removing the cap entirely.
+    growColumns: 260,
     images: [
       {
         src: `${BASE}/workshops/henna-workshops/henna-workshops-1.jpg`,
@@ -313,7 +315,6 @@ export const projects: Project[] = [
         alt: "Henna workshop",
         description: piece,
       },
-      // Client feedback: swap 8 and 9.
       {
         src: `${BASE}/workshops/henna-workshops/henna-workshops-9.jpg`,
         width: 900,

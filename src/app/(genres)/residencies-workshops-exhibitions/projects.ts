@@ -31,6 +31,12 @@ export type Project = {
   // immediately right of the hero) that should space their images with a
   // normal gap instead of the default pinned-overlap stacking.
   looseColumns?: number[];
+  // Overrides the default 1rem gap used between images in a loose column.
+  looseColumnGap?: number;
+  // Nudges images after the first in a loose column rightward by this many
+  // rem, so the stack reads as an intentionally imperfect, hand-placed
+  // arrangement rather than a rigid grid.
+  looseColumnShift?: number;
   // Row indices (in "rows" layout mode) that should size each image by
   // aspect ratio instead of splitting the row width evenly — so images of
   // very different aspect ratios in the same row render at the same
@@ -405,8 +411,13 @@ export const projects: Project[] = [
     name: "Humble Abode",
     summary: summaryPlaceholder,
     // Client feedback: align the group photo and the room shot as one
-    // stacked column instead of side-by-side columns.
+    // stacked column instead of side-by-side columns, with extra breathing
+    // room between them and the room shot nudged right so the pair reads
+    // as a deliberately imperfect, hand-placed stack rather than a grid.
     restColumnCount: 1,
+    looseColumns: [0],
+    looseColumnGap: 2,
+    looseColumnShift: 1.5,
     images: [
       {
         src: `${BASE}/exhibitions/humble-abode/humble-abode-1.jpg`,

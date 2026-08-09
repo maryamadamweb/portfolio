@@ -227,7 +227,12 @@ export function ProjectCluster({ project }: { project: Project }) {
                       loose
                         ? index === 0
                           ? undefined
-                          : { marginTop: "1rem" }
+                          : {
+                              marginTop: `${project.looseColumnGap ?? 1}rem`,
+                              marginLeft: project.looseColumnShift
+                                ? `${project.looseColumnShift}rem`
+                                : undefined,
+                            }
                         : overlapStyle(index)
                     }
                     onClick={() => openAt(image)}

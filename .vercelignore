@@ -1,0 +1,4 @@
+# Staging area for videos pending upload to bunny.net (not part of the site's
+# public assets) — mirrors the /bunny-uploads entry in .gitignore, since the
+# Vercel CLI's local upload doesn't reliably respect .gitignore on its own.
+/bunny-uploads

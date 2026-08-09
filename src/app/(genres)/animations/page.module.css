@@ -8,6 +8,12 @@
   margin-bottom: 3rem;
 }
 
+.embedWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

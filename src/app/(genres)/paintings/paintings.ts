@@ -6,6 +6,8 @@ export type Painting = {
   subtitle: string;
   about: string;
   link?: string;
+  linkText?: string;
+  linkSubtext?: string;
 };
 
 export const paintings: Painting[] = [
@@ -18,6 +20,8 @@ export const paintings: Painting[] = [
     about:
       "Orchid-Terrarium explores the cyclical relationship between humans and the earth, focusing on how imperialists have historically disregarded the land they sought and currently seek to inhabit, viewing it as a resource for extraction rather than a living system requiring reciprocal care.",
     link: "https://naramm.substack.com/p/orchid-terrarium",
+    linkText: "Orchid-Terrarium",
+    linkSubtext: "On the cyclical dialogue we should have with the earth",
   },
   {
     src: "/genres/paintings/painting-1.jpg",

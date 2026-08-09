@@ -56,11 +56,27 @@
 }
 
 .link {
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
   color: var(--color-text);
+  margin-top: 0.5rem;
+}
+
+.linkText {
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  margin-top: 0.5rem;
+}
+
+.linkSubtext {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+
+.linkCta {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 @media (max-width: 900px) {

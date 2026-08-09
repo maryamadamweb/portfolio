@@ -31,7 +31,16 @@ export default function PaintingsPage() {
                   rel="noopener noreferrer"
                   className={styles.link}
                 >
-                  Read more: {painting.link.replace(/^https?:\/\//, "")}
+                  <span className={styles.linkText}>
+                    {painting.linkText ??
+                      painting.link.replace(/^https?:\/\//, "")}
+                  </span>
+                  {painting.linkSubtext && (
+                    <span className={styles.linkSubtext}>
+                      {painting.linkSubtext}{" "}
+                      <span className={styles.linkCta}>(Read more)</span>
+                    </span>
+                  )}
                 </a>
               )}
             </div>

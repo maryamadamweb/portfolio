@@ -56,6 +56,30 @@ function distributeIntoColumns(
     heights[shortest] += estimatedWeight(illustration);
   }
 
+  // Client feedback: Dates should sit directly under Newham Heritage Month.
+  // Moved after the auto-balanced placement above (rather than folded into
+  // it) so every other piece's column is unaffected.
+  const datesColumn = columns.findIndex((col) =>
+    col.some((illustration) => illustration.slug === "dates")
+  );
+  const newhamColumn = columns.findIndex((col) =>
+    col.some((illustration) => illustration.slug === "newham-heritage-month")
+  );
+  if (
+    datesColumn !== -1 &&
+    newhamColumn !== -1 &&
+    datesColumn !== newhamColumn
+  ) {
+    const [dates] = columns[datesColumn].splice(
+      columns[datesColumn].findIndex((i) => i.slug === "dates"),
+      1
+    );
+    const newhamIndex = columns[newhamColumn].findIndex(
+      (i) => i.slug === "newham-heritage-month"
+    );
+    columns[newhamColumn].splice(newhamIndex + 1, 0, dates);
+  }
+
   return columns;
 }
 

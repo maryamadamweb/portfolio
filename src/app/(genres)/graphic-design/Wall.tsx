@@ -24,11 +24,18 @@ const COLUMN_OFFSETS = ["0rem", "4rem", "1.75rem"];
 // instead of a uniform gap. Skipped on the first item in a column.
 const CLUSTER_JITTER = ["1.5rem", "-1rem", "2.25rem", "-0.5rem", "0.75rem"];
 
-function jitterStyle(indexInColumn: number): CSSProperties {
-  if (indexInColumn === 0) return {};
-  return {
-    marginTop: CLUSTER_JITTER[(indexInColumn - 1) % CLUSTER_JITTER.length],
-  };
+function clusterStyle(
+  project: Project,
+  indexInColumn: number,
+  columnCount: number
+): CSSProperties {
+  const jitter =
+    indexInColumn === 0
+      ? 0
+      : parseFloat(CLUSTER_JITTER[(indexInColumn - 1) % CLUSTER_JITTER.length]);
+  const desktopOffset = columnCount > 1 ? project.verticalOffset ?? 0 : 0;
+  const marginTop = jitter + desktopOffset;
+  return marginTop !== 0 ? { marginTop: `${marginTop}rem` } : {};
 }
 
 // Rough per-project weight used only to balance column heights while
@@ -86,7 +93,10 @@ export function Wall({ projects }: { projects: Project[] }) {
           }}
         >
           {column.map((project, index) => (
-            <div key={project.slug} style={jitterStyle(index)}>
+            <div
+              key={project.slug}
+              style={clusterStyle(project, index, columnCount)}
+            >
               <ProjectCluster project={project} />
             </div>
           ))}

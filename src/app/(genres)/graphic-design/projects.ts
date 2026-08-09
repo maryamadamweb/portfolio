@@ -11,6 +11,11 @@ export type Project = {
   // Spaces the side-column items with a normal gap instead of the default
   // pinned-overlap stacking.
   looseColumns?: boolean;
+  // Extra top margin (rem), applied only in the Wall's multi-column
+  // (desktop) layout, for nudging a cluster's vertical position within its
+  // column beyond the standard jitter — e.g. to visually center it against
+  // clusters in a neighbouring column.
+  verticalOffset?: number;
 };
 
 const BASE = "/genres/graphic-design";
@@ -148,6 +153,10 @@ export const projects: Project[] = [
     name: "Muzz x Huq That",
     summary:
       "Poster commissioned by Muzz with Huq That to promote their Henna and Halwa event.",
+    // Client feedback: on desktop this sits in a column of its own next to
+    // IWM and Roots of Collective Liberation — nudge it down so it reads as
+    // vertically centered against that pair instead of aligned to IWM's top.
+    verticalOffset: 6,
     media: [
       {
         type: "image",

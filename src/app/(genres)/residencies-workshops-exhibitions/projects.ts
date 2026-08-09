@@ -409,7 +409,7 @@ export const projects: Project[] = [
   {
     slug: "humble-abode",
     name: "Humble Abode",
-    summary: summaryPlaceholder,
+    summary: "Co-curated exhibition, fashion show and event.",
     // Client feedback: align the group photo and the room shot as one
     // stacked column instead of side-by-side columns, with extra breathing
     // room between them and the room shot nudged right so the pair reads

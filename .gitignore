@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# staging area for videos pending upload to bunny.net (not part of the site's public assets)
+/bunny-uploads
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

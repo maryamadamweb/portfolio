@@ -31,6 +31,17 @@ export type Project = {
   // immediately right of the hero) that should space their images with a
   // normal gap instead of the default pinned-overlap stacking.
   looseColumns?: number[];
+  // Row indices (in "rows" layout mode) that should size each image by
+  // aspect ratio instead of splitting the row width evenly — so images of
+  // very different aspect ratios in the same row render at the same
+  // height instead of the narrower one looking stretched-tall. No
+  // cropping: each image keeps its own ratio, just narrower or wider.
+  justifyRows?: number[];
+  // Row indices (in "rows" layout mode) that should break out of the
+  // Wall's column layout and hug the true right edge of the page,
+  // instead of staying positioned inside whichever column the cluster
+  // landed in.
+  pageEdgeRows?: number[];
 };
 
 const summaryPlaceholder = "A short placeholder description of this project.";
@@ -341,6 +352,14 @@ export const projects: Project[] = [
     // it became, then the 3 workshop-process shots at the bottom — a
     // curated 1/2/3 stack instead of the auto-computed hero+columns split.
     rows: [1, 2, 3],
+    // reinstate-1 is a much narrower crop (461w) than reinstate-2 (900w),
+    // so splitting their row evenly by width made reinstate-1 render far
+    // taller than reinstate-2 — justify row 1 by aspect ratio instead so
+    // they match heights.
+    justifyRows: [1],
+    // Pin row 1 to the right edge of the page rather than wherever the
+    // Wall happens to place this cluster's column.
+    pageEdgeRows: [1],
     images: [
       {
         src: `${BASE}/workshops/reinstate/reinstate-3.jpg`,

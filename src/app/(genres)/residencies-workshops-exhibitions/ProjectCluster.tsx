@@ -1,6 +1,13 @@
 "use client";
 
-import { useMemo, useState, type CSSProperties } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import Image from "next/image";
 import { GenreGalleryDialog } from "@/components/genres/GenreGalleryDialog";
 import type { Project } from "./projects";
@@ -88,6 +95,44 @@ function layoutRows(images: GalleryImage[], rows: number[]) {
   return result;
 }
 
+// Pins its contents to the true right edge of the viewport, regardless of
+// which Wall column this cluster landed in. A pure-CSS breakout (the usual
+// 100vw/left:50%/margin:-50vw trick) only cancels out correctly when the
+// element's immediate parent is itself centered directly in the viewport —
+// here the row sits behind several nested centered/flex layers (page
+// padding, the Wall's flex row, the column, the cluster), so the offsets
+// don't cancel. Measuring the actual rendered position and translating by
+// the exact delta works regardless of nesting depth.
+function PageEdgeRow({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function update() {
+      const el = ref.current;
+      if (!el) return;
+      // Reset before measuring so repeated calls (e.g. React StrictMode's
+      // double effect-invocation in dev, or back-to-back resize events)
+      // each measure the untransformed position instead of compounding
+      // the previous translate on top of itself.
+      el.style.transform = "none";
+      const naturalRight = el.getBoundingClientRect().right;
+      // clientWidth (not window.innerWidth) excludes the scrollbar, so the
+      // row lines up with the actual visible edge instead of overshooting
+      // into it.
+      el.style.transform = `translateX(${document.documentElement.clientWidth - naturalRight}px)`;
+    }
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return (
+    <div ref={ref} className={styles.rowPageEdge}>
+      {children}
+    </div>
+  );
+}
+
 export function ProjectCluster({ project }: { project: Project }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -118,13 +163,24 @@ export function ProjectCluster({ project }: { project: Project }) {
       <p className={styles.summary}>{project.summary}</p>
       {rows ? (
         <div className={styles.rows}>
-          {rows.map((row, rowIndex) => (
-            <div key={rowIndex} className={styles.row}>
-              {row.map((image) => (
+          {rows.map((row, rowIndex) => {
+            const justified = project.justifyRows?.includes(rowIndex);
+            const pageEdge = project.pageEdgeRows?.includes(rowIndex);
+            const totalRatio = row.reduce(
+              (sum, image) => sum + image.width / image.height,
+              0
+            );
+            const rowContentWidth = ROWS_WIDTH - (row.length - 1) * GAP;
+            const rowItems = row.map((image) => {
+              const ratio = image.width / image.height;
+              return (
                 <button
                   key={image.src}
                   type="button"
                   className={styles.rowItem}
+                  style={
+                    justified ? { flex: `${ratio} ${ratio} 0px` } : undefined
+                  }
                   onClick={() => openAt(image)}
                 >
                   <Image
@@ -132,13 +188,33 @@ export function ProjectCluster({ project }: { project: Project }) {
                     alt={image.alt}
                     width={image.width}
                     height={image.height}
-                    sizes={`(max-width: 700px) 90vw, ${Math.round(ROWS_WIDTH / row.length)}px`}
+                    sizes={`(max-width: 700px) 90vw, ${Math.round(
+                      justified
+                        ? rowContentWidth * (ratio / totalRatio)
+                        : ROWS_WIDTH / row.length
+                    )}px`}
                     className={styles.media}
                   />
                 </button>
-              ))}
-            </div>
-          ))}
+              );
+            });
+
+            if (pageEdge) {
+              return (
+                <PageEdgeRow key={rowIndex}>
+                  <div className={styles.row} style={{ maxWidth: ROWS_WIDTH }}>
+                    {rowItems}
+                  </div>
+                </PageEdgeRow>
+              );
+            }
+
+            return (
+              <div key={rowIndex} className={styles.row}>
+                {rowItems}
+              </div>
+            );
+          })}
         </div>
       ) : (
         <div className={styles.collage}>

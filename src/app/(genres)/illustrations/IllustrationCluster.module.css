@@ -1,0 +1,79 @@
+.cluster {
+  width: 100%;
+}
+
+.name {
+  font-size: var(--fs-lg);
+  margin-bottom: 0.5rem;
+}
+
+.credit {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: 0.75rem;
+}
+
+.textBackdrop {
+  max-width: 60ch;
+  margin-bottom: 1rem;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--color-bg) 92%, transparent) 0%,
+    color-mix(in srgb, var(--color-bg) 45%, transparent) 100%,
+    transparent 100%
+  );
+}
+
+.summary {
+  color: var(--color-text-muted);
+  white-space: pre-line;
+}
+
+.collage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.frame {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.collage[data-count="2"] .frame {
+  max-width: 280px;
+}
+
+.collage[data-count="2"] .frame:last-child {
+  max-width: 150px;
+  margin-top: 2rem;
+}
+
+.media {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.links {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-width: 60ch;
+}
+
+.link {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  font-size: var(--fs-sm);
+}

@@ -12,15 +12,6 @@ export const genres: GenreMeta[] = [
     coverWidth: 1427,
     coverHeight: 1606,
     tags: ["Design", "Web"],
-    images: [
-      {
-        src: "/genres/illustrations/islamic-relief.jpeg",
-        width: 960,
-        height: 1165,
-        alt: "Islamic Relief Artwork",
-        // description: "A short placeholder description of this piece.",
-      },
-    ],
   },
   {
     slug: "graphic-design",

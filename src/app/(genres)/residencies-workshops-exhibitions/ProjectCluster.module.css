@@ -58,19 +58,8 @@
 
 .row {
   display: flex;
+  align-items: flex-start;
   gap: 1rem;
-}
-
-/* Pinned to the true right edge of the viewport via a measured transform
-   (see PageEdgeRow in ProjectCluster.tsx) — this just right-aligns its
-   contents and reserves the edge gap; the horizontal position itself is
-   set by JS since it has to escape several nested centered/flex layers
-   that a pure-CSS breakout can't cancel out. */
-.rowPageEdge {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 1.5rem;
-  box-sizing: border-box;
 }
 
 .rowItem {

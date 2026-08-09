@@ -35,13 +35,11 @@ export type Project = {
   // aspect ratio instead of splitting the row width evenly — so images of
   // very different aspect ratios in the same row render at the same
   // height instead of the narrower one looking stretched-tall. No
-  // cropping: each image keeps its own ratio, just narrower or wider.
+  // cropping: each image keeps its own ratio, just narrower or wider. The
+  // resulting row is also scaled down (JUSTIFIED_ROW_SCALE) and centered
+  // rather than stretched edge to edge, with a slightly larger gap
+  // (JUSTIFIED_GAP) between images.
   justifyRows?: number[];
-  // Row indices (in "rows" layout mode) that should break out of the
-  // Wall's column layout and hug the true right edge of the page,
-  // instead of staying positioned inside whichever column the cluster
-  // landed in.
-  pageEdgeRows?: number[];
 };
 
 const summaryPlaceholder = "A short placeholder description of this project.";
@@ -357,9 +355,6 @@ export const projects: Project[] = [
     // taller than reinstate-2 — justify row 1 by aspect ratio instead so
     // they match heights.
     justifyRows: [1],
-    // Pin row 1 to the right edge of the page rather than wherever the
-    // Wall happens to place this cluster's column.
-    pageEdgeRows: [1],
     images: [
       {
         src: `${BASE}/workshops/reinstate/reinstate-3.jpg`,

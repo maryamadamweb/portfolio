@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type CSSProperties,
-  type ReactNode,
-} from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { GenreGalleryDialog } from "@/components/genres/GenreGalleryDialog";
 import type { Project } from "./projects";
@@ -95,43 +88,14 @@ function layoutRows(images: GalleryImage[], rows: number[]) {
   return result;
 }
 
-// Pins its contents to the true right edge of the viewport, regardless of
-// which Wall column this cluster landed in. A pure-CSS breakout (the usual
-// 100vw/left:50%/margin:-50vw trick) only cancels out correctly when the
-// element's immediate parent is itself centered directly in the viewport —
-// here the row sits behind several nested centered/flex layers (page
-// padding, the Wall's flex row, the column, the cluster), so the offsets
-// don't cancel. Measuring the actual rendered position and translating by
-// the exact delta works regardless of nesting depth.
-function PageEdgeRow({ children }: { children: ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function update() {
-      const el = ref.current;
-      if (!el) return;
-      // Reset before measuring so repeated calls (e.g. React StrictMode's
-      // double effect-invocation in dev, or back-to-back resize events)
-      // each measure the untransformed position instead of compounding
-      // the previous translate on top of itself.
-      el.style.transform = "none";
-      const naturalRight = el.getBoundingClientRect().right;
-      // clientWidth (not window.innerWidth) excludes the scrollbar, so the
-      // row lines up with the actual visible edge instead of overshooting
-      // into it.
-      el.style.transform = `translateX(${document.documentElement.clientWidth - naturalRight}px)`;
-    }
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  return (
-    <div ref={ref} className={styles.rowPageEdge}>
-      {children}
-    </div>
-  );
-}
+// "Justified" rows (project.justifyRows) size each image by aspect ratio
+// so mismatched-ratio images land at the same height, but scaled down to
+// this fraction of the full row width and centered rather than stretched
+// edge to edge — matches the client's reference layout for Reinstate's
+// sketch/photo pair, which sits narrower and centered with a bit more
+// breathing room between the two than the default row gap.
+const JUSTIFIED_ROW_SCALE = 0.8;
+const JUSTIFIED_GAP = 24;
 
 export function ProjectCluster({ project }: { project: Project }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -165,53 +129,53 @@ export function ProjectCluster({ project }: { project: Project }) {
         <div className={styles.rows}>
           {rows.map((row, rowIndex) => {
             const justified = project.justifyRows?.includes(rowIndex);
-            const pageEdge = project.pageEdgeRows?.includes(rowIndex);
             const totalRatio = row.reduce(
               (sum, image) => sum + image.width / image.height,
               0
             );
-            const rowContentWidth = ROWS_WIDTH - (row.length - 1) * GAP;
-            const rowItems = row.map((image) => {
-              const ratio = image.width / image.height;
-              return (
-                <button
-                  key={image.src}
-                  type="button"
-                  className={styles.rowItem}
-                  style={
-                    justified ? { flex: `${ratio} ${ratio} 0px` } : undefined
-                  }
-                  onClick={() => openAt(image)}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    width={image.width}
-                    height={image.height}
-                    sizes={`(max-width: 700px) 90vw, ${Math.round(
-                      justified
-                        ? rowContentWidth * (ratio / totalRatio)
-                        : ROWS_WIDTH / row.length
-                    )}px`}
-                    className={styles.media}
-                  />
-                </button>
-              );
-            });
-
-            if (pageEdge) {
-              return (
-                <PageEdgeRow key={rowIndex}>
-                  <div className={styles.row} style={{ maxWidth: ROWS_WIDTH }}>
-                    {rowItems}
-                  </div>
-                </PageEdgeRow>
-              );
-            }
+            const gap = justified ? JUSTIFIED_GAP : GAP;
+            const rowContentWidth = justified
+              ? ROWS_WIDTH * JUSTIFIED_ROW_SCALE - (row.length - 1) * gap
+              : ROWS_WIDTH - (row.length - 1) * gap;
 
             return (
-              <div key={rowIndex} className={styles.row}>
-                {rowItems}
+              <div
+                key={rowIndex}
+                className={styles.row}
+                style={
+                  justified
+                    ? { gap: `${gap}px`, justifyContent: "center" }
+                    : undefined
+                }
+              >
+                {row.map((image) => {
+                  const ratio = image.width / image.height;
+                  const justifiedWidth = rowContentWidth * (ratio / totalRatio);
+                  return (
+                    <button
+                      key={image.src}
+                      type="button"
+                      className={styles.rowItem}
+                      style={
+                        justified
+                          ? { flex: `0 1 ${justifiedWidth}px` }
+                          : undefined
+                      }
+                      onClick={() => openAt(image)}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={image.width}
+                        height={image.height}
+                        sizes={`(max-width: 700px) 90vw, ${Math.round(
+                          justified ? justifiedWidth : ROWS_WIDTH / row.length
+                        )}px`}
+                        className={styles.media}
+                      />
+                    </button>
+                  );
+                })}
               </div>
             );
           })}

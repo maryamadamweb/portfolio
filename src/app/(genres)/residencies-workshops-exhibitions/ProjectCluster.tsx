@@ -26,9 +26,13 @@ function estimatedHeight(image: GalleryImage, width: number) {
 // column count leaves each column short of the hero's height no matter how
 // the images are split — forcing fewer, taller columns there fixes it
 // without changing the formula for every other cluster.
-function layoutCluster(images: GalleryImage[], columnOverride?: number) {
+function layoutCluster(
+  images: GalleryImage[],
+  columnOverride?: number,
+  heroWidth = HERO_WIDTH
+) {
   const [hero, ...rest] = images;
-  const heroHeight = estimatedHeight(hero, HERO_WIDTH);
+  const heroHeight = estimatedHeight(hero, heroWidth);
 
   if (rest.length === 0) {
     return { hero, columns: [] as GalleryImage[][] };
@@ -65,8 +69,8 @@ function overlapStyle(indexInColumn: number): CSSProperties {
   return { marginTop: `${COLUMN_OVERLAP[indexInColumn % COLUMN_OVERLAP.length]}rem` };
 }
 
-function clusterWidth(columnCount: number) {
-  return HERO_WIDTH + GAP + columnCount * (REST_WIDTH + GAP) + 40;
+function clusterWidth(columnCount: number, heroWidth = HERO_WIDTH) {
+  return heroWidth + GAP + columnCount * (REST_WIDTH + GAP) + 40;
 }
 
 // Fixed width for the "rows" layout mode — derived from the same
@@ -88,9 +92,10 @@ export function ProjectCluster({ project }: { project: Project }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
+  const heroWidth = project.heroWidth ?? HERO_WIDTH;
   const { hero, columns } = useMemo(
-    () => layoutCluster(project.images, project.restColumnCount),
-    [project.images, project.restColumnCount]
+    () => layoutCluster(project.images, project.restColumnCount, heroWidth),
+    [project.images, project.restColumnCount, heroWidth]
   );
   const rows = useMemo(
     () => (project.rows ? layoutRows(project.images, project.rows) : null),
@@ -105,7 +110,9 @@ export function ProjectCluster({ project }: { project: Project }) {
   return (
     <section
       className={styles.cluster}
-      style={{ maxWidth: rows ? ROWS_WIDTH : clusterWidth(columns.length) }}
+      style={{
+        maxWidth: rows ? ROWS_WIDTH : clusterWidth(columns.length, heroWidth),
+      }}
     >
       <h2 className={styles.name}>{project.name}</h2>
       <p className={styles.summary}>{project.summary}</p>
@@ -138,6 +145,11 @@ export function ProjectCluster({ project }: { project: Project }) {
           <button
             type="button"
             className={styles.hero}
+            style={
+              heroWidth !== HERO_WIDTH
+                ? { flexBasis: heroWidth, maxWidth: heroWidth }
+                : undefined
+            }
             onClick={() => openAt(hero)}
           >
             <Image
@@ -145,32 +157,45 @@ export function ProjectCluster({ project }: { project: Project }) {
               alt={hero.alt}
               width={hero.width}
               height={hero.height}
-              sizes="(max-width: 700px) 60vw, 340px"
+              sizes={`(max-width: 700px) 60vw, ${heroWidth}px`}
               className={styles.media}
             />
           </button>
-          {columns.map((column, columnIndex) => (
-            <div key={columnIndex} className={styles.column}>
-              {column.map((image, index) => (
-                <button
-                  key={image.src}
-                  type="button"
-                  className={styles.frame}
-                  style={overlapStyle(index)}
-                  onClick={() => openAt(image)}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    width={image.width}
-                    height={image.height}
-                    sizes="(max-width: 700px) 45vw, 230px"
-                    className={styles.media}
-                  />
-                </button>
-              ))}
-            </div>
-          ))}
+          {columns.map((column, columnIndex) => {
+            const loose = project.looseColumns?.includes(columnIndex);
+            return (
+              <div
+                key={columnIndex}
+                className={styles.column}
+                style={project.growColumns ? { maxWidth: "none" } : undefined}
+              >
+                {column.map((image, index) => (
+                  <button
+                    key={image.src}
+                    type="button"
+                    className={styles.frame}
+                    style={
+                      loose
+                        ? index === 0
+                          ? undefined
+                          : { marginTop: "1rem" }
+                        : overlapStyle(index)
+                    }
+                    onClick={() => openAt(image)}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={image.width}
+                      height={image.height}
+                      sizes="(max-width: 700px) 45vw, 230px"
+                      className={styles.media}
+                    />
+                  </button>
+                ))}
+              </div>
+            );
+          })}
         </div>
       )}
       <GenreGalleryDialog

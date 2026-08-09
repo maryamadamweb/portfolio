@@ -16,6 +16,19 @@ export type Project = {
   // the client wants a specific curated composition for rather than the
   // auto-computed one.
   rows?: number[];
+  // Shrinks the hero below the default HERO_WIDTH (also used when
+  // estimating its height for the column-count formula, so bin-packing
+  // stays consistent with the smaller hero). Frees up row width for the
+  // rest columns to flex-grow into — paired with growColumns below.
+  heroWidth?: number;
+  // Removes the rest columns' default max-width cap so flex-grow (already
+  // enabled on .column) can expand each column to fill whatever width is
+  // left in its row, instead of staying pinned at REST_WIDTH.
+  growColumns?: boolean;
+  // Column indices (in the auto-computed column layout, 0 = the column
+  // immediately right of the hero) that should space their images with a
+  // normal gap instead of the default pinned-overlap stacking.
+  looseColumns?: number[];
 };
 
 const summaryPlaceholder = "A short placeholder description of this project.";
@@ -33,18 +46,57 @@ export const projects: Project[] = [
     name: "Rabbits Road Press (Residency)",
     summary:
       "Rabbits Road Press Residency (2023) — Explored early POC-owned businesses in Newham through archival research and design, using shop fronts as visual markers of care, migration, and belonging.",
-    // Client feedback: the second postcard set and the printed-zine stack
-    // should read as big as the hero postcard image, clearly separated
-    // rather than tucked into small side columns — a curated 1/2/3 stack
-    // instead of the auto-computed hero+columns split.
-    rows: [1, 2, 3],
+    // Client feedback: the hero was leaving the postcard-set column
+    // (residency-3/5, column 0) short of its height with dead space below
+    // — shrink the hero a bit to give every rest column more row width to
+    // grow into, and give column 0 a normal gap instead of the pinned
+    // overlap so residency-3/5 read bigger and clearly separated.
+    heroWidth: 300,
+    growColumns: true,
+    looseColumns: [0],
     images: [
-      { src: `${BASE}/residencies/rabbits-road-press/residency-1.jpg`, width: 1200, height: 1600, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-4.png`, width: 788, height: 569, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-5.png`, width: 682, height: 474, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-2.jpg`, width: 1200, height: 1600, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-3.png`, width: 726, height: 504, alt: "Rabbits Road Press residency", description: piece },
-      { src: `${BASE}/residencies/rabbits-road-press/residency-6.png`, width: 724, height: 523, alt: "Rabbits Road Press residency", description: piece },
+      {
+        src: `${BASE}/residencies/rabbits-road-press/residency-1.jpg`,
+        width: 1200,
+        height: 1600,
+        alt: "Rabbits Road Press residency",
+        description: piece,
+      },
+      {
+        src: `${BASE}/residencies/rabbits-road-press/residency-3.png`,
+        width: 726,
+        height: 504,
+        alt: "Rabbits Road Press residency",
+        description: piece,
+      },
+      {
+        src: `${BASE}/residencies/rabbits-road-press/residency-4.png`,
+        width: 788,
+        height: 569,
+        alt: "Rabbits Road Press residency",
+        description: piece,
+      },
+      {
+        src: `${BASE}/residencies/rabbits-road-press/residency-2.jpg`,
+        width: 1200,
+        height: 1600,
+        alt: "Rabbits Road Press residency",
+        description: piece,
+      },
+      {
+        src: `${BASE}/residencies/rabbits-road-press/residency-5.png`,
+        width: 682,
+        height: 474,
+        alt: "Rabbits Road Press residency",
+        description: piece,
+      },
+      {
+        src: `${BASE}/residencies/rabbits-road-press/residency-6.png`,
+        width: 724,
+        height: 523,
+        alt: "Rabbits Road Press residency",
+        description: piece,
+      },
     ],
   },
   {
@@ -58,12 +110,48 @@ export const projects: Project[] = [
     // auto-computed hero+columns split.
     rows: [2, 3, 1],
     images: [
-      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-5.jpg`, width: 1280, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
-      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-1.jpg`, width: 1072, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
-      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-3.jpg`, width: 900, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
-      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-4.jpg`, width: 900, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
-      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-2.jpg`, width: 900, height: 1600, alt: "Newham Heritage Month workshop", description: piece },
-      { src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-6.jpg`, width: 1600, height: 800, alt: "Newham Heritage Month workshop", description: piece },
+      {
+        src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-5.jpg`,
+        width: 1280,
+        height: 1600,
+        alt: "Newham Heritage Month workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-1.jpg`,
+        width: 1072,
+        height: 1600,
+        alt: "Newham Heritage Month workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-3.jpg`,
+        width: 900,
+        height: 1600,
+        alt: "Newham Heritage Month workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-4.jpg`,
+        width: 900,
+        height: 1600,
+        alt: "Newham Heritage Month workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-2.jpg`,
+        width: 900,
+        height: 1600,
+        alt: "Newham Heritage Month workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/newham-heritage-month/newham-heritage-month-6.jpg`,
+        width: 1600,
+        height: 800,
+        alt: "Newham Heritage Month workshop",
+        description: piece,
+      },
     ],
   },
   {
@@ -71,7 +159,13 @@ export const projects: Project[] = [
     name: "Somewhere I Live",
     summary: "Exhibition display.",
     images: [
-      { src: `${BASE}/exhibitions/somewhere-i-live/somewhere-i-live-1.jpg`, width: 1200, height: 1600, alt: "Somewhere I Live exhibition", description: piece },
+      {
+        src: `${BASE}/exhibitions/somewhere-i-live/somewhere-i-live-1.jpg`,
+        width: 1200,
+        height: 1600,
+        alt: "Somewhere I Live exhibition",
+        description: piece,
+      },
     ],
   },
   {
@@ -84,10 +178,34 @@ export const projects: Project[] = [
     // image puts all 3 side by side.
     restColumnCount: 3,
     images: [
-      { src: `${BASE}/workshops/rosetta-arts/rosetta-arts-1.jpg`, width: 1280, height: 1600, alt: "Rosetta Arts Artist Accelerator Programme", description: piece },
-      { src: `${BASE}/workshops/rosetta-arts/rosetta-arts-2.jpg`, width: 1280, height: 1600, alt: "Rosetta Arts Artist Accelerator Programme", description: piece },
-      { src: `${BASE}/workshops/rosetta-arts/rosetta-arts-3.jpg`, width: 1170, height: 1450, alt: "Rosetta Arts Artist Accelerator Programme", description: piece },
-      { src: `${BASE}/workshops/rosetta-arts/rosetta-arts-4.png`, width: 514, height: 495, alt: "Rosetta Arts Artist Accelerator Programme", description: piece },
+      {
+        src: `${BASE}/workshops/rosetta-arts/rosetta-arts-1.jpg`,
+        width: 1280,
+        height: 1600,
+        alt: "Rosetta Arts Artist Accelerator Programme",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/rosetta-arts/rosetta-arts-2.jpg`,
+        width: 1280,
+        height: 1600,
+        alt: "Rosetta Arts Artist Accelerator Programme",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/rosetta-arts/rosetta-arts-3.jpg`,
+        width: 1170,
+        height: 1450,
+        alt: "Rosetta Arts Artist Accelerator Programme",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/rosetta-arts/rosetta-arts-4.png`,
+        width: 514,
+        height: 495,
+        alt: "Rosetta Arts Artist Accelerator Programme",
+        description: piece,
+      },
     ],
   },
   {
@@ -96,9 +214,27 @@ export const projects: Project[] = [
     summary:
       "V&A East Summer School (Workshops) — Co-facilitated screen-print workshops with Memunatu Barrie for young people in Stratford.",
     images: [
-      { src: `${BASE}/workshops/va-east/va-east-1.jpg`, width: 1600, height: 1067, alt: "V&A East workshop", description: piece },
-      { src: `${BASE}/workshops/va-east/va-east-2.jpg`, width: 1600, height: 1067, alt: "V&A East workshop", description: piece },
-      { src: `${BASE}/workshops/va-east/va-east-3.jpg`, width: 1600, height: 1067, alt: "V&A East workshop", description: piece },
+      {
+        src: `${BASE}/workshops/va-east/va-east-1.jpg`,
+        width: 1600,
+        height: 1067,
+        alt: "V&A East workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/va-east/va-east-2.jpg`,
+        width: 1600,
+        height: 1067,
+        alt: "V&A East workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/va-east/va-east-3.jpg`,
+        width: 1600,
+        height: 1067,
+        alt: "V&A East workshop",
+        description: piece,
+      },
     ],
   },
   {
@@ -106,7 +242,13 @@ export const projects: Project[] = [
     name: "William Morris Gallery",
     summary: "Exhibition display.",
     images: [
-      { src: `${BASE}/exhibitions/william-morris-gallery/william-morris-gallery-1.jpg`, width: 1280, height: 1600, alt: "William Morris Gallery exhibition", description: piece },
+      {
+        src: `${BASE}/exhibitions/william-morris-gallery/william-morris-gallery-1.jpg`,
+        width: 1280,
+        height: 1600,
+        alt: "William Morris Gallery exhibition",
+        description: piece,
+      },
     ],
   },
   {
@@ -122,16 +264,70 @@ export const projects: Project[] = [
     // fits in one row with no wrap, at any width.
     restColumnCount: 1,
     images: [
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-1.jpg`, width: 1280, height: 1600, alt: "Henna workshop", description: piece },
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-2.jpg`, width: 1280, height: 1600, alt: "Henna workshop", description: piece },
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-3.jpg`, width: 1067, height: 1600, alt: "Henna workshop", description: piece },
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-4.jpg`, width: 1280, height: 1600, alt: "Henna workshop", description: piece },
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-5.jpg`, width: 900, height: 1600, alt: "Henna workshop", description: piece },
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-6.jpg`, width: 1280, height: 1600, alt: "Henna workshop", description: piece },
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-7.jpg`, width: 1200, height: 1600, alt: "Henna workshop", description: piece },
+      {
+        src: `${BASE}/workshops/henna-workshops/henna-workshops-1.jpg`,
+        width: 1280,
+        height: 1600,
+        alt: "Henna workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/henna-workshops/henna-workshops-2.jpg`,
+        width: 1280,
+        height: 1600,
+        alt: "Henna workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/henna-workshops/henna-workshops-3.jpg`,
+        width: 1067,
+        height: 1600,
+        alt: "Henna workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/henna-workshops/henna-workshops-4.jpg`,
+        width: 1280,
+        height: 1600,
+        alt: "Henna workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/henna-workshops/henna-workshops-5.jpg`,
+        width: 900,
+        height: 1600,
+        alt: "Henna workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/henna-workshops/henna-workshops-6.jpg`,
+        width: 1280,
+        height: 1600,
+        alt: "Henna workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/henna-workshops/henna-workshops-7.jpg`,
+        width: 1200,
+        height: 1600,
+        alt: "Henna workshop",
+        description: piece,
+      },
       // Client feedback: swap 8 and 9.
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-9.jpg`, width: 900, height: 1600, alt: "Henna workshop", description: piece },
-      { src: `${BASE}/workshops/henna-workshops/henna-workshops-8.jpg`, width: 900, height: 1600, alt: "Henna workshop", description: piece },
+      {
+        src: `${BASE}/workshops/henna-workshops/henna-workshops-9.jpg`,
+        width: 900,
+        height: 1600,
+        alt: "Henna workshop",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/henna-workshops/henna-workshops-8.jpg`,
+        width: 900,
+        height: 1600,
+        alt: "Henna workshop",
+        description: piece,
+      },
     ],
   },
   {
@@ -145,12 +341,48 @@ export const projects: Project[] = [
     // curated 1/2/3 stack instead of the auto-computed hero+columns split.
     rows: [1, 2, 3],
     images: [
-      { src: `${BASE}/workshops/reinstate/reinstate-3.jpg`, width: 1600, height: 1200, alt: "Reinstate workshop and community mural", description: piece },
-      { src: `${BASE}/workshops/reinstate/reinstate-1.jpg`, width: 461, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
-      { src: `${BASE}/workshops/reinstate/reinstate-2.jpg`, width: 900, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
-      { src: `${BASE}/workshops/reinstate/reinstate-4.jpg`, width: 1200, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
-      { src: `${BASE}/workshops/reinstate/reinstate-5.jpg`, width: 1200, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
-      { src: `${BASE}/workshops/reinstate/reinstate-6.jpg`, width: 900, height: 1600, alt: "Reinstate workshop and community mural", description: piece },
+      {
+        src: `${BASE}/workshops/reinstate/reinstate-3.jpg`,
+        width: 1600,
+        height: 1200,
+        alt: "Reinstate workshop and community mural",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/reinstate/reinstate-1.jpg`,
+        width: 461,
+        height: 1600,
+        alt: "Reinstate workshop and community mural",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/reinstate/reinstate-2.jpg`,
+        width: 900,
+        height: 1600,
+        alt: "Reinstate workshop and community mural",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/reinstate/reinstate-4.jpg`,
+        width: 1200,
+        height: 1600,
+        alt: "Reinstate workshop and community mural",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/reinstate/reinstate-5.jpg`,
+        width: 1200,
+        height: 1600,
+        alt: "Reinstate workshop and community mural",
+        description: piece,
+      },
+      {
+        src: `${BASE}/workshops/reinstate/reinstate-6.jpg`,
+        width: 900,
+        height: 1600,
+        alt: "Reinstate workshop and community mural",
+        description: piece,
+      },
     ],
   },
   {
@@ -161,9 +393,27 @@ export const projects: Project[] = [
     // stacked column instead of side-by-side columns.
     restColumnCount: 1,
     images: [
-      { src: `${BASE}/exhibitions/humble-abode/humble-abode-1.jpg`, width: 1200, height: 1600, alt: "Humble Abode exhibition", description: piece },
-      { src: `${BASE}/exhibitions/humble-abode/humble-abode-2.jpg`, width: 1292, height: 1600, alt: "Humble Abode exhibition", description: piece },
-      { src: `${BASE}/exhibitions/humble-abode/humble-abode-3.jpg`, width: 960, height: 1280, alt: "Humble Abode exhibition", description: piece },
+      {
+        src: `${BASE}/exhibitions/humble-abode/humble-abode-1.jpg`,
+        width: 1200,
+        height: 1600,
+        alt: "Humble Abode exhibition",
+        description: piece,
+      },
+      {
+        src: `${BASE}/exhibitions/humble-abode/humble-abode-2.jpg`,
+        width: 1292,
+        height: 1600,
+        alt: "Humble Abode exhibition",
+        description: piece,
+      },
+      {
+        src: `${BASE}/exhibitions/humble-abode/humble-abode-3.jpg`,
+        width: 960,
+        height: 1280,
+        alt: "Humble Abode exhibition",
+        description: piece,
+      },
     ],
   },
   {
@@ -173,7 +423,13 @@ export const projects: Project[] = [
     // Client feedback: make this bigger.
     rows: [1],
     images: [
-      { src: `${BASE}/exhibitions/fruit-salad/fruit-salad-1.jpg`, width: 1600, height: 1200, alt: "Fruit Salad exhibition", description: piece },
+      {
+        src: `${BASE}/exhibitions/fruit-salad/fruit-salad-1.jpg`,
+        width: 1600,
+        height: 1200,
+        alt: "Fruit Salad exhibition",
+        description: piece,
+      },
     ],
   },
 ];

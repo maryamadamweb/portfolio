@@ -207,7 +207,13 @@ export function ProjectCluster({ project }: { project: Project }) {
                 key={item.src}
                 type="button"
                 className={styles.frame}
-                style={overlapStyle(index)}
+                style={
+                  project.looseColumns
+                    ? index === 0
+                      ? undefined
+                      : { marginTop: "1rem" }
+                    : overlapStyle(index)
+                }
                 onClick={() => openAt(item)}
               >
                 <Media

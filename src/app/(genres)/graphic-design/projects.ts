@@ -8,6 +8,9 @@ export type Project = {
   summary?: string;
   media: MediaItem[];
   heroWidth?: number;
+  // Spaces the side-column items with a normal gap instead of the default
+  // pinned-overlap stacking.
+  looseColumns?: boolean;
 };
 
 const BASE = "/genres/graphic-design";
@@ -36,6 +39,7 @@ export const projects: Project[] = [
     name: "From My Mother's Hands",
     summary:
       "A self-initiated, research-led project interrogating the marginalisation of South Asian craft within dominant design narratives. Through intergenerational interviews, indigenous textile processes, and the creation of a custom Gujarati typeface, the project reframes typography as a tactile, cultural practice. The work culminated in a khadi zine and embroidered textile pieces that centre ancestral labour, language, and memory.",
+    looseColumns: true,
     media: [
       {
         type: "image",

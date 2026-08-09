@@ -15,6 +15,8 @@ export function GenreGalleryDialog({
   onOpenChange: (open: boolean) => void;
 }) {
   const hasDescription = Boolean(image?.description);
+  const hasLinks = Boolean(image?.links?.length);
+  const hasSidebar = hasDescription || hasLinks;
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -22,7 +24,7 @@ export function GenreGalleryDialog({
         <Dialog.Overlay className={styles.overlay} />
         <Dialog.Content
           className={
-            hasDescription
+            hasSidebar
               ? styles.content
               : `${styles.content} ${styles.contentCentered}`
           }
@@ -41,7 +43,7 @@ export function GenreGalleryDialog({
                   className={styles.image}
                 />
               </div>
-              {hasDescription ? (
+              {hasSidebar ? (
                 <div className={styles.textPane}>
                   <Dialog.Close asChild>
                     <button
@@ -53,9 +55,27 @@ export function GenreGalleryDialog({
                     </button>
                   </Dialog.Close>
                   <Dialog.Title className={styles.title}>About</Dialog.Title>
-                  <Dialog.Description className={styles.description}>
-                    {image.description}
-                  </Dialog.Description>
+                  {hasDescription && (
+                    <Dialog.Description className={styles.description}>
+                      {image.description}
+                    </Dialog.Description>
+                  )}
+                  {hasLinks && (
+                    <ul className={styles.links}>
+                      {image.links!.map((link) => (
+                        <li key={link.href}>
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.link}
+                          >
+                            {link.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               ) : (
                 <Dialog.Title className={styles.srOnly}>

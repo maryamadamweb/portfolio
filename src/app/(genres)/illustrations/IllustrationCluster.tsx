@@ -20,11 +20,6 @@ export function IllustrationCluster({
       {illustration.credit && (
         <p className={styles.credit}>{illustration.credit}</p>
       )}
-      {illustration.summary && (
-        <div className={styles.textBackdrop}>
-          <p className={styles.summary}>{illustration.summary}</p>
-        </div>
-      )}
       <div
         className={styles.collage}
         data-count={illustration.images.length}
@@ -72,6 +67,7 @@ export function IllustrationCluster({
             ? {
                 ...illustration.images[selectedIndex],
                 description: illustration.summary,
+                links: illustration.links,
               }
             : null
         }

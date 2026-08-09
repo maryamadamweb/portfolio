@@ -4,6 +4,7 @@ export type GalleryImage = {
   height: number;
   alt: string;
   description?: string;
+  links?: { href: string; label: string }[];
 };
 
 export type GenreMeta = {

@@ -7,10 +7,10 @@ import {
 } from "./videos";
 import styles from "./Row.module.css";
 
-// One horizontal row, every project as its own cluster — the client wants
-// this scannable left-to-right rather than the masonry "wall" the other
-// genres use. Row order (and the hyphen-online-spice-series special case)
-// comes straight from src/app/(genres)/animations/videos.ts.
+// One cluster per row, stacked in a single column — the client wants this
+// scannable top-to-bottom rather than the masonry multi-column "wall" the
+// other genres use. Row order (and the hyphen-online-spice-series special
+// case) comes straight from src/app/(genres)/animations/videos.ts.
 export function Row() {
   return (
     <div className={styles.row}>

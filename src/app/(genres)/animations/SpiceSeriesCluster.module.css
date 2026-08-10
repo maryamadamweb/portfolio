@@ -10,6 +10,7 @@
 
 .collage {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
@@ -40,9 +41,7 @@
 
 .media {
   width: 170px;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 6px;
+  height: auto;
   display: block;
 }
 
@@ -74,10 +73,6 @@
 }
 
 @media (max-width: 900px) {
-  .collage {
-    flex-wrap: wrap;
-  }
-
   .embedFrame {
     width: 270px;
   }

@@ -75,15 +75,11 @@ export function SpiceSeriesCluster({
         </div>
 
         <div className={styles.center}>
-          {embeds.map(({ clip, position }) => {
-            const spice = spiceForPosition(entries, position);
-            return (
-              <div key={position} className={styles.embedFrame}>
-                <ClipMedia clip={clip} className={styles.embedMedia} />
-                {spice && <span className={styles.caption}>{spice.name}</span>}
-              </div>
-            );
-          })}
+          {embeds.map(({ clip, position }) => (
+            <div key={position} className={styles.embedFrame}>
+              <ClipMedia clip={clip} className={styles.embedMedia} />
+            </div>
+          ))}
         </div>
 
         <div className={styles.side}>

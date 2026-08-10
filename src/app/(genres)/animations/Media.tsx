@@ -11,9 +11,13 @@ import type { AnimationClip } from "./videos";
 // this section never downloads it.
 export function LazyVideo({
   src,
+  width,
+  height,
   className,
 }: {
   src: string;
+  width?: number;
+  height?: number;
   className?: string;
 }) {
   const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
@@ -39,6 +43,8 @@ export function LazyVideo({
   return (
     <video
       ref={setVideoEl}
+      width={width}
+      height={height}
       preload="none"
       muted
       loop
@@ -58,7 +64,14 @@ export function ClipMedia({
   className?: string;
 }) {
   if (clip.type === "video") {
-    return <LazyVideo src={clip.src} className={className} />;
+    return (
+      <LazyVideo
+        src={clip.src}
+        width={clip.width}
+        height={clip.height}
+        className={className}
+      />
+    );
   }
   return <InstagramEmbed permalink={clip.permalink} className={className} />;
 }

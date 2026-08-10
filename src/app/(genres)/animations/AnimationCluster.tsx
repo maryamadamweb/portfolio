@@ -13,9 +13,23 @@ const HERO_GAP = 12;
 const REST_WIDTH = 150;
 const REST_GAP = 16;
 
-function heroGridHeight(clipCount: number) {
-  const rows = Math.max(1, Math.ceil(clipCount / HERO_COLS));
-  return rows * HERO_TILE + (rows - 1) * HERO_GAP;
+function estimatedClipHeight(clip: AnimationProject["clips"][number], width: number) {
+  // Instagram embeds don't carry width/height — this codepath is only ever
+  // exercised for hyphen-online-spice-series's clip array, which renders
+  // through SpiceSeriesCluster instead, so a square-ish fallback is fine.
+  return clip.type === "video" ? (width / clip.width) * clip.height : width;
+}
+
+// Tiles keep each clip's native aspect ratio (no forced square crop), so
+// row height varies with content — estimate it from the actual average
+// clip height at the fixed tile width rather than assuming a fixed size.
+function heroGridHeight(clips: AnimationProject["clips"]) {
+  if (clips.length === 0) return HERO_TILE;
+  const rows = Math.max(1, Math.ceil(clips.length / HERO_COLS));
+  const avgHeight =
+    clips.reduce((sum, clip) => sum + estimatedClipHeight(clip, HERO_TILE), 0) /
+    clips.length;
+  return rows * avgHeight + (rows - 1) * HERO_GAP;
 }
 
 function estimatedImageHeight(image: AnimationProject["images"][number]) {
@@ -67,7 +81,7 @@ export function AnimationCluster({ project }: { project: AnimationProject }) {
   const [item, setItem] = useState<AnimationLightboxItem | null>(null);
   const [open, setOpen] = useState(false);
 
-  const heroHeight = heroGridHeight(project.clips.length);
+  const heroHeight = heroGridHeight(project.clips);
   const { left, right } = useMemo(
     () => scatterImages(project.images, heroHeight),
     [project.images, heroHeight]

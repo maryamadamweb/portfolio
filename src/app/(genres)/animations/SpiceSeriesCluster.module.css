@@ -1,0 +1,84 @@
+.cluster {
+  flex: 0 0 auto;
+}
+
+.name {
+  font-size: var(--fs-lg);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.collage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: 170px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+
+.frame:hover {
+  transform: scale(1.04);
+}
+
+.media {
+  width: 170px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.embedFrame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: 300px;
+}
+
+.embedMedia {
+  width: 100%;
+}
+
+.caption {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .collage {
+    flex-wrap: wrap;
+  }
+
+  .embedFrame {
+    width: 270px;
+  }
+}

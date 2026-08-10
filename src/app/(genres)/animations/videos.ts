@@ -202,6 +202,8 @@ export type AnimationProjectMeta = {
   links?: ProjectLink[];
 };
 
+// Row order follows the client's requested sequence — LOVE and Converse are
+// deliberately placed together at the very end of the horizontal row.
 export const animationProjectMeta: AnimationProjectMeta[] = [
   {
     slug: "cervical-cancer-screening",
@@ -227,11 +229,6 @@ export const animationProjectMeta: AnimationProjectMeta[] = [
       "'Unappealing' is an animation and illustration signifying dismembered grief and loss seeped into the walls.",
   },
   {
-    slug: "converse",
-    name: "Converse",
-    summary: "Artist feature for Converse.",
-  },
-  {
     slug: "hyphen-online-spice-series",
     name: "Hyphen Online — Spice Series",
   },
@@ -239,6 +236,53 @@ export const animationProjectMeta: AnimationProjectMeta[] = [
     slug: "miscellaneous-animations",
     name: "LOVE Miscellaneous animation x4",
   },
+  {
+    slug: "converse",
+    name: "Converse",
+    summary: "Artist feature for Converse.",
+  },
+];
+
+export type AnimationImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
+const IMAGE_BASE = "/genres/animations";
+
+// Dimensions read directly off the optimized WebP files in
+// public/genres/animations/<slug>/ via sharp. Array order matches the
+// <slug>-N.webp numbering on disk.
+export const cervicalCancerScreeningImages: AnimationImage[] = [
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-1.webp`, width: 1170, height: 1462, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-2.webp`, width: 1080, height: 1080, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-3.webp`, width: 1170, height: 1481, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-4.webp`, width: 1170, height: 1489, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-5.webp`, width: 2500, height: 2000, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-6.webp`, width: 2500, height: 2000, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-7.webp`, width: 2500, height: 2000, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-8.webp`, width: 2160, height: 2600, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-9.webp`, width: 238, height: 453, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-10.webp`, width: 2160, height: 2160, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-11.webp`, width: 2160, height: 2160, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-12.webp`, width: 1080, height: 1300, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-13.webp`, width: 1500, height: 1500, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-14.webp`, width: 1080, height: 1080, alt: "Cervical Cancer Screening illustration" },
+  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-15.webp`, width: 1080, height: 1080, alt: "Cervical Cancer Screening illustration" },
+];
+
+export const khichdiFilmImages: AnimationImage[] = [
+  { src: `${IMAGE_BASE}/khichdi-film/khichdi-film-1.webp`, width: 3508, height: 3095, alt: "Khichdi illustration" },
+  { src: `${IMAGE_BASE}/khichdi-film/khichdi-film-2.webp`, width: 4494, height: 3044, alt: "Khichdi illustration" },
+  { src: `${IMAGE_BASE}/khichdi-film/khichdi-film-3.webp`, width: 1420, height: 802, alt: "Khichdi illustration" },
+  { src: `${IMAGE_BASE}/khichdi-film/khichdi-film-4.webp`, width: 1080, height: 1080, alt: "Khichdi illustration" },
+];
+
+export const converseImages: AnimationImage[] = [
+  { src: `${IMAGE_BASE}/converse/converse-1.webp`, width: 750, height: 750, alt: "Converse illustration" },
+  { src: `${IMAGE_BASE}/converse/converse-2.webp`, width: 750, height: 750, alt: "Converse illustration" },
 ];
 
 export type SpiceEntry = {
@@ -290,3 +334,33 @@ export const hyphenOnlineSpiceSeriesEntries: SpiceEntry[] = [
     clipIndices: [5],
   },
 ];
+
+export type AnimationProject = AnimationProjectMeta & {
+  clips: AnimationClip[];
+  images: AnimationImage[];
+};
+
+// One entry per horizontal-row cluster, in display order. hyphen-online-spice-series
+// is included here too (with its raw clips) so generic consumers can still see it,
+// but the page renders it with SpiceSeriesCluster using hyphenOnlineSpiceSeriesEntries
+// instead of the plain clips/images fields below.
+export const animationProjects: AnimationProject[] = animationProjectMeta.map(
+  (meta) => {
+    switch (meta.slug) {
+      case "cervical-cancer-screening":
+        return { ...meta, clips: cervicalCancerScreeningClips, images: cervicalCancerScreeningImages };
+      case "khichdi-film":
+        return { ...meta, clips: khichdiFilmClips, images: khichdiFilmImages };
+      case "unappealing":
+        return { ...meta, clips: unappealingClips, images: [] };
+      case "hyphen-online-spice-series":
+        return { ...meta, clips: hyphenOnlineSpiceSeriesClips, images: [] };
+      case "miscellaneous-animations":
+        return { ...meta, clips: miscellaneousAnimationsClips, images: [] };
+      case "converse":
+        return { ...meta, clips: converseClips, images: converseImages };
+      default:
+        throw new Error(`No clips/images mapping for animation project "${meta.slug}"`);
+    }
+  }
+);

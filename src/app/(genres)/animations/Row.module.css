@@ -1,0 +1,9 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 4rem;
+  overflow-x: auto;
+  padding: 2rem 3rem 3rem;
+  scrollbar-width: thin;
+}

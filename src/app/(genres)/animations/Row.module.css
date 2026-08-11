@@ -3,5 +3,14 @@
   flex-direction: column;
   align-items: center;
   gap: 6rem;
-  padding: 2rem 3rem 4rem;
+  padding: 0 3rem 4rem;
+}
+
+.pairRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4rem;
+  max-width: 100%;
 }

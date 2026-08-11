@@ -114,12 +114,16 @@ export const hyphenOnlineSpiceSeriesClips: AnimationClip[] = [
     height: 1066,
   },
   {
-    type: "instagram-embed",
-    permalink: "https://www.instagram.com/reel/DLkpp30yZg9/",
+    type: "video",
+    src: "https://vz-cacde0a9-0c8.b-cdn.net/4fe6ffb8-2d47-4eb6-851d-57cc628ceed6/playlist.m3u8",
+    width: 800,
+    height: 1112,
   },
   {
-    type: "instagram-embed",
-    permalink: "https://www.instagram.com/reel/DKRqUWDtoJm/",
+    type: "video",
+    src: "https://vz-cacde0a9-0c8.b-cdn.net/125c190b-9c1d-4a69-bd92-e29695a42fc1/playlist.m3u8",
+    width: 800,
+    height: 1114,
   },
   {
     type: "video",
@@ -156,7 +160,14 @@ export const khichdiFilmClips: AnimationClip[] = [
   },
 ];
 
+// Order matters: the client wants the 1f9f20ea clip first in the grid.
 export const miscellaneousAnimationsClips: AnimationClip[] = [
+  {
+    type: "video",
+    src: "https://vz-cacde0a9-0c8.b-cdn.net/1f9f20ea-c477-4869-a151-0a499cb47752/playlist.m3u8",
+    width: 2160,
+    height: 2160,
+  },
   {
     type: "video",
     src: "https://vz-cacde0a9-0c8.b-cdn.net/e45b7c18-1ebc-49e5-b774-7025a447069c/playlist.m3u8",
@@ -173,12 +184,6 @@ export const miscellaneousAnimationsClips: AnimationClip[] = [
     type: "video",
     src: "https://vz-cacde0a9-0c8.b-cdn.net/ae21fcc1-ce69-444e-b15d-fb301d59f87b/playlist.m3u8",
     width: 2152,
-    height: 2160,
-  },
-  {
-    type: "video",
-    src: "https://vz-cacde0a9-0c8.b-cdn.net/1f9f20ea-c477-4869-a151-0a499cb47752/playlist.m3u8",
-    width: 2160,
     height: 2160,
   },
 ];
@@ -202,18 +207,18 @@ export type AnimationProjectMeta = {
   links?: ProjectLink[];
 };
 
-// Row order follows the client's requested sequence — LOVE and Converse are
-// deliberately placed together at the very end of the horizontal row.
+// Row order follows the client's requested sequence. hyphen-online-spice-series
+// sits above unappealing; unappealing and miscellaneous-animations (LOVE) share
+// a single paired row (see Row.tsx) rather than each getting a full row.
 export const animationProjectMeta: AnimationProjectMeta[] = [
   {
     slug: "cervical-cancer-screening",
-    name: "Cervical Cancer Screening",
-    credit: "NHS",
+    name: "NHS - Cervical Cancer Screening",
     summary:
       "This campaign aimed to encourage Muslim women in North East London to attend cervical screening appointments by addressing stigma, misinformation, and cultural barriers through culturally sensitive design and storytelling.",
     links: [
-      { href: "https://allaboutcervicalscreening.co.uk/", label: "More info" },
-      { href: "https://www.youtube.com/watch?v=ie0AnarOwOo", label: "Full film" },
+      { href: "https://allaboutcervicalscreening.co.uk/", label: "For more info" },
+      { href: "https://www.youtube.com/watch?v=ie0AnarOwOo", label: "Full Film" },
     ],
   },
   {
@@ -223,18 +228,18 @@ export const animationProjectMeta: AnimationProjectMeta[] = [
       "Commissioned as part of NHS Untold Stories and funded by the Arts & Humanities Research Council to mark 75 years of the NHS. The brief was to contribute animation and typographic elements to an experimental short documentary exploring the lived experiences of four first-generation Indian nurses in the UK, using archival material and hand-crafted visuals to support themes of migration, care, and service.",
   },
   {
-    slug: "unappealing",
-    name: "Unappealing",
-    summary:
-      "'Unappealing' is an animation and illustration signifying dismembered grief and loss seeped into the walls.",
-  },
-  {
     slug: "hyphen-online-spice-series",
     name: "Hyphen Online — Spice Series",
   },
   {
+    slug: "unappealing",
+    name: "Unappealing",
+    summary:
+      "'Unappealing' is an animation and audio piece signifying dismembered grief and loss seeped into the walls.",
+  },
+  {
     slug: "miscellaneous-animations",
-    name: "LOVE Miscellaneous animation x4",
+    name: "LOVE",
   },
   {
     slug: "converse",
@@ -264,7 +269,6 @@ export const cervicalCancerScreeningImages: AnimationImage[] = [
   { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-6.webp`, width: 2500, height: 2000, alt: "Cervical Cancer Screening illustration" },
   { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-7.webp`, width: 2500, height: 2000, alt: "Cervical Cancer Screening illustration" },
   { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-8.webp`, width: 2160, height: 2600, alt: "Cervical Cancer Screening illustration" },
-  { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-9.webp`, width: 238, height: 453, alt: "Cervical Cancer Screening illustration" },
   { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-10.webp`, width: 2160, height: 2160, alt: "Cervical Cancer Screening illustration" },
   { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-11.webp`, width: 2160, height: 2160, alt: "Cervical Cancer Screening illustration" },
   { src: `${IMAGE_BASE}/cervical-cancer-screening/cervical-cancer-screening-12.webp`, width: 1080, height: 1300, alt: "Cervical Cancer Screening illustration" },
@@ -287,8 +291,6 @@ export const converseImages: AnimationImage[] = [
 
 export type SpiceEntry = {
   name: string;
-  // No tagline was given for Saffron — every other spice has a short poetic
-  // one, so leave it unset rather than invent one to match the pattern.
   tagline?: string;
   href: string;
   // 1-indexed positions into hyphenOnlineSpiceSeriesClips, matching the
@@ -330,6 +332,7 @@ export const hyphenOnlineSpiceSeriesEntries: SpiceEntry[] = [
   },
   {
     name: "Saffron",
+    tagline: "The story of saffron, from ancient Persia to Essex",
     href: "https://hyphenonline.com/2025/04/23/saffron-spice-history-culture-cuisine-cooking-persia-iran-essex/",
     clipIndices: [5],
   },

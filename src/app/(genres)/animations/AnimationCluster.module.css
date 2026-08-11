@@ -4,7 +4,7 @@
 
 .name {
   font-size: var(--fs-lg);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.75rem;
   text-align: center;
 }
 
@@ -20,7 +20,7 @@
 .summary {
   color: var(--color-text-muted);
   font-size: var(--fs-sm);
-  max-width: 32ch;
+  max-width: 60ch;
   margin: 0 auto 1.5rem;
   text-align: center;
 }
@@ -43,7 +43,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 150px;
+  max-width: 100%;
 }
 
 .frame {
@@ -71,20 +71,21 @@
 
 /* The centered, larger "animation frames" — each tile keeps its clip's
    native aspect ratio (width fixed, height auto) rather than being
-   cropped into a uniform square. */
+   cropped into a uniform square. Actual width set inline per-project
+   (AnimationCluster.tsx's SMALL/LARGE tile sizes). */
 .hero {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
   gap: 12px;
-  width: 594px;
-  max-width: 60vw;
+  max-width: 100%;
 }
 
 .heroFrame {
   display: block;
-  width: 190px;
+  max-width: 100%;
   padding: 0;
   border: none;
   background: none;
@@ -101,14 +102,38 @@
   display: block;
 }
 
+/* Overlaps the hero's top-right corner like a small badge/sticker rather
+   than taking up its own space in the layout — pointer-events:none so it
+   never intercepts the click meant for the frame underneath it. */
+.soundIcon {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.75rem;
+  color: var(--color-text-muted);
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+
 .links {
   list-style: none;
-  margin: 1rem 0 0;
+  margin: 0 0 1.5rem;
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   align-items: center;
+  max-width: 90vw;
+}
+
+.links li {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+.linkLabel {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
 }
 
 .link {
@@ -116,10 +141,4 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
   font-size: var(--fs-sm);
-}
-
-@media (max-width: 700px) {
-  .hero {
-    max-width: 100%;
-  }
 }

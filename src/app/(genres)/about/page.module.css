@@ -48,6 +48,12 @@
   color: var(--color-text-muted);
   white-space: pre-line;
 }
+
+.bioLink {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
 /* 
 .bio + .bio {
   margin-top: 1rem;
@@ -90,7 +96,18 @@
 }
 
 .contact {
+  position: relative;
   margin-top: 2.5rem;
+}
+
+.contactIllustration {
+  position: absolute;
+  top: 0;
+  left: calc(100% - 20px);
+  width: 90px;
+  height: auto;
+  transform: translateY(-35%) rotate(15deg);
+  pointer-events: none;
 }
 
 .contactHeading {
@@ -145,5 +162,9 @@
   .articlesPane {
     flex: 0 0 auto;
     width: 100%;
+  }
+
+  .contactIllustration {
+    display: none;
   }
 }

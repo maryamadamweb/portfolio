@@ -33,9 +33,17 @@ export default function AboutPage() {
             incorporating surrealist imagery, her work addresses social
             politics, faith, and existence. Her practice visually reflects
             the Gujarati/interlingual word &quot;naram&quot; (soft, gentle),
-            even when addressing more subversive themes. Since winning the
-            Jo Brocklehurst Prize in 2021, she has gone on to work with the
-            likes of Dazed, V&A East, BFI, NHS, and Islamic Relief.
+            even when addressing more subversive themes. Since winning the{" "}
+            <a
+              href="https://www.blondesfineart.com/blondes-blog/2022/1/6/jo-brocklehurst"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.bioLink}
+            >
+              Jo Brocklehurst Prize
+            </a>{" "}
+            in 2021, she has gone on to work with the likes of Dazed, V&A
+            East, BFI, NHS, and Islamic Relief.
           </p>
         </div>
         <div className={styles.articlesPane}>
@@ -116,6 +124,13 @@ export default function AboutPage() {
                 @naramhands
               </a>
             </div>
+            <Image
+              src="/genres/illustrations/illustration-5b.webp"
+              alt=""
+              width={757}
+              height={2000}
+              className={styles.contactIllustration}
+            />
           </section>
         </div>
       </div>

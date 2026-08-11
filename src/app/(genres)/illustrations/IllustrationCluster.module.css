@@ -39,6 +39,13 @@
   margin-top: 2.75rem;
 }
 
+.cluster[data-slug="steward"] .frame {
+  max-width: 1000px;
+  width: calc(100% + 3rem);
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}
+
 .media {
   width: 100%;
   height: auto;

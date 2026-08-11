@@ -15,7 +15,7 @@ export function IllustrationCluster({
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <section className={styles.cluster}>
+    <section className={styles.cluster} data-slug={illustration.slug}>
       <h2 className={styles.name}>{illustration.name}</h2>
       {illustration.credit && (
         <p className={styles.credit}>{illustration.credit}</p>

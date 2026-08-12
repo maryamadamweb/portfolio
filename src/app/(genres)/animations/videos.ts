@@ -197,7 +197,7 @@ export const unappealingClips: AnimationClip[] = [
   },
 ];
 
-export type ProjectLink = { href: string; label: string };
+export type ProjectLink = { href: string; label: string; hideUrl?: boolean };
 
 export type AnimationProjectMeta = {
   slug: string;
@@ -218,7 +218,7 @@ export const animationProjectMeta: AnimationProjectMeta[] = [
       "This campaign aimed to encourage Muslim women in North East London to attend cervical screening appointments by addressing stigma, misinformation, and cultural barriers through culturally sensitive design and storytelling.",
     links: [
       { href: "https://allaboutcervicalscreening.co.uk/", label: "For more info" },
-      { href: "https://www.youtube.com/watch?v=ie0AnarOwOo", label: "Full Film" },
+      { href: "https://www.youtube.com/watch?v=ie0AnarOwOo", label: "Full Film", hideUrl: true },
     ],
   },
   {

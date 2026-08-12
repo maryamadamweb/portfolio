@@ -118,7 +118,7 @@ export function AnimationCluster({
   // and Converse asked to be bigger still than every other large cluster.
   heroTileOverride?: number;
   restWidthOverride?: number;
-  // Plain speaker glyph next to the hero, flagging that opening it plays
+  // "Click to listen" badge on the hero, flagging that opening it plays
   // sound — used by unappealing (an "audio piece").
   showSoundIcon?: boolean;
 }) {
@@ -169,19 +169,33 @@ export function AnimationCluster({
           {project.summary}
         </p>
       )}
+      {showSoundIcon && <p className={styles.soundNote}>Click to listen</p>}
       {project.links && (
         <ul className={styles.links}>
           {project.links.map((link) => (
             <li key={link.href}>
-              <span className={styles.linkLabel}>{link.label} : </span>
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.link}
-              >
-                {link.href}
-              </a>
+              {link.hideUrl ? (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <>
+                  <span className={styles.linkLabel}>{link.label} : </span>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    {link.href}
+                  </a>
+                </>
+              )}
             </li>
           ))}
         </ul>
@@ -228,28 +242,6 @@ export function AnimationCluster({
               <ClipMedia clip={clip} className={styles.heroMedia} />
             </button>
           ))}
-          {showSoundIcon && (
-            <span className={styles.soundIcon} title="Has sound" aria-label="Has sound">
-              <svg
-                viewBox="0 0 24 24"
-                width="26"
-                height="26"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M4 9.8c0-1 .8-1.8 1.8-1.8h2.1l4.6-3.9c.9-.8 2.3-.1 2.3 1.1v13.6c0 1.2-1.4 1.9-2.3 1.1L7.9 16H5.8C4.8 16 4 15.2 4 14.2V9.8Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M16.2 8.8a4.5 4.5 0 0 1 0 6.4"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
-          )}
         </div>
 
         <div className={styles.side}>

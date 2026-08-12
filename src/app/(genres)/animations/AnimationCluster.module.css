@@ -102,16 +102,13 @@
   display: block;
 }
 
-/* Overlaps the hero's top-right corner like a small badge/sticker rather
-   than taking up its own space in the layout — pointer-events:none so it
-   never intercepts the click meant for the frame underneath it. */
-.soundIcon {
-  position: absolute;
-  top: -0.75rem;
-  right: -0.75rem;
+.soundNote {
   color: var(--color-text-muted);
-  transform: rotate(-20deg);
-  pointer-events: none;
+  font-size: var(--fs-xs);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: -1rem 0 1.5rem;
 }
 
 .links {

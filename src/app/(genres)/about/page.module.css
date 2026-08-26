@@ -1,18 +1,24 @@
 .page {
+  position: relative;
   min-height: 100dvh;
-  padding: 4rem 2rem 0.75rem;
+  padding: 2.5rem 2rem 0.75rem;
 }
 
 .row {
-  display: flex;
-  align-items: flex-start;
-  gap: 4rem;
+  display: grid;
+  grid-template-columns: 340px 34ch 1fr;
+  grid-template-areas:
+    "image about articles"
+    "contact contact articles";
+  align-items: start;
+  column-gap: 4.5rem;
+  row-gap: 1.25rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .imageWrap {
-  flex: 0 0 400px;
+  grid-area: image;
   position: relative;
 }
 
@@ -34,8 +40,7 @@
 }
 
 .textPane {
-  flex: 0 1 34ch;
-  min-width: 34ch;
+  grid-area: about;
   padding-top: 0.5rem;
 }
 
@@ -60,7 +65,8 @@
 } */
 
 .articlesPane {
-  flex: 1 1 auto;
+  grid-area: articles;
+  position: relative;
   max-width: 40ch;
   padding-top: 0.5rem;
 }
@@ -96,29 +102,28 @@
 }
 
 .contact {
-  position: relative;
-  margin-top: 2.5rem;
+  grid-area: contact;
 }
 
 .contactIllustration {
   position: absolute;
-  top: 0;
-  left: calc(100% - 20px);
-  width: 90px;
+  bottom: 3rem;
+  right: 5rem;
+  width: 100px;
   height: auto;
-  transform: translateY(-35%) rotate(15deg);
+  transform: rotate(15deg);
   pointer-events: none;
 }
 
 .contactHeading {
   font-size: var(--fs-lg);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .contactDetails {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
 }
 
 .contactItem {
@@ -129,7 +134,7 @@
 
 .fontCredit {
   max-width: 1200px;
-  margin: 3rem auto 0;
+  margin: 1.25rem auto 0;
   color: var(--color-text-muted);
   font-size: var(--fs-xs);
 }
@@ -142,14 +147,14 @@
 
 @media (max-width: 900px) {
   .row {
+    display: flex;
     flex-direction: column;
     gap: 2rem;
   }
 
   .imageWrap {
-    flex: 0 0 auto;
     width: 100%;
-    max-width: 360px;
+    max-width: 340px;
   }
 
   .caption {
@@ -160,7 +165,6 @@
   }
 
   .articlesPane {
-    flex: 0 0 auto;
     width: 100%;
   }
 

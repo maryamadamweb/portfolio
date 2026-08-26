@@ -11,7 +11,7 @@ export default function AboutPage() {
             alt="Maryam Adam"
             width={1400}
             height={2100}
-            sizes="(max-width: 900px) 90vw, 400px"
+            sizes="(max-width: 900px) 90vw, 340px"
             className={styles.image}
             priority
           />
@@ -49,6 +49,19 @@ export default function AboutPage() {
         <div className={styles.articlesPane}>
           <h2 className={styles.articlesHeading}>Articles</h2>
           <ul className={styles.articlesList}>
+            <li className={styles.article}>
+              <a
+                href="https://creativelivesinprogress.com/articles/maryam-adam"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.articleLink}
+              >
+                Maryam Adam on Mehndi, craft and decolonial design practice
+              </a>
+              <span className={styles.articlePublication}>
+                Creative Lives in Progress
+              </span>
+            </li>
             <li className={styles.article}>
               <a
                 href="https://www.dazeddigital.com/beauty/article/66042/1/huq-that-the-south-asian-collective-turning-henna-into-high-art"
@@ -98,41 +111,34 @@ export default function AboutPage() {
               </span>
             </li>
           </ul>
-          <section className={styles.contact}>
-            <h2 className={styles.contactHeading}>Contact</h2>
-            <div className={styles.contactDetails}>
-              <a
-                href="mailto:maryam.arts@outlook.com"
-                className={styles.contactItem}
-              >
-                maryam.arts@outlook.com
-              </a>
-              <a
-                href="https://instagram.com/paintingonmars"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.contactItem}
-              >
-                @paintingonmars
-              </a>
-              <a
-                href="https://instagram.com/naramhands"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.contactItem}
-              >
-                @naramhands
-              </a>
-            </div>
-            <Image
-              src="/genres/illustrations/illustration-5b.webp"
-              alt=""
-              width={757}
-              height={2000}
-              className={styles.contactIllustration}
-            />
-          </section>
         </div>
+        <section className={styles.contact}>
+          <h2 className={styles.contactHeading}>Contact</h2>
+          <div className={styles.contactDetails}>
+            <a
+              href="mailto:maryam.arts@outlook.com"
+              className={styles.contactItem}
+            >
+              maryam.arts@outlook.com
+            </a>
+            <a
+              href="https://instagram.com/paintingonmars"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.contactItem}
+            >
+              @paintingonmars
+            </a>
+            <a
+              href="https://instagram.com/naramhands"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.contactItem}
+            >
+              @naramhands
+            </a>
+          </div>
+        </section>
       </div>
       <p className={styles.fontCredit}>
         Headings set in{" "}
@@ -146,6 +152,13 @@ export default function AboutPage() {
         </a>{" "}
         by Velvetyne Type Foundry.
       </p>
+      <Image
+        src="/genres/illustrations/illustration-5b.webp"
+        alt=""
+        width={757}
+        height={2000}
+        className={styles.contactIllustration}
+      />
     </main>
   );
 }
